@@ -1,0 +1,99 @@
+🧑‍💼 USERS
+Stores information about each user.
+
+Fields: username, email, password, profile picture, bio, etc.
+
+Used for login, user profiles, social features, and workout ownership.
+
+
+
+🏋️‍♂️ EQUIPMENT TYPES
+List of available equipment (e.g., dumbbells, bench, treadmill).
+
+Used to associate exercises with the type of equipment required.
+
+
+
+💪 MUSCLES
+Contains names of muscle groups (e.g., biceps, quads).
+
+Used to identify what muscles each exercise targets.
+
+
+
+🏃 EXERCISES
+Stores all exercises in the app.
+
+Each exercise links to an equipment type and includes instructions and images.
+
+
+
+🔗 EXERCISE_MUSCLES
+A many-to-many link table between exercises and muscles.
+
+Allows each exercise to target multiple muscles.
+
+
+
+📋 WORKOUT ROUTINES
+A custom workout plan created by a user.
+
+Can include a name, description, and timestamp.
+
+
+
+🧩 ROUTINE_EXERCISES
+Links exercises to specific workout routines.
+
+Includes an order field to sequence the exercises within a routine.
+
+
+
+🔁 ROUTINE_EXERCISE_SETS
+Stores detailed sets (reps, weight) for each exercise in a routine.
+
+Allows fine-tuned tracking of how each exercise should be performed in a routine.
+
+
+
+🕒 WORKOUT SESSIONS
+Tracks when a user starts and ends a workout based on a routine.
+
+Helps with workout history and progress tracking.
+
+
+
+📈 SESSION LOGS
+Logs each individual set completed during a workout session.
+
+Captures real performance: reps, weight, set number, etc.
+
+
+
+💬 SOCIAL FEATURES
+
+👥 USER FOLLOWING
+Tracks which users follow which others.
+
+Enables a social feed and connections.
+
+
+
+📸 POSTS
+Allows users to share content: photos, captions, and link it to a workout or session.
+
+Posts are tied to users and optionally linked to routines/sessions.
+
+
+
+❤️ POST LIKES
+Tracks which users have liked which posts.
+
+Enforces one like per user per post via UNIQUE(post_id, user_id).
+
+
+
+💬 POST COMMENTS
+Stores comments users leave on posts.
+
+Contains the comment, who wrote it, and when.
