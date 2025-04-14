@@ -6,7 +6,7 @@ USE Forged_Gym;
 DROP TABLE IF EXISTS post_comments, post_likes, posts, user_following, session_logs, workout_sessions, routine_exercise_sets, routine_exercises, workout_routines, exercise_muscles, exercises, muscles, equipment_types, users;
 
 -- USERS
-CREATE TABLE users (
+CREATE TABLE Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -17,19 +17,19 @@ CREATE TABLE users (
 );
 
 -- EQUIPMENT TYPES
-CREATE TABLE equipment_types (
+CREATE TABLE Equipment_Types (
     equipment_type_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
 -- MUSCLES
-CREATE TABLE muscles (
+CREATE TABLE Muscles (
     muscle_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
 -- EXERCISES
-CREATE TABLE exercises (
+CREATE TABLE Exercises (
     exercise_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     equipment_type_id INT,
@@ -39,7 +39,7 @@ CREATE TABLE exercises (
 );
 
 -- EXERCISE_MUSCLES
-CREATE TABLE exercise_muscles (
+CREATE TABLE Exercise_Muscles (
     exercise_id INT,
     muscle_id INT,
     PRIMARY KEY (exercise_id, muscle_id),
@@ -48,7 +48,7 @@ CREATE TABLE exercise_muscles (
 );
 
 -- WORKOUT ROUTINES
-CREATE TABLE workout_routines (
+CREATE TABLE Workout_Routines (
     routine_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     name VARCHAR(100) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE workout_routines (
 );
 
 -- ROUTINE_EXERCISES
-CREATE TABLE routine_exercises (
+CREATE TABLE Routine_Exercises (
     routine_exercise_id INT AUTO_INCREMENT PRIMARY KEY,
     routine_id INT,
     exercise_id INT,
@@ -68,7 +68,7 @@ CREATE TABLE routine_exercises (
 );
 
 -- ROUTINE_EXERCISE_SETS
-CREATE TABLE routine_exercise_sets (
+CREATE TABLE Routine_Exercise_Sets (
     set_id INT AUTO_INCREMENT PRIMARY KEY,
     routine_exercise_id INT,
     set_number INT,
@@ -78,7 +78,7 @@ CREATE TABLE routine_exercise_sets (
 );
 
 -- WORKOUT SESSIONS
-CREATE TABLE workout_sessions (
+CREATE TABLE Workout_Sessions (
     session_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     routine_id INT,
@@ -89,7 +89,7 @@ CREATE TABLE workout_sessions (
 );
 
 -- SESSION LOGS
-CREATE TABLE session_logs (
+CREATE TABLE Session_Logs (
     session_log_id INT AUTO_INCREMENT PRIMARY KEY,
     session_id INT,
     exercise_id INT,
@@ -104,7 +104,7 @@ CREATE TABLE session_logs (
 -- Social aspect of the app
 
 -- USER FOLLOWING
-CREATE TABLE user_following (
+CREATE TABLE User_Following (
     follower_id INT,
     following_id INT,
     PRIMARY KEY (follower_id, following_id),
@@ -113,7 +113,7 @@ CREATE TABLE user_following (
 );
 
 -- POSTS
-CREATE TABLE posts (
+CREATE TABLE Posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     caption TEXT,
@@ -127,7 +127,7 @@ CREATE TABLE posts (
 );
 
 -- POST LIKES
-CREATE TABLE post_likes (
+CREATE TABLE Post_Likes (
     like_id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT,
     user_id INT,
@@ -138,7 +138,7 @@ CREATE TABLE post_likes (
 );
 
 -- POST COMMENTS
-CREATE TABLE post_comments (
+CREATE TABLE Post_Comments (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT,
     user_id INT,
