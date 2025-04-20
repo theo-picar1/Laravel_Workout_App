@@ -12,8 +12,8 @@
         </div>
         <div class="authentication-buttons">
             <h3>Get started</h3>
-            <button @click="active = 'login'">Login</button>
-            <button @click="active = 'register'" class="register-button">Register</button>
+            <button @click="active = 'login'" class="login-button">Login</button>
+            <button @click="active = 'register'">Register</button>
         </div>
     </div>
     

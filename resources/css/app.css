@@ -15,6 +15,10 @@ html {
     height: 100%;
 }
 
+p {
+    font-size: 18px;
+}
+
 /* Default button appearance. Just to prevent having to write a lot of css for each button */
 button {
     appearance: none;
@@ -25,6 +29,7 @@ button {
     font-weight: bold;
     background-color: red;
     color: white;
+    width: 100%;
 }
 
 button:active {
@@ -84,8 +89,8 @@ button:active {
         gap: 10px;
     }
 
-    .authentication-page .content .welcome-container .authentication-buttons .register-button {
-        background-color: red;
+    .authentication-page .content .welcome-container .authentication-buttons .login-button {
+        background-color: black;
     }
 
     .authentication-page .content .fill-out-section {
