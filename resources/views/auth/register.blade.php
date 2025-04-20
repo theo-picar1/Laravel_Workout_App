@@ -1,7 +1,7 @@
 <div>
     <h1>Register</h1>
 
-    <form method="POST">
+    <form method="POST" action="{{ route('register') }}">
         @csrf
         <div>
             <p>Enter your username</p>
@@ -16,6 +16,11 @@
         <div>
             <p>Enter your password</p>
             <input type="password" name="password" required>
+        </div>
+
+        <div>
+            <p>Confirm your password</p>
+            <input type="password" name="password_confirmation" required>
         </div>
 
         <button type="submit">Register</button>
