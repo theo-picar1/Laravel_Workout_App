@@ -38,4 +38,8 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
+    protected function redirectTo()
+    {
+        return view('pages.workout');
+    }
 }

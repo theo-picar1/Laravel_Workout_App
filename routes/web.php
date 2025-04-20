@@ -12,12 +12,20 @@ Auth::routes();
 
 // Get index.blade.php inside the auth folder of views
 Route::get('/', function () {
+    // Check if the user is authenticated
+    if (auth()->check()) {
+        return redirect()->route('pages.workout');
+    }
+    
     return view('auth.index');
 });
 
+// Gets the authentication page with login and register forms
+Route::get('/authentication', [PagesController::class, 'authenticationPage'])->name('auth.index');
+
 // Get the workout page within the pages folder. The return view is defined in WorkoutController
 // '/workout' is the URL (for the user), 'index' is the method name in the PagesController', and 'pages.workout' is just the name for the route. Can be anything as long as they match
-Route::get('/workout', [PagesController::class, 'index'])->name('pages.workout');
+Route::get('/workout', [PagesController::class, 'workoutPage'])->name('pages.workout');
 
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
