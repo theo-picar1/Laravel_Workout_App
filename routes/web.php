@@ -27,6 +27,8 @@ Route::get('/authentication', [PagesController::class, 'authenticationPage'])->n
 // '/workout' is the URL (for the user), 'index' is the method name in the PagesController', and 'pages.workout' is just the name for the route. Can be anything as long as they match
 Route::get('/workout', [PagesController::class, 'workoutPage'])->name('pages.workout');
 
+Route::get('/profile', [PagesController::class, 'editProfilePage'])->name('pages.profile');
+
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
 
