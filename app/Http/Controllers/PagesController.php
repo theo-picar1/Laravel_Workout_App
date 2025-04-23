@@ -15,4 +15,9 @@ class PagesController extends Controller
     public function authenticationPage() {
         return view('auth.index');
     }
+
+    // Returns the edit profile page view
+    public function editProfilePage() {
+        return view('pages.profile');
+    }
 }

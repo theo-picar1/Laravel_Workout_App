@@ -11,26 +11,26 @@
     @yield('content')
 
     <footer>
-        <div>
+        <a href="{{ route('pages.profile') }}">
             <img src="{{ asset('images/profile-icon.png') }}">
             <p>Profile</p>
-        </div>
-        <div>
+        </a>
+        <a a href="{{ route('pages.profile') }}">
             <img src="{{ asset('images/globe-icon.png') }}">
             <p>Discover</p>
-        </div>
-        <div>
+        </a>
+        <a a href="{{ route('pages.workout') }}">
             <img src="{{ asset('images/add-icon.png') }}">
             <p>Workout</p>
-        </div>
-        <div>
+        </a>
+        <a a href="{{ route('pages.profile') }}">
             <img src="{{ asset('images/weight-icon.png') }}">
             <p>Exercises</p>
-        </div>
-        <div>
+        </a>
+        <a a href="{{ route('pages.profile') }}">
             <img src="{{ asset('images/history-icon.png') }}">
             <p>History</p>
-        </div>
+        </a>
     </footer>
 </body>
 </html>

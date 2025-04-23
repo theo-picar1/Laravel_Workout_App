@@ -181,7 +181,15 @@ button:active {
         box-shadow: 0 -2px 10px black;
     }
 
-    .main-pages footer div img {
+    .main-pages footer a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+    }
+
+    .main-pages footer a img {
         width: 32px;
         height: auto;
     }
@@ -248,5 +256,113 @@ button:active {
         width: 100%;
         margin-top: 10px;
         padding: 16px 0;
+    }
+
+    /* Edit profile page */
+    .main-pages .edit-profile-page header {
+        width: 100%;
+        background-color: #262626;
+        height: min-content;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 30px 20px;
+    }
+
+    .main-pages .edit-profile-page header #header-title {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .main-pages .edit-profile-page header p {
+        color: red;
+    }
+
+    .main-pages .edit-profile-page header #logout {
+        text-align: right;
+    }
+
+    .main-pages .edit-profile-page .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section img {
+        width: 75px;
+        height: 75px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details {
+        width: 100%;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details p {
+        font-size: 20px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 10px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div p {
+        font-size: 16px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div .title {
+        color: gray;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-bio-section {
+        margin-top: 5px;
+        background-color: #262626;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-progress-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 30px;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-progress-section div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #262626;
+        padding: 50px 20px;
+        border-radius: 15px;
+        flex-shrink: 1;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    .main-pages .edit-profile-page .main-content .user-progress-section div h3 {
+        width: 90px;
     }
 }
