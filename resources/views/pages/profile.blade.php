@@ -5,7 +5,15 @@
         <header>
             <p>Edit profile</p>
             <p id="header-title">Profile</p>
-            <p id="logout">Logout</p>
+            <div x-data id="logout">
+                <p @click="$refs.logoutForm.submit()" class="logout-button" style="width: min-content">Logout</p>
+
+                <!-- Hidden logout form placed away from the visual layout -->
+                <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}" style="display: none" hidden>
+                    @csrf
+                </form>
+            </div>
+
         </header>
 
         <div class="main-content">

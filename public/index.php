@@ -1,5 +1,9 @@
 <?php
 
+if (headers_sent($file, $line)) {
+    exit("⚠️ Output started early in $file on line $line");
+}
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 

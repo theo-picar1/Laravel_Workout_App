@@ -34,12 +34,14 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        \Log::debug("LoginController constructor reached.");
+        
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
 
     protected function redirectTo()
     {
-        return view('pages.workout');
+        return '/workout';
     }
 }

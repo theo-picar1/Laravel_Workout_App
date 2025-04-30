@@ -280,7 +280,8 @@ button:active {
     }
 
     .main-pages .edit-profile-page header #logout {
-        text-align: right;
+        display: flex;
+        justify-content: flex-end;
     }
 
     .main-pages .edit-profile-page .main-content {
