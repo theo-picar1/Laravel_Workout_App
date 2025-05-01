@@ -29,6 +29,8 @@ Route::get('/workout', [PagesController::class, 'workoutPage'])->name('pages.wor
 
 Route::get('/profile', [PagesController::class, 'editProfilePage'])->name('pages.profile');
 
+Route::get('/exercises', [PagesController::class, 'exercisesPage'])->name('pages.exercises');
+
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
 

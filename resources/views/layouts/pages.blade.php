@@ -23,7 +23,7 @@
             <img src="{{ asset('images/add-icon.png') }}">
             <p>Workout</p>
         </a>
-        <a a href="{{ route('pages.profile') }}">
+        <a a href="{{ route('pages.exercises') }}">
             <img src="{{ asset('images/weight-icon.png') }}">
             <p>Exercises</p>
         </a>

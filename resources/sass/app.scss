@@ -338,3 +338,110 @@ button {
         width: 90px;
     }
 }
+
+
+/* Exercise Page Specific Styles */
+.exercise-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.header-section {
+    margin-bottom: 25px;
+}
+
+.header-top {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.header-number {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-title {
+    font-size: 20px;
+    margin: 0;
+    color: #333;
+    font-weight: normal;
+}
+
+.header-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.controls-section {
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 6px 12px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-tab.active {
+    background-color: #333;
+    color: white;
+}
+
+.exercise-table {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-cell {
+    padding: 12px 15px;
+    flex: 1;
+}
+
+.table-body {
+    background-color: white;
+}
+
+.table-row {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row:last-child {
+    border-bottom: none;
+}
+
+.table-cell {
+    padding: 12px 15px;
+    flex: 1;
+}

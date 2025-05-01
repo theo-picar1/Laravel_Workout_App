@@ -20,4 +20,9 @@ class PagesController extends Controller
     public function editProfilePage() {
         return view('pages.profile');
     }
+
+    // Returns the exercises page view
+    public function exercisesPage() {
+        return view('pages.exercises');
+    }
 }
