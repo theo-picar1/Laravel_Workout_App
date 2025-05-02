@@ -16,6 +16,10 @@ $website-white: #ffffff;
 // Padding
 $mobile-padding: 50px 20px;
 
+// Filter colors 
+$website-white-to-light-gray: brightness(50%) grayscale(100%);
+$website-light-gray-to-white: brightness(250%) contrast(1000%);
+
 * {
     padding: 0;
     margin: 0;
@@ -85,11 +89,33 @@ p {
     a {
         @include display-flex(column, unset, center, 0);
         text-decoration: none;
-        color: $website-white;
+        color: $website-light-gray;
+
+        &:hover {
+            color: $website-white;
+
+            img {
+                filter: $website-light-gray-to-white;
+            }
+        }
 
         img {
             width: 32px;
             height: auto;
+            filter: $website-white-to-light-gray;
+        }
+    }
+}
+
+// CSS for making the selected href white and passing id as a parameter
+@mixin selected-footer-href-css($id) {
+    #{$id} {
+        p {
+            color: $website-white;
+        }
+
+        img {
+            filter: none;
         }
     }
 }
@@ -370,6 +396,14 @@ p {
             position: fixed;
             bottom: 0;
             width: 100%;
+        }
+
+        #workout-page-footer {
+            @include selected-footer-href-css('#workout-href');
+        }
+
+        #profile-page-footer {
+            @include selected-footer-href-css('#profile-href');
         }
     }
 }

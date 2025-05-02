@@ -423,10 +423,29 @@ p {
     align-items: center;
     gap: 0;
     text-decoration: none;
+    color: #808080;
+  }
+  .main-pages footer a:hover {
     color: #ffffff;
+  }
+  .main-pages footer a:hover img {
+    filter: brightness(250%) contrast(1000%);
   }
   .main-pages footer a img {
     width: 32px;
     height: auto;
+    filter: brightness(50%) grayscale(100%);
+  }
+  .main-pages #workout-page-footer #workout-href p {
+    color: #ffffff;
+  }
+  .main-pages #workout-page-footer #workout-href img {
+    filter: none;
+  }
+  .main-pages #profile-page-footer #profile-href p {
+    color: #ffffff;
+  }
+  .main-pages #profile-page-footer #profile-href img {
+    filter: none;
   }
 }/*# sourceMappingURL=app.css.map */

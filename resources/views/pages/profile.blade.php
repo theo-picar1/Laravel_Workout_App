@@ -75,24 +75,24 @@
             </div>
         </div>
 
-        <footer>
-            <a href="{{ route('pages.profile') }}">
+        <footer id="profile-page-footer">
+            <a href="{{ route('pages.profile') }}" id="profile-href">
                 <img src="{{ asset('images/profile-icon.png') }}">
                 <p>Profile</p>
             </a>
-            <a a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.profile') }}">
                 <img src="{{ asset('images/globe-icon.png') }}">
                 <p>Discover</p>
             </a>
-            <a a href="{{ route('pages.workout') }}">
+            <a href="{{ route('pages.workout') }}">
                 <img src="{{ asset('images/add-icon.png') }}">
                 <p>Workout</p>
             </a>
-            <a a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.profile') }}">
                 <img src="{{ asset('images/weight-icon.png') }}">
                 <p>Exercises</p>
             </a>
-            <a a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.profile') }}">
                 <img src="{{ asset('images/history-icon.png') }}">
                 <p>History</p>
             </a>
