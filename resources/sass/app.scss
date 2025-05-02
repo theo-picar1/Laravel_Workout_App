@@ -4,45 +4,18 @@
 // Variables
 @import 'variables';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// colors
+$website-red: #ff0000;
+$website-dark-red: #9b0202;
+$website-light-red: #fb4747;
+$website-dark-gray: #262626;
+$website-light-gray: #808080;
+$website-black: #000000;
+$website-white: #ffffff;
 
-// Variables for commonly used styles
-$primary-color: red;
-$secondary-color: #262626;
-$white-color: white;
-$gray-color: gray;
-$font-size-large: 18px;
-$font-size-medium: 16px;
-$font-size-small: 14px;
+// Padding
+$mobile-padding: 50px 20px;
 
-// Mixin for button styles
-@mixin button-style($bg-color, $text-color: $white-color) {
-    appearance: none;
-    border: none;
-    border-radius: 6px;
-    padding: 15px 0px;
-    font-size: $font-size-large;
-    font-weight: bold;
-    background-color: $bg-color;
-    color: $text-color;
-    width: 100%;
-    &:active {
-        filter: brightness(0.85);
-    }
-}
-
-// Mixin for flexbox layout
-@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
-    display: flex;
-    flex-direction: $direction;
-    justify-content: $justify;
-    align-items: $align;
-    gap: $gap;
-}
-
-// Global styles
 * {
     padding: 0;
     margin: 0;
@@ -55,286 +28,348 @@ html {
 }
 
 p {
-    font-size: $font-size-large;
+    font-size: 18px;
 }
 
-// Default button appearance
-button {
-    @include button-style($primary-color);
+// Default button appearance function 
+@mixin app-button-base-css($padding, $font-size, $background-color, $color, $width, $hover-color, $active-color) {
+    appearance: none;
+    border: none;
+    border-radius: 6px;
+    padding: $padding;
+    font-size: $font-size;
+    font-weight: bold;
+    background-color: $background-color;
+    color: $color;
+    width: $width;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $hover-color;
+    }
+
+    &:active {
+        background-color: $active-color;
+    }
 }
 
-@media screen and (min-width: 0px) {
+// Default input css for website 
+@mixin text-input-base-css($width, $border-radius) {
+    appearance: none;
+    width: $width;
+    padding: 8px 12px;
+    border-radius: $border-radius;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+}
+
+
+// display-flex function to define justify-content, align-items, direction and gap
+@mixin display-flex($direction, $justify-content, $align-items, $gap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    gap: $gap;
+}
+
+// function css
+@mixin footer-css() {
+    @include display-flex(row, space-between, center, 0);
+    text-align: center;
+    background-color: $website-dark-gray;
+    padding: 20px;
+    box-shadow: 0 -2px 10px $website-black;
+
+    a {
+        @include display-flex(column, unset, center, 0);
+        text-decoration: none;
+        color: $website-white;
+
+        img {
+            width: 32px;
+            height: auto;
+        }
+    }
+}
+
+@media screen AND (min-width: 0px) {
 
     /****** AUTHENTICATION PAGE CSS *****/
     .authentication-page {
         background-image: url('/public/images/user-auth-background.jpg');
         background-size: 100% 100%;
         background-repeat: no-repeat;
-        background-color: black;
-        color: $white-color;
-    }
+        background-color: $website-black;
+        color: $website-white;
 
-    .authentication-page .content {
-        @include flex(column, center, center, 20px);
-        height: 100vh;
-        padding: 50px 20px;
-        backdrop-filter: blur(5px);
-    }
+        .content {
+            text-align: center;
+            height: 100vh;
+            padding: $mobile-padding;
+            backdrop-filter: blur(5px);
 
-    .authentication-page .content .welcome-container {
-        @include flex(column, space-between, center, 0);
-        height: 100%;
-    }
+            .welcome-container {
+                @include display-flex(column, space-between, unset, 0);
+                height: 100%;
+            }
 
-    .authentication-page .content .welcome-container .app-title div {
-        @include flex(row, center, center, 15px);
-    }
+            .app-title {
+                @include display-flex(column, center, center, 0px);
 
-    .authentication-page .content .welcome-container .app-title div img {
-        width: 100px;
-        height: auto;
-    }
+                div {
+                    @include display-flex(row, unset, center, 5px);
 
-    .authentication-page .content .welcome-container .app-title div h1 {
-        font-weight: bold;
-        font-size: 46px;
-    }
+                    img {
+                        width: 90px;
+                        height: auto;
+                    }
 
-    .authentication-page .content .welcome-container .app-title p {
-        font-size: 20px;
-    }
+                    h1 {
+                        font-weight: bold;
+                        font-size: 44px;
+                    }
 
-    .authentication-page .content .welcome-container .authentication-buttons {
-        @include flex(column, center, center, 10px);
-    }
+                    p {
+                        font-size: 20px;
+                    }
+                }
+            }
 
-    .authentication-page .content .welcome-container .authentication-buttons .login-button {
-        background-color: $secondary-color;
-    }
+            .authentication-buttons {
+                @include display-flex(column, unset, unset, 10px);
 
-    .authentication-page .content .fill-out-section {
-        @include flex(column, left, center, 20px);
-    }
+                button {
+                    @include app-button-base-css(15px 0, 20px, $website-red, $website-white, 100%, $website-dark-red, $website-light-red);
+                }
 
-    .authentication-page .content .fill-out-section .back-container {
-        @include flex(row, center, center, 0);
-    }
+                .login-button {
+                    background-color: $website-black;
+                    @include app-button-base-css(15px 0, 20px, $website-black, $website-white, 100%, $website-black, $website-black);
+                }
+            }
+        }
 
-    .authentication-page .content .fill-out-section .back-container:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
+        .fill-out-section {
+            @include display-flex(column, unset, unset, 20px);
 
-    .authentication-page .content .fill-out-section h1 {
-        font-size: 36px;
-    }
+            .back-container {
+                @include display-flex(row, unset, center, 0);
 
-    .authentication-page .content .fill-out-section form {
-        @include flex(column, center, center, 20px);
-        margin-top: 20px;
-    }
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
 
-    .authentication-page .content .fill-out-section form div {
-        width: 100%;
-    }
+            form {
+                @include display-flex(column, unset, flex-start, 20px);
 
-    .authentication-page .content .fill-out-section form div p {
-        font-size: $font-size-large;
-        padding-left: 8px;
-    }
+                div {
+                    text-align: left;
+                    width: 100%;
 
-    .authentication-page .content .fill-out-section form div input {
-        appearance: none;
-        width: 100%;
-        padding: 8px 12px;
-        border-radius: 15px;
-        background-color: $secondary-color;
-        border: 3px solid $white-color;
-        color: rgb(230, 230, 230);
-        outline: none;
-        margin-top: 5px;
-    }
+                    p {
+                        font-size: 18px;
+                        padding-left: 8px;
+                    }
 
-    .authentication-page .content .fill-out-section form button {
-        @include button-style($primary-color);
-        margin-top: 5px;
-    }
+                    input {
+                        @include text-input-base-css(100%, 15px);
+                        border: 2px solid $website-white;
+                        margin-top: 5px;
+                    }
+                }
 
-    .authentication-page .content .fill-out-section form button:hover {
-        cursor: pointer;
-        filter: opacity(0.85);
+                button {
+                    @include app-button-base-css(15px 0, 18px, $website-red, $website-white, 100%, $website-light-red, $website-dark-red);
+                }
+            }
+        }
     }
 
     /* ********** MAIN PAGES CSS ********** */
     .main-pages {
-        display: grid;
-        grid-template-rows: 1fr auto;
-        height: 100vh;
-        background-color: black;
-        color: $white-color;
-    }
+        max-height: 100vh;
+        background-color: $website-black;
+        color: $website-white;
 
-    .main-pages footer {
-        @include flex(row, space-between, center, 20px);
-        background-color: $secondary-color;
-        box-shadow: 0 -2px 10px black;
-    }
+        // Workout page
+        .workout-page {
+            padding: $mobile-padding;
+            @include display-flex(column, unset, unset, 40px);
+            scrollbar-width: none;
+            // IMPORTANT: Because footer is fixed so scroll won't take its height into consideration
+            padding-bottom: 100px;
 
-    .main-pages footer a {
-        @include flex(column, center, center, 0);
-        text-decoration: none;
-        color: $white-color;
-    }
+            h1 {
+                font-size: 40px;
+            }
 
-    .main-pages footer a img {
-        width: 32px;
-        height: auto;
-    }
+            .quick-start-section {
+                margin-top: 10px;
+                width: 100%;
+                padding: 15px 0;
 
-    .main-pages .workout-page {
-        padding: 50px 20px;
-        flex: 1;
-        @include flex(column, space-between, flex-start, 40px);
-        overflow-y: scroll;
-    }
+                button {
+                    @include app-button-base-css(12px 0, 16px, $website-red, $website-white, 100%, $website-dark-red, $website-light-red);
+                    margin-top: 10px;
+                }
+            }
 
-    .main-pages .workout-page h1 {
-        font-size: 40px;
-    }
+            .routines-section {
 
-    .main-pages .workout-page .quick-start-section button {
-        margin-top: 10px;
-        width: 100%;
-        padding: 15px 0;
-    }
+                .title {
+                    @include display-flex(row, space-between, center, 0);
 
-    .main-pages .workout-page .routines-section .title {
-        @include flex(row, space-between, center, 0);
-    }
+                    button {
+                        @include app-button-base-css(8px 0, 16px, $website-dark-gray, $website-white, 150px, $website-dark-gray, $website-light-gray);
 
-    .main-pages .workout-page .routines-section .title button {
-        font-size: 16px;
-        background-color: $secondary-color;
-        width: 150px;
-    }
+                        &:active {
+                            filter: brightness(1.5);
+                        }
+                    }
+                }
 
-    .main-pages .workout-page .routines-section .title button:active {
-        filter: brightness(1.5);
-    }
+                .routines-list {
+                    @include display-flex(column, unset, unset, 20px);
+                    margin-top: 20px;
 
-    .main-pages .workout-page .routines-section .routines-list {
-        @include flex(column, center, center, 20px);
-        margin-top: 20px;
-    }
+                    .routine {
+                        background-color: $website-dark-gray;
+                        padding: 20px;
+                        border-radius: 15px;
 
-    .main-pages .workout-page .routines-section .routines-list .routine {
-        background-color: $secondary-color;
-        padding: 20px 35px;
-        border-radius: 15px;
-    }
+                        .exercises-preview {
+                            @include display-flex(row, unset, unset, 0);
+                            margin-top: 5px;
+                            color: $website-light-gray;
+                            flex-wrap: wrap;
+                        }
 
-    .main-pages .workout-page .routines-section .routines-list .routine .exercises-preview {
-        @include flex(row, space-between, flex-start, 5px);
-        margin-top: 5px;
-        color: $gray-color;
-    }
+                        button {
+                            @include app-button-base-css(16px 0, 16px, $website-red, $website-white, 100%, $website-dark-red, $website-light-red);
+                            margin-top: 10px;
+                        }
+                    }
+                }
+            }
+        }
 
-    .main-pages .workout-page .routines-section .routines-list .routine button {
-        width: 100%;
-        margin-top: 10px;
-        padding: 16px 0;
-    }
+        .edit-profile-page {
+            padding-bottom: 100px;
+            max-width: 100vw;
+            height: auto;
 
-    .main-pages .edit-profile-page header {
-        background-color: $secondary-color;
-        height: min-content;
-        @include flex(row, space-between, center, 20px);
-        padding: 30px 20px;
-    }
+            header {
+                width: 100%;
+                background-color: $website-dark-gray;
+                display: grid;
+                align-content: center;
+                grid-template-columns: 1fr 1fr 1fr;
+                padding: 0px 20px;
+                height: 80px;
 
-    .main-pages .edit-profile-page header #header-title {
-        color: $white-color;
-        font-weight: bold;
-        font-size: 20px;
-        text-align: center;
-    }
+                #header-title {
+                    color: $website-white;
+                    font-weight: bold;
+                    font-size: 20px;
+                    text-align: center;
+                }
 
-    .main-pages .edit-profile-page header p {
-        color: $primary-color;
-    }
+                p {
+                    color: $website-red;
+                }
 
-    .main-pages .edit-profile-page header #logout {
-        display: flex;
-        justify-content: flex-end;
-    }
+                #logout {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
 
-    .main-pages .edit-profile-page .main-content {
-        @include flex(column, flex-start, flex-start, 30px);
-        padding: 20px;
-    }
+            .main-content {
+                overflow-y: scroll;
+                padding: $mobile-padding;
+                padding-bottom: 0;
+                @include display-flex(column, unset, unset, 20px);
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section {
-        margin-top: 15px;
-        @include flex(row, flex-start, flex-start, 20px);
-        width: 100%;
-    }
+                .user-profile-picture-section {
+                    margin-top: 15px;
+                    @include display-flex(row, unset, flex-start, 20px);
+                    width: 100%;
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section img {
-        width: 75px;
-        height: 75px;
-        background-color: $primary-color;
-        border-radius: 50%;
-    }
+                    img {
+                        width: 75px;
+                        height: 75px;
+                        background-color: $website-red;
+                        border-radius: 50%;
+                    }
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details {
-        width: 100%;
-    }
+                    .user-profile-details {
+                        width: 100%;
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details p {
-        font-size: 20px;
-    }
+                        p {
+                            font-size: 20px;
+                        }
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats {
-        @include flex(row, space-between, flex-start, 0);
-        margin-top: 10px;
-    }
+                        .user-profile-stats {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 1fr;
+                            margin-top: 10px;
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div {
-        @include flex(column, flex-start, flex-start, 5px);
-    }
+                            div {
+                                @include display-flex(column, unset, unset, 5px);
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div p {
-        font-size: $font-size-medium;
-    }
+                                p {
+                                    font-size: 16px;
+                                }
 
-    .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div .title {
-        color: $gray-color;
-    }
+                                .title {
+                                    color: $website-light-gray;
+                                }
+                            }
+                        }
+                    }
+                }
 
-    .main-pages .edit-profile-page .main-content .user-bio-section {
-        margin-top: 5px;
-        background-color: $secondary-color;
-        padding: 10px;
-        border-radius: 10px;
-    }
+                .user-bio-section {
+                    margin-top: 5px;
+                    background-color: $website-dark-gray;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
 
-    .main-pages .edit-profile-page .main-content .user-progress-section {
-        @include flex(row, space-between, center, 30px);
-        text-align: center;
-        margin-top: 15px;
-    }
+                .user-progress-section {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 30px;
+                    text-align: center;
+                    margin-top: 15px;
 
-    .main-pages .edit-profile-page .main-content .user-progress-section div {
-        @include flex(column, center, center, 10px);
-        background-color: $secondary-color;
-        padding: 50px 20px;
-        border-radius: 15px;
-        flex-shrink: 1;
-        flex-grow: 1;
-        width: 100%;
-    }
+                    div {
+                        @include display-flex(column, center, center, 0);
+                        background-color: $website-dark-gray;
+                        padding: $mobile-padding;
+                        border-radius: 15px;
+                        flex-shrink: 1;
+                        flex-grow: 1;
+                        width: 100%;
 
-    .main-pages .edit-profile-page .main-content .user-progress-section div h3 {
-        width: 90px;
+                        h3 {
+                            width: 90px;
+                        }
+                    }
+                }
+            }
+        }
+
+        footer {
+            @include footer-css();
+            height: 80px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     }
 }

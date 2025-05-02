@@ -5,10 +5,10 @@
         <header>
             <p>Edit profile</p>
             <p id="header-title">Profile</p>
+            {{-- This is just some logging-out functionality --}}
             <div x-data id="logout">
                 <p @click="$refs.logoutForm.submit()" class="logout-button" style="width: min-content">Logout</p>
 
-                <!-- Hidden logout form placed away from the visual layout -->
                 <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}" style="display: none" hidden>
                     @csrf
                 </form>
@@ -74,5 +74,28 @@
                 </div>
             </div>
         </div>
+
+        <footer>
+            <a href="{{ route('pages.profile') }}">
+                <img src="{{ asset('images/profile-icon.png') }}">
+                <p>Profile</p>
+            </a>
+            <a a href="{{ route('pages.profile') }}">
+                <img src="{{ asset('images/globe-icon.png') }}">
+                <p>Discover</p>
+            </a>
+            <a a href="{{ route('pages.workout') }}">
+                <img src="{{ asset('images/add-icon.png') }}">
+                <p>Workout</p>
+            </a>
+            <a a href="{{ route('pages.profile') }}">
+                <img src="{{ asset('images/weight-icon.png') }}">
+                <p>Exercises</p>
+            </a>
+            <a a href="{{ route('pages.profile') }}">
+                <img src="{{ asset('images/history-icon.png') }}">
+                <p>History</p>
+            </a>
+        </footer>
     </div>
 @endsection

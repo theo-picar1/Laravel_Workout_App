@@ -3,7 +3,7 @@
 
     <div>
         <p>Enter your email</p>
-        <input type="text" name="email" required> {{-- Has to be eamil since this is the default for Laravel's auth system --}}
+        <input type="text" name="email" autocomplete="off"> {{-- Has to be eamil since this is the default for Laravel's auth system --}}
     </div>
 
     <div>

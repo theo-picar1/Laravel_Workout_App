@@ -5,12 +5,12 @@
         @csrf
         <div>
             <p>Enter your username</p>
-            <input type="text" name="username" required>
+            <input type="text" name="username" autocomplete="off" required>
         </div>
 
         <div>
             <p>Enter your email</p>
-            <input type="email" name="email" required>
+            <input type="email" name="email" autocomplete="off" required>
         </div>
 
         <div>
