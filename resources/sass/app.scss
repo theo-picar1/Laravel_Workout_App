@@ -4,14 +4,32 @@
 // Variables
 @import 'variables';
 
+// IMPORTANT: KEEP TRACK FOLLOWIN Z INDEXES
+/*
+    #start-empty-workout-modal: 1
+*/
+
+// To get rid of up and down arrows for number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 // colors
 $website-red: #ff0000;
 $website-dark-red: #9b0202;
 $website-light-red: #fb4747;
+$website-darker-gray: #171717;
 $website-dark-gray: #262626;
 $website-light-gray: #808080;
 $website-black: #000000;
 $website-white: #ffffff;
+$website-green: #81fe5e;
+$website-hover-green: #71ed4f;
+
+// Translucency
+$invisible : #ffffff00;
 
 // Padding
 $mobile-padding: 50px 20px;
@@ -104,6 +122,10 @@ p {
             height: auto;
             filter: $website-white-to-light-gray;
         }
+
+        p {
+            font-size: 12px;
+        }
     }
 }
 
@@ -117,6 +139,36 @@ p {
         img {
             filter: none;
         }
+    }
+}
+
+// CSS for the buttons / icons within the start exercise and history modals
+@mixin exercise-icon-button-css($height) {
+    @include display-flex(unset, center, center, 0);
+    background-color: $website-darker-gray;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: $height;
+}
+
+// CSS for inputs within the start workout modal
+@mixin exercise-input-css() {
+    appearance: none;
+    text-align: center;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 2px solid $invisible;
+    max-width: 50px;
+    background-color: $website-darker-gray;
+    color: $website-white;
+    outline: none;
+
+    &:focus {
+        border-color: $website-white;
+    }
+
+    &::placeholder {
+        color: $website-light-gray;
     }
 }
 
@@ -220,6 +272,196 @@ p {
         max-height: 100vh;
         background-color: $website-black;
         color: $website-white;
+
+        // ********** MODALS CSS **********
+        #start-empty-workout-modal {
+            position: fixed;
+            z-index: 1;
+            height: 95vh;
+            overflow-y: scroll;
+            width: 100%;
+            bottom: 0;
+            background-color: $website-dark-gray;
+            border-radius: 8px 8px 0 0;
+            padding: 15px;
+            transform: translateY(1000px);
+            transition: transform 0.1s ease-in-out;
+
+            &.openOrClose {
+                transform: translateY(0);
+            }
+
+            &.minimise {
+                transform: translateY(90%);
+            }
+
+            .header {
+                @include display-flex(row, space-between, center, 0px);
+                height: 30px;
+
+                .left-side {
+                    @include display-flex(row, unset, center, 10px);
+                    height: 100%;
+
+                    h3 {
+                        width: min-content;
+                    }
+
+                    div {
+                        @include exercise-icon-button-css(100%);
+                    }
+                }
+
+                .right-side {
+                    @include display-flex(row, unset, center, 10px);
+                    height: 100%;
+
+                    div {
+                        @include exercise-icon-button-css(100%);
+                        height: 100%;
+                        transition: transform 0.3s ease;
+
+                        #minimise-start-empty-workout-button {
+                            transform: rotate(0deg);
+                            transition: transform 0.3s ease;
+
+                            &.minimise {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+
+                    button {
+                        @include app-button-base-css(0px 12px, 14px, $website-green, $website-white, auto, $website-hover-green, $website-green);
+                        height: inherit;
+                    }
+                }
+            }
+
+            #time {
+                margin: 10px 0;
+                color: $website-light-gray;
+            }
+
+            .exercises-list {
+
+                .exercise {
+
+                    .exercise-header {
+                        @include display-flex(row, space-between, center, 0);
+                        border-top: thin solid $website-darker-gray;
+                        border-bottom: thin solid $website-darker-gray;
+                        padding: 5px 0px;
+
+                        div {
+                            @include exercise-icon-button-css(auto);
+                            background-color: $website-red;
+                        }
+                    }
+
+                    .exercise-stats {
+                        margin-top: 10px;
+                        @include display-flex(row, space-between, flex-start, 0);
+
+                        .columns {
+                            text-align: center;
+                            display: grid;
+                            grid-auto-flow: row;
+                            grid-auto-rows: 20px;
+                            gap: 10px;
+                            align-content: flex-start;
+                            align-items: center;
+                        }
+
+                        .set-number-column {
+
+                            div {
+                                @include exercise-icon-button-css(auto);
+                            }
+                        }
+
+                        .previous-stat-column {
+
+                            div {
+
+                                p {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+
+                        .kg-column {
+
+                            input {
+                                @include exercise-input-css();
+                            }
+                        }
+
+                        .reps-column {
+
+                            input {
+                                @include exercise-input-css();
+                            }
+                        }
+
+                        .is-finished-column {
+
+                            label {
+                                @include exercise-icon-button-css(23px);
+                                position: relative;
+                                @include display-flex(column, center, center, 0);
+                                background-color: $website-darker-gray;
+                                width: 100%;
+                                padding: 0;
+
+                                img {
+                                    position: fixed;
+                                }
+
+                                input {
+                                    appearance: none;
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: 5px;
+
+                                    &:checked {
+                                        background-color: $website-green;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    #add-set-button {
+                        @include app-button-base-css(3px 0, 12px, $website-darker-gray, $website-white, 100%, $website-dark-gray, $website-light-gray);
+                        @include display-flex(row, center, center, 5px);
+                        margin-top: 10px;
+
+                        img {
+                            width: 20px;
+                            height: auto;
+                        }
+
+                        p {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+
+            .buttons-section {
+                margin-top: 20px;
+                @include display-flex(column, center, flex-start, 15px);
+                
+                button {
+                    @include app-button-base-css(6px 0, 12px, $website-red, $website-white, 100%, $website-dark-red, $website-light-red);
+                }
+
+                #add-exercises-button {
+                    background-color: $website-green;
+                }
+            }
+        }
 
         // Workout page
         .workout-page {
@@ -404,6 +646,38 @@ p {
 
         #profile-page-footer {
             @include selected-footer-href-css('#profile-href');
+        }
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .main-pages {
+
+        #start-empty-workout-modal {
+
+            .header {
+
+                .left-side {
+
+                    h3 {
+                        width: fit-content;
+                    }
+                }
+            }
+
+            #time {
+                margin-top: 0;
+            }
+        }
+
+        footer {
+
+            a {
+
+                p {
+                    font-size: 16px;
+                }
+            }
         }
     }
 }

@@ -1,12 +1,171 @@
 @extends('layouts.pages')
 
 @section('content')
+    {{-- Start empty workout modal --}}
+    <div id="start-empty-workout-modal">
+        <div class="header">
+            <div class="left-side">
+                <h3>Name of workout</h3>
+
+                <div>
+                    <img src="{{ asset('images/more-icon.png') }}">
+                </div>
+            </div>
+
+            <div class="right-side">
+                <div>
+                    <img src="{{ asset('images/minimise-icon.png') }}"
+                        onclick="minimiseModal('start-empty-workout-modal', 'minimise-start-empty-workout-button')"
+                        id="minimise-start-empty-workout-button">
+                </div>
+
+                <button onclick="closeModal('start-empty-workout-modal')">Finish</button>
+            </div>
+        </div>
+
+        <p id="time">0:00:00</p>
+
+        <div class="exercises-list">
+            <div class="exercise">
+                <div class="exercise-header">
+                    <p id="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable -
+                        Straight Bar)</p>
+
+                    <div>
+                        <img src="{{ asset('images/remove-icon.png') }}">
+                    </div>
+                </div>
+
+                <div class="exercise-stats">
+                    <div class="columns set-number-column">
+                        <p>Set</p>
+
+                        <div>
+                            <p>1</p>
+                        </div>
+
+                        <div>
+                            <p>2</p>
+                        </div>
+
+                        <div>
+                            <p>3</p>
+                        </div>
+
+                        <div>
+                            <p>4</p>
+                        </div>
+
+                        <div>
+                            <p>5</p>
+                        </div>
+
+                        <div>
+                            <p>6</p>
+                        </div>
+                    </div>
+
+                    <div class="columns previous-stat-column">
+                        <p>Previous</p>
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+                    </div>
+
+                    <div class="columns kg-column">
+                        <p>KG</p>
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                    </div>
+
+                    <div class="columns reps-column">
+                        <p>Reps</p>
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                    </div>
+
+                    <div class="columns is-finished-column">
+                        <img src="{{ asset('images/check-icon.png') }}">
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+                    </div>
+                </div>
+
+                <div id="add-set-button">
+                    <img src="{{ asset('images/add-icon.png') }}">
+                    <p>Add Set</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-section">
+            <button id="add-exercises-button">Add Exercises</button>
+            <button onclick="closeModal('start-empty-workout-modal')">Cancel Workout</button>
+        </div>
+    </div>
+
     <div class="workout-page">
         <h1>Start Workout</h1>
 
         <div class="quick-start-section">
             <h2>Quick start</h2>
-            <button type="button">Start an empty workout</button>
+            <button type="button" onclick="openModal('start-empty-workout-modal')">Start an empty workout</button>
         </div>
 
         <div class="routines-section">
