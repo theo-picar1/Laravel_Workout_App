@@ -1,4 +1,13 @@
 @import url("https://fonts.bunny.net/css?family=Nunito");
+/*
+    #start-empty-workout-modal: 1
+*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -182,6 +191,304 @@ p {
     max-height: 100vh;
     background-color: #000000;
     color: #ffffff;
+  }
+  .main-pages #start-empty-workout-modal {
+    position: fixed;
+    z-index: 1;
+    height: 95vh;
+    overflow-y: scroll;
+    width: 100%;
+    bottom: 0;
+    background-color: #262626;
+    border-radius: 8px 8px 0 0;
+    padding: 15px;
+    transform: translateY(1000px);
+    transition: transform 0.1s ease-in-out;
+  }
+  .main-pages #start-empty-workout-modal.openOrClose {
+    transform: translateY(0);
+  }
+  .main-pages #start-empty-workout-modal.minimise {
+    transform: translateY(90%);
+  }
+  .main-pages #start-empty-workout-modal .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0px;
+    height: 30px;
+  }
+  .main-pages #start-empty-workout-modal .header .left-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+  }
+  .main-pages #start-empty-workout-modal .header .left-side h3 {
+    width: -moz-min-content;
+    width: min-content;
+  }
+  .main-pages #start-empty-workout-modal .header .left-side div {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: 100%;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side div {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side div #minimise-start-empty-workout-button {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side div #minimise-start-empty-workout-button.minimise {
+    transform: rotate(180deg);
+  }
+  .main-pages #start-empty-workout-modal .header .right-side button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    border-radius: 6px;
+    padding: 0px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #81fe5e;
+    color: #ffffff;
+    width: auto;
+    height: inherit;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side button:hover {
+    cursor: pointer;
+    background-color: #71ed4f;
+  }
+  .main-pages #start-empty-workout-modal .header .right-side button:active {
+    background-color: #81fe5e;
+  }
+  .main-pages #start-empty-workout-modal #time {
+    margin: 10px 0;
+    color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    border-top: thin solid #171717;
+    border-bottom: thin solid #171717;
+    padding: 5px 0px;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-header div {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: auto;
+    background-color: #ff0000;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .columns {
+    text-align: center;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: 20px;
+    gap: 10px;
+    align-content: flex-start;
+    align-items: center;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .set-number-column div {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: auto;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .previous-stat-column div p {
+    font-size: 12px;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .kg-column input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    text-align: center;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    max-width: 50px;
+    background-color: #171717;
+    color: #ffffff;
+    outline: none;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .kg-column input:focus {
+    border-color: #ffffff;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .kg-column input::-moz-placeholder {
+    color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .kg-column input::placeholder {
+    color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .reps-column input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    text-align: center;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    max-width: 50px;
+    background-color: #171717;
+    color: #ffffff;
+    outline: none;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .reps-column input:focus {
+    border-color: #ffffff;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .reps-column input::-moz-placeholder {
+    color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .reps-column input::placeholder {
+    color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .is-finished-column label {
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    padding: 0px 5px;
+    border-radius: 5px;
+    height: 23px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background-color: #171717;
+    width: 100%;
+    padding: 0;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .is-finished-column label img {
+    position: fixed;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .is-finished-column label input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise .exercise-stats .is-finished-column label input:checked {
+    background-color: #81fe5e;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise #add-set-button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 0;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #171717;
+    color: #ffffff;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise #add-set-button:hover {
+    cursor: pointer;
+    background-color: #262626;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise #add-set-button:active {
+    background-color: #808080;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise #add-set-button img {
+    width: 20px;
+    height: auto;
+  }
+  .main-pages #start-empty-workout-modal .exercises-list .exercise #add-set-button p {
+    font-size: 14px;
+  }
+  .main-pages #start-empty-workout-modal .buttons-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .main-pages #start-empty-workout-modal .buttons-section button {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #ff0000;
+    color: #ffffff;
+    width: 100%;
+  }
+  .main-pages #start-empty-workout-modal .buttons-section button:hover {
+    cursor: pointer;
+    background-color: #9b0202;
+  }
+  .main-pages #start-empty-workout-modal .buttons-section button:active {
+    background-color: #fb4747;
+  }
+  .main-pages #start-empty-workout-modal .buttons-section #add-exercises-button {
+    background-color: #81fe5e;
   }
   .main-pages .workout-page {
     padding: 50px 20px;
@@ -436,6 +743,9 @@ p {
     height: auto;
     filter: brightness(50%) grayscale(100%);
   }
+  .main-pages footer a p {
+    font-size: 12px;
+  }
   .main-pages #workout-page-footer #workout-href p {
     color: #ffffff;
   }
@@ -447,5 +757,17 @@ p {
   }
   .main-pages #profile-page-footer #profile-href img {
     filter: none;
+  }
+}
+@media screen and (min-width: 425px) {
+  .main-pages #start-empty-workout-modal .header .left-side h3 {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .main-pages #start-empty-workout-modal #time {
+    margin-top: 0;
+  }
+  .main-pages footer a p {
+    font-size: 16px;
   }
 }/*# sourceMappingURL=app.css.map */
