@@ -12,8 +12,7 @@ window.addEventListener('resize', formatExerciseName)
 window.addEventListener('load', formatExerciseName)  
 
 function formatExerciseName() {
-    let pElement = document.getElementById('exercise-name')
-    let originalText = pElement.getAttribute('original-text')
+    let exerciseNames = document.getElementsByClassName('exercise-name')
     
     let screenWidth = window.innerWidth
     let charLimit = 50
@@ -29,13 +28,17 @@ function formatExerciseName() {
         charLimit = 50
     }
 
-    // Limit the text content based on the original text' length and screen width
-    if (originalText.length > charLimit) {
-        pElement.textContent = originalText.substring(0, charLimit) + '...'
-    }
-    else {
-        pElement.textContent = originalText  // Show full text if it's shorter than the limit
-    }
+    // Loop through all elements
+    Array.from(exerciseNames).forEach(name => {
+        let originalText = name.getAttribute('original-text')
+
+        if (originalText.length > charLimit) {
+            name.textContent = originalText.substring(0, charLimit) + '...'
+        } 
+        else {
+            name.textContent = originalText
+        }
+    })
 }
 
 // TIME FUNCTION (FOR WORKOUTS) Code by: ChatGPT
@@ -69,7 +72,7 @@ window.openModal = function (modalToOpen) {
         startStopwatch()
     }
 
-    modal.classList.toggle('openOrClose')
+    modal.classList.add('openOrClose')
 }
 
 window.closeModal = function (modalToClose) {
@@ -89,4 +92,28 @@ window.minimiseModal = function (modalToMinimise, imageToFlip) {
 
     modal.classList.toggle('minimise')
     image.classList.toggle('minimise')
+}
+
+window.openPopupModal = function (modalToOpen, title, description, cancelText, continueText, cancelColor, continueColor) {
+    let modal = document.getElementById(modalToOpen)
+    let modalTitle = document.getElementById(`${modalToOpen}-title`)
+    let modalDesc = document.getElementById(`${modalToOpen}-description`)
+    let cancelButton = document.getElementById(`${modalToOpen}-cancel-button`)
+    let continueButton = document.getElementById(`${modalToOpen}-continue-button`)
+
+    modalTitle.textContent = title
+    modalDesc.textContent = description
+    cancelButton.textContent = cancelText
+    continueButton.textContent = continueText
+
+    cancelButton.style.backgroundColor = cancelColor
+    continueButton.style.backgroundColor = continueColor
+
+    modal.classList.add('openPopup')
+}
+
+window.closePopupModal = function(modalToClose) {
+    let modal = document.getElementById(modalToClose)
+
+    modal.classList.remove('openPopup')
 }
