@@ -1,6 +1,34 @@
 @extends('layouts.pages')
 
 @section('content')
+    {{-- Finish workout pop up modal --}}
+    <div class="pop-up-modal" id="finish-workout-pop-up-modal">
+        <div class="pop-up-modal-content">
+            <h4 id="finish-workout-pop-up-modal-title"></h4>
+
+            <p id="finish-workout-pop-up-modal-description"></p>
+
+            <div>
+                <button id="finish-workout-pop-up-modal-cancel-button" onclick="closePopupModal('finish-workout-pop-up-modal')"></button>
+                <button id="finish-workout-pop-up-modal-continue-button" onclick="closeModal('start-empty-workout-modal'); closePopupModal('finish-workout-pop-up-modal')"></button>
+            </div>
+        </div>
+    </div>
+
+    {{-- General pop up modal --}}
+    <div class="pop-up-modal" id="general-pop-up-modal">
+        <div class="pop-up-modal-content">
+            <h4 id="general-pop-up-modal-title"></h4>
+
+            <p id="general-pop-up-modal-description"></p>
+
+            <div>
+                <button id="general-pop-up-modal-cancel-button" onclick="closePopupModal('general-pop-up-modal')"></button>
+                <button id="general-pop-up-modal-continue-button" onclick="closePopupModal('general-pop-up-modal')"></button>
+            </div>
+        </div>
+    </div>
+
     {{-- Start empty workout modal --}}
     <div id="start-empty-workout-modal">
         <div class="header">
@@ -19,7 +47,7 @@
                         id="minimise-start-empty-workout-button">
                 </div>
 
-                <button onclick="closeModal('start-empty-workout-modal')">Finish</button>
+                <button onclick="openPopupModal('finish-workout-pop-up-modal', 'Finish workout?', 'Any inputs not filled in will be discarded. Would you like to continue?', 'Cancel', 'Finish', '#171717', '#81fe5e')">Finish</button>
             </div>
         </div>
 
@@ -28,8 +56,133 @@
         <div class="exercises-list">
             <div class="exercise">
                 <div class="exercise-header">
-                    <p id="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable -
-                        Straight Bar)</p>
+                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable - Straight Bar)</p>
+
+                    <div onclick="openPopupModal('general-pop-up-modal', 'Remove exercise?', 'Are you sure you want to remove this exercise? You can add it again later.', 'Cancel', 'Remove', '#171717', '#ff0000')">
+                        <img src="{{ asset('images/remove-icon.png') }}">
+                    </div>
+                </div>
+
+                <div class="exercise-stats">
+                    <div class="columns set-number-column">
+                        <p>Set</p>
+
+                        <div>
+                            <p>1</p>
+                        </div>
+
+                        <div>
+                            <p>2</p>
+                        </div>
+
+                        <div>
+                            <p>3</p>
+                        </div>
+
+                        <div>
+                            <p>4</p>
+                        </div>
+
+                        <div>
+                            <p>5</p>
+                        </div>
+
+                        <div>
+                            <p>6</p>
+                        </div>
+                    </div>
+
+                    <div class="columns previous-stat-column">
+                        <p>Previous</p>
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+
+                        <div>
+                            <p>10kg x 10rps</p>
+                        </div>
+                    </div>
+
+                    <div class="columns kg-column">
+                        <p>KG</p>
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                    </div>
+
+                    <div class="columns reps-column">
+                        <p>Reps</p>
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                        <input type="number" placeholder="10" min="0" max="999">
+                    </div>
+
+                    <div class="columns is-finished-column">
+                        <img src="{{ asset('images/check-icon.png') }}">
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+
+                        <label>
+                            <input type="checkbox">
+                            <img src="{{ asset('images/check-icon.png') }}">
+                        </label>
+                    </div>
+                </div>
+
+                <div id="add-set-button">
+                    <img src="{{ asset('images/add-icon.png') }}">
+                    <p>Add Set</p>
+                </div>
+            </div>
+
+            <div class="exercise">
+                <div class="exercise-header">
+                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable - Straight Bar)</p>
 
                     <div>
                         <img src="{{ asset('images/remove-icon.png') }}">
@@ -156,7 +309,7 @@
 
         <div class="buttons-section">
             <button id="add-exercises-button">Add Exercises</button>
-            <button onclick="closeModal('start-empty-workout-modal')">Cancel Workout</button>
+            <button onclick="openPopupModal('general-pop-up-modal', 'Cancel workout?', 'Are you sure you want to cancel the workout? All progress will be lost!', 'Resume', 'Finish', '#171717', '#ff0000')">Cancel Workout</button>
         </div>
     </div>
 
