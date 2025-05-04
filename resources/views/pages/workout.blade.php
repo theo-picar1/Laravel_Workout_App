@@ -417,7 +417,7 @@
             <img src="{{ asset('images/profile-icon.png') }}">
             <p>Profile</p>
         </a>
-        <a href="{{ route('pages.exercises') }}">
+        <a href="{{ route('pages.discover') }}">
             <img src="{{ asset('images/globe-icon.png') }}">
             <p>Discover</p>
         </a>
