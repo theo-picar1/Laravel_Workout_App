@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Exercises;
 
 class PagesController extends Controller
 {
@@ -16,8 +17,15 @@ class PagesController extends Controller
         return view('auth.index');
     }
 
-    // Returns the edit profile page view
-    public function editProfilePage() {
+    // Returns the profile page view
+    public function profilePage() {
         return view('pages.profile');
+    }
+
+    // Returns the exercises page view
+    public function exercisesPage() {
+        $exercises = Exercises::all();
+
+        return view('pages.exercises');
     }
 }

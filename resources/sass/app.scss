@@ -8,6 +8,7 @@
 /*
     #start-empty-workout-modal: 1
     All modals that use pop-up-transition mixin: 2
+    footer: 10
 */
 
 // To get rid of up and down arrows for number inputs
@@ -39,6 +40,7 @@ $mobile-padding: 50px 20px;
 // Filter colors 
 $website-white-to-light-gray: brightness(50%) grayscale(100%);
 $website-light-gray-to-white: brightness(250%) contrast(1000%);
+$website-white-to-black: brightness(-250%);
 
 * {
     padding: 0;
@@ -296,6 +298,7 @@ p {
         max-height: 100vh;
         background-color: $website-black;
         color: $website-white;
+        scrollbar-width: none;
 
         // ********** MODALS CSS **********
         .pop-up-modal {
@@ -330,6 +333,7 @@ p {
             }
         }
 
+        // POP UP MODAL WITH CUSTOME FUNCTIONALITY
         #finish-workout-pop-up-modal {
 
             &.openPopup {
@@ -339,6 +343,7 @@ p {
             }
         }
 
+        // MODAL FOR ANY POP UPS YOU WISH TO CREATE THAT DONT NEED CUSTOM FUNCTIONALITY
         #general-pop-up-modal {
 
             &.openPopup {
@@ -348,6 +353,7 @@ p {
             }
         }
 
+        // MODAL FOR STARTING AN EMPTY WORKOUT
         #start-empty-workout-modal {
             position: fixed;
             z-index: 1;
@@ -539,7 +545,7 @@ p {
             }
         }
 
-        // Workout page
+        // WORKOUT PAGE
         .workout-page {
             padding: $mobile-padding;
             @include display-flex(column, unset, unset, 40px);
@@ -601,7 +607,8 @@ p {
             }
         }
 
-        .edit-profile-page {
+        // PROFILE VIEW PAGE
+        .profile-page {
             padding-bottom: 100px;
             max-width: 100vw;
             height: auto;
@@ -708,12 +715,138 @@ p {
             }
         }
 
+        // EXERCISES VIEW PAGE
+        .exercises-page {
+            display: grid;
+            grid-template-rows: 10% 90%;
+            scrollbar-width: none;
+
+            header {
+                background-color: $website-dark-gray;
+                @include display-flex(unset, center, center, 0);
+            }
+
+            .main-content {
+                padding: 0 20px;
+                margin-top: 10px;
+                position: relative;
+
+                .exercises-searchbar-container {
+                    width: 100%;
+                    @include display-flex(row, unset, center, 5px);
+                    @include text-input-base-css(100%, 10px);
+                    padding: 4px 10px;
+                    border: 2px solid $invisible;
+
+                    &:focus-within {
+                        border: 2px solid $website-white;
+                    }
+
+                    img {
+                        filter: $website-white-to-light-gray;
+                    }
+
+                    #exercises-searchbar {
+                        appearance: none;
+                        border: none;
+                        background-color: $invisible;
+                        padding: 0;
+                        color: $website-white;
+                        outline: none;
+                    }
+                }
+
+                .exercises-list {
+                    margin-top: 15px;
+
+                    .exercise {
+                        border-top: thin solid $website-light-gray;
+                        padding: 10px 0;
+                        @include display-flex(row, space-between, center, 0);
+
+                        .left-side {
+                            @include display-flex(row, unset, center, 10px);
+
+                            .image-container {
+                                background-color: $website-white;
+                                @include display-flex(unset, center, center, 0);
+                                padding: 7px;
+                                border-radius: 50%;
+
+                                img {
+                                    filter: $website-white-to-black;
+                                    width: 24px;
+                                    height: 24px;
+                                }
+                            }
+
+                            .name-and-muscle-group-container {
+                                
+                                p {
+                                    font-size: 16px;
+                                }
+
+                                #muscle-group {
+                                    color: $website-light-gray;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            #specific-exercise-view-modal {
+                transform: translateX(1000px);
+                transition: transform 0.3s ease;
+                position: fixed;
+                min-height: 100vh;
+                width: 100%;
+                color: $website-white;
+                background-color: $website-black;
+
+                &.openOrClose {
+                    transform: translateX(0);
+                }
+
+                header {
+                    width: 100%;
+                    background-color: $website-dark-gray;
+                    @include display-flex(row, space-between, center, 0);
+                    padding: 20px;
+                }
+
+                #exercise-details-section {
+                    padding: 0 20px;
+                    margin-top: 15px;
+
+                    .image-container {
+                        width: 100%;
+                        aspect-ratio: 16 / 9;
+                        background-color: white;
+                        @include display-flex(unset, center, center, 0);
+
+                        img {
+                            filter: $website-white-to-black;
+                            width: 50px;
+                            height: auto;
+                        }
+                    }
+
+                    .exercise-instructions {
+                        margin-top: 20px;
+                        @include display-flex(column, unset, unset, 10px);
+                    }
+                }
+            }
+        }
+
         footer {
             @include footer-css();
             height: 80px;
             position: fixed;
             bottom: 0;
             width: 100%;
+            z-index: 10;
         }
 
         #workout-page-footer {
@@ -722,6 +855,10 @@ p {
 
         #profile-page-footer {
             @include selected-footer-href-css('#profile-href');
+        }
+
+        #exercises-page-footer {
+            @include selected-footer-href-css('#exercises-href');
         }
     }
 }

@@ -117,3 +117,33 @@ window.closePopupModal = function(modalToClose) {
 
     modal.classList.remove('openPopup')
 }
+
+// Function to fill in the specified elements depending on what exercise was chosen
+window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage) {
+    let nameElement = document.getElementById('selected-exercise-name')
+    nameElement.textContent = exerciseName
+
+    let htmlString = ""
+    let instructions = exerciseInstructions.match(/\d+\.\s[^(\d+\.)]+/g) || [];
+    let imageToShow = exerciseImage ? exerciseImage : '/images/weight-icon.png'
+
+    htmlString += `
+    <div class="image-container">
+        <img src="${imageToShow}">
+    </div>
+
+    <div class="exercise-instructions">
+        <h2>Instructions</h2>`
+
+    instructions.forEach(instruction => {
+        htmlString += `
+        <p>${instruction}</p>
+        `
+    })
+    
+    htmlString += `
+    </div>
+    `
+
+    document.getElementById('exercise-details-section').innerHTML = htmlString
+}

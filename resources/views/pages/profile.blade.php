@@ -1,7 +1,7 @@
 @extends('layouts.pages')
 
 @section('content')
-    <div class="edit-profile-page">
+    <div class="profile-page">
         <header>
             <p>Edit profile</p>
             <p id="header-title">Profile</p>
@@ -80,7 +80,7 @@
                 <img src="{{ asset('images/profile-icon.png') }}">
                 <p>Profile</p>
             </a>
-            <a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.exercises') }}">
                 <img src="{{ asset('images/globe-icon.png') }}">
                 <p>Discover</p>
             </a>
@@ -88,11 +88,11 @@
                 <img src="{{ asset('images/add-icon.png') }}">
                 <p>Workout</p>
             </a>
-            <a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.exercises') }}">
                 <img src="{{ asset('images/weight-icon.png') }}">
                 <p>Exercises</p>
             </a>
-            <a href="{{ route('pages.profile') }}">
+            <a href="{{ route('pages.exercises') }}">
                 <img src="{{ asset('images/history-icon.png') }}">
                 <p>History</p>
             </a>
