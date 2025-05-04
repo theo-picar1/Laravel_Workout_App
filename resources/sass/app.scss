@@ -9,6 +9,7 @@
     #start-empty-workout-modal: 1
     All modals that use pop-up-transition mixin: 2
     footer: 10
+    #clear-exercise-search-button: 5
 */
 
 // To get rid of up and down arrows for number inputs
@@ -363,7 +364,7 @@ p {
             background-color: $website-dark-gray;
             border-radius: 8px 8px 0 0;
             padding: 15px;
-            transform: translateY(1000px);
+            transform: translateY(100%);
             transition: transform 0.3s ease;
             overflow-y: scroll;
             scrollbar-width: none;
@@ -717,23 +718,22 @@ p {
 
         // EXERCISES VIEW PAGE
         .exercises-page {
-            display: grid;
-            grid-template-rows: 10% 90%;
             scrollbar-width: none;
 
             header {
                 background-color: $website-dark-gray;
                 @include display-flex(unset, center, center, 0);
+                height: 50px;
             }
 
             .main-content {
                 padding: 0 20px;
                 margin-top: 10px;
-                position: relative;
+                @include display-flex(column, unset, unset, 0);
 
                 .exercises-searchbar-container {
                     width: 100%;
-                    @include display-flex(row, unset, center, 5px);
+                    @include display-flex(row, space-between, center, 0);
                     @include text-input-base-css(100%, 10px);
                     padding: 4px 10px;
                     border: 2px solid $invisible;
@@ -742,17 +742,21 @@ p {
                         border: 2px solid $website-white;
                     }
 
-                    img {
-                        filter: $website-white-to-light-gray;
-                    }
+                    .left-side {
+                        @include display-flex(row, unset, center, 5px);
 
-                    #exercises-searchbar {
-                        appearance: none;
-                        border: none;
-                        background-color: $invisible;
-                        padding: 0;
-                        color: $website-white;
-                        outline: none;
+                        img {
+                            filter: $website-white-to-light-gray;
+                        }
+    
+                        #exercises-searchbar {
+                            appearance: none;
+                            border: none;
+                            background-color: $invisible;
+                            padding: 0;
+                            color: $website-white;
+                            outline: none;
+                        }
                     }
                 }
 
@@ -793,13 +797,21 @@ p {
                         }
                     }
                 }
+
+                #clear-exercise-search-button {
+                    margin: auto;
+                    @include app-button-base-css(5px 0px, 12px, $website-red, $website-white, min-content, $website-dark-red, $website-light-red);
+                    display: none;
+                    width: 30%;
+                }
             }
 
             #specific-exercise-view-modal {
-                transform: translateX(1000px);
+                transform: translateX(100%);
                 transition: transform 0.3s ease;
                 position: fixed;
-                min-height: 100vh;
+                min-height: 100%;
+                top: 0;
                 width: 100%;
                 color: $website-white;
                 background-color: $website-black;
