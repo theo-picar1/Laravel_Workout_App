@@ -7,15 +7,17 @@
         </header>
 
         <div class="main-content">
-            <label class="exercises-searchbar-container">  
-                <img src="{{ asset('images/search-icon.png') }}">
+            <label class="exercises-searchbar-container" onclick="setClearSearchAndInputId('clear-exercise-search-button', 'exercises-searchbar')">  
+                <div class="left-side">
+                    <img src="{{ asset('images/search-icon.png') }}">
 
-                <input type="text" placeholder="Search for an exercise" id="exercises-searchbar">
+                    <input autocomplete="off" type="text" placeholder="Search for an exercise" id="exercises-searchbar">
+                </div>
             </label>
 
             <div class="exercises-list">
                 @foreach ($exercises as $exercise)
-                    <div class="exercise" onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}')">
+                    <div exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row" onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}')">
                         <div class="left-side">
                             <div class="image-container">
                                 <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}" class="{{ $exercise->image_url ? 'exercise-image' : 'placeholder-image' }}">
@@ -33,6 +35,8 @@
                     </div>
                 @endforeach
             </div>
+
+            <button id="clear-exercise-search-button" onclick="clearSearchInput()">Reset</button>
         </div>
 
         <div id="specific-exercise-view-modal">

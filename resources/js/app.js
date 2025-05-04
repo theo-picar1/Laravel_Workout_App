@@ -6,21 +6,35 @@ Alpine.start()
 
 let timerInterval
 let startTime
+let clearSearchButton
+let searchInput
+let clearSearchButtonId
 
-// Event listeners
+// ********** Event listeners **********
+
 window.addEventListener('resize', formatExerciseName)
-window.addEventListener('load', formatExerciseName)  
+window.addEventListener('load', formatExerciseName)
+
+// For the searchbar in the exercises page view
+document.getElementById('exercises-searchbar').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        let name = this.value
+        searchExercisesByName(name)
+    }
+})
+
+// *************************************
 
 function formatExerciseName() {
     let exerciseNames = document.getElementsByClassName('exercise-name')
-    
+
     let screenWidth = window.innerWidth
     let charLimit = 50
 
     // Adjust character limit based on screen width
     if (screenWidth < 375) {
         charLimit = 28
-    } 
+    }
     else if (screenWidth < 425) {
         charLimit = 35
     }
@@ -34,7 +48,7 @@ function formatExerciseName() {
 
         if (originalText.length > charLimit) {
             name.textContent = originalText.substring(0, charLimit) + '...'
-        } 
+        }
         else {
             name.textContent = originalText
         }
@@ -55,12 +69,12 @@ function startStopwatch() {
 
         if (hours > 0) {
             timeElement.textContent = `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}` // This is the hour format
-        } 
+        }
         else {
             timeElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}` // This is the regular mm::ss format
         }
-    }, 
-    1000) // This is updating the timer every 1 second (1000ms)
+    },
+        1000) // This is updating the timer every 1 second (1000ms)
 }
 
 // MODAL FUNCTIONS
@@ -112,7 +126,7 @@ window.openPopupModal = function (modalToOpen, title, description, cancelText, c
     modal.classList.add('openPopup')
 }
 
-window.closePopupModal = function(modalToClose) {
+window.closePopupModal = function (modalToClose) {
     let modal = document.getElementById(modalToClose)
 
     modal.classList.remove('openPopup')
@@ -140,10 +154,51 @@ window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exe
         <p>${instruction}</p>
         `
     })
-    
+
     htmlString += `
     </div>
     `
 
     document.getElementById('exercise-details-section').innerHTML = htmlString
+}
+
+// FILTETRING FUNCTIONALITY
+function searchExercisesByName(name) {
+    let exercises = document.getElementsByClassName('exercise-view-row')
+
+    clearSearchButton.style.display = "block"
+
+    // Simple code to set the display type of all exercises that dont match to be "none". Otherwise display type is "flex"
+    // The attribute needs to EXACTLY match the search input though
+    Array.from(exercises).forEach(exercise => {
+        if (name === '') {
+            exercise.style.display = "flex"
+            clearSearchButton.style.display = "none"
+        }
+        else if (exercise.getAttribute('exercise-name') === name) {
+            exercise.style.display = "flex"
+        }
+        else if (exercise.getAttribute('exercise-name') !== name) {
+            exercise.style.display = "none"
+        }
+    })
+}
+
+window.setClearSearchAndInputId = function (clearId, searchId) {
+    clearSearchButton = document.getElementById(clearId)
+    searchInput = document.getElementById(searchId)
+    clearSearchButtonId = clearId // This is for the if statement in the clearSearchInput function
+}
+
+// Simple function to clear the search input 
+window.clearSearchInput = function () {
+    // Custom functionality for the exercises reset button. Just brings back all exercises
+    if (clearSearchButtonId === "clear-exercise-search-button") {
+        let exercises = document.getElementsByClassName('exercise-view-row')
+
+        Array.from(exercises).forEach(exercise => { exercise.style.display = "flex" })
+    }
+
+    searchInput.value = ""
+    clearSearchButton.style.display = "none"
 }
