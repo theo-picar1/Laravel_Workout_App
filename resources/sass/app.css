@@ -2,6 +2,7 @@
 /*
     #start-empty-workout-modal: 1
     All modals that use pop-up-transition mixin: 2
+    footer: 10
 */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -192,6 +193,7 @@ p {
     max-height: 100vh;
     background-color: #000000;
     color: #ffffff;
+    scrollbar-width: none;
   }
   .main-pages .pop-up-modal {
     position: fixed;
@@ -679,12 +681,12 @@ p {
   .main-pages .workout-page .routines-section .routines-list .routine button:active {
     background-color: #fb4747;
   }
-  .main-pages .edit-profile-page {
+  .main-pages .profile-page {
     padding-bottom: 100px;
     max-width: 100vw;
     height: auto;
   }
-  .main-pages .edit-profile-page header {
+  .main-pages .profile-page header {
     width: 100%;
     background-color: #262626;
     display: grid;
@@ -693,20 +695,20 @@ p {
     padding: 0px 20px;
     height: 80px;
   }
-  .main-pages .edit-profile-page header #header-title {
+  .main-pages .profile-page header #header-title {
     color: #ffffff;
     font-weight: bold;
     font-size: 20px;
     text-align: center;
   }
-  .main-pages .edit-profile-page header p {
+  .main-pages .profile-page header p {
     color: #ff0000;
   }
-  .main-pages .edit-profile-page header #logout {
+  .main-pages .profile-page header #logout {
     display: flex;
     justify-content: flex-end;
   }
-  .main-pages .edit-profile-page .main-content {
+  .main-pages .profile-page .main-content {
     overflow-y: scroll;
     padding: 50px 20px;
     padding-bottom: 0;
@@ -716,7 +718,7 @@ p {
     align-items: unset;
     gap: 20px;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section {
+  .main-pages .profile-page .main-content .user-profile-picture-section {
     margin-top: 15px;
     display: flex;
     flex-direction: row;
@@ -725,50 +727,50 @@ p {
     gap: 20px;
     width: 100%;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section img {
+  .main-pages .profile-page .main-content .user-profile-picture-section img {
     width: 75px;
     height: 75px;
     background-color: #ff0000;
     border-radius: 50%;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details {
     width: 100%;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details p {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details p {
     font-size: 20px;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 10px;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div {
     display: flex;
     flex-direction: column;
     justify-content: unset;
     align-items: unset;
     gap: 5px;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div p {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div p {
     font-size: 16px;
   }
-  .main-pages .edit-profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div .title {
+  .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details .user-profile-stats div .title {
     color: #808080;
   }
-  .main-pages .edit-profile-page .main-content .user-bio-section {
+  .main-pages .profile-page .main-content .user-bio-section {
     margin-top: 5px;
     background-color: #262626;
     padding: 10px;
     border-radius: 10px;
   }
-  .main-pages .edit-profile-page .main-content .user-progress-section {
+  .main-pages .profile-page .main-content .user-progress-section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
     text-align: center;
     margin-top: 15px;
   }
-  .main-pages .edit-profile-page .main-content .user-progress-section div {
+  .main-pages .profile-page .main-content .user-progress-section div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -781,8 +783,150 @@ p {
     flex-grow: 1;
     width: 100%;
   }
-  .main-pages .edit-profile-page .main-content .user-progress-section div h3 {
+  .main-pages .profile-page .main-content .user-progress-section div h3 {
     width: 90px;
+  }
+  .main-pages .exercises-page {
+    display: grid;
+    grid-template-rows: 10% 90%;
+    scrollbar-width: none;
+  }
+  .main-pages .exercises-page header {
+    background-color: #262626;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages .exercises-page .main-content {
+    padding: 0 20px;
+    margin-top: 10px;
+    position: relative;
+  }
+  .main-pages .exercises-page .main-content .exercises-searchbar-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 5px;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+    padding: 4px 10px;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+  .main-pages .exercises-page .main-content .exercises-searchbar-container:focus-within {
+    border: 2px solid #ffffff;
+  }
+  .main-pages .exercises-page .main-content .exercises-searchbar-container img {
+    filter: brightness(50%) grayscale(100%);
+  }
+  .main-pages .exercises-page .main-content .exercises-searchbar-container #exercises-searchbar {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    color: #ffffff;
+    outline: none;
+  }
+  .main-pages .exercises-page .main-content .exercises-list {
+    margin-top: 15px;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise {
+    border-top: thin solid #808080;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise .left-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 10px;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise .left-side .image-container {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 7px;
+    border-radius: 50%;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise .left-side .image-container img {
+    filter: brightness(-250%);
+    width: 24px;
+    height: 24px;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise .left-side .name-and-muscle-group-container p {
+    font-size: 16px;
+  }
+  .main-pages .exercises-page .main-content .exercises-list .exercise .left-side .name-and-muscle-group-container #muscle-group {
+    color: #808080;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal {
+    transform: translateX(1000px);
+    transition: transform 0.3s ease;
+    position: fixed;
+    min-height: 100vh;
+    width: 100%;
+    color: #ffffff;
+    background-color: #000000;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal.openOrClose {
+    transform: translateX(0);
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal header {
+    width: 100%;
+    background-color: #262626;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    padding: 20px;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal #exercise-details-section {
+    padding: 0 20px;
+    margin-top: 15px;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal #exercise-details-section .image-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: white;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal #exercise-details-section .image-container img {
+    filter: brightness(-250%);
+    width: 50px;
+    height: auto;
+  }
+  .main-pages .exercises-page #specific-exercise-view-modal #exercise-details-section .exercise-instructions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 10px;
   }
   .main-pages footer {
     display: flex;
@@ -798,6 +942,7 @@ p {
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 10;
   }
   .main-pages footer a {
     display: flex;
@@ -832,6 +977,12 @@ p {
     color: #ffffff;
   }
   .main-pages #profile-page-footer #profile-href img {
+    filter: none;
+  }
+  .main-pages #exercises-page-footer #exercises-href p {
+    color: #ffffff;
+  }
+  .main-pages #exercises-page-footer #exercises-href img {
     filter: none;
   }
 }
