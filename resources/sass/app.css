@@ -272,6 +272,7 @@ p {
     background-color: #262626;
     border-radius: 8px 8px 0 0;
     padding: 15px;
+    padding-bottom: 100px;
     transform: translateY(100%);
     transition: transform 0.3s ease;
     overflow-y: scroll;
@@ -281,7 +282,7 @@ p {
     transform: translateY(0);
   }
   .main-pages #start-empty-workout-modal.minimise {
-    transform: translateY(90%);
+    transform: translateY(78%);
   }
   .main-pages #start-empty-workout-modal .header {
     display: flex;

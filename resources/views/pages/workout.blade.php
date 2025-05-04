@@ -24,7 +24,7 @@
 
             <div>
                 <button id="general-pop-up-modal-cancel-button" onclick="closePopupModal('general-pop-up-modal')"></button>
-                <button id="general-pop-up-modal-continue-button" onclick="closePopupModal('general-pop-up-modal')"></button>
+                <button id="general-pop-up-modal-continue-button" onclick="closePopupModal('general-pop-up-modal'); closeModal('start-empty-workout-modal')"></button>
             </div>
         </div>
     </div>

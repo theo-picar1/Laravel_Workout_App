@@ -16,12 +16,17 @@ window.addEventListener('resize', formatExerciseName)
 window.addEventListener('load', formatExerciseName)
 
 // For the searchbar in the exercises page view
-document.getElementById('exercises-searchbar').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        let name = this.value
-        searchExercisesByName(name)
-    }
-})
+let searchBar = document.getElementById('exercises-searchbar')
+
+// If statement so that the entire javascript file does not break
+if (searchBar) {
+    searchBar.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const name = this.value
+            searchExercisesByName(name)
+        }
+    })
+}
 
 // *************************************
 
@@ -79,6 +84,7 @@ function startStopwatch() {
 
 // MODAL FUNCTIONS
 window.openModal = function (modalToOpen) {
+    console.log("hola")
     let modal = document.getElementById(modalToOpen)
 
     // So that the stopwatch ONLY starts when the user decides to start a workout
@@ -87,6 +93,10 @@ window.openModal = function (modalToOpen) {
     }
 
     modal.classList.add('openOrClose')
+}
+
+window.hello = function () {
+    console.log("holda")
 }
 
 window.closeModal = function (modalToClose) {
