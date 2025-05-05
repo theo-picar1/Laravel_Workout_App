@@ -9,6 +9,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExercisesController;
+use App\Http\Controllers\ProfileController;
 
 Auth::routes();
 
@@ -18,7 +19,7 @@ Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('pages.workout');
     }
-    
+
     return view('auth.index');
 });
 
@@ -49,3 +50,7 @@ Route::put('/exercises/{exercise}', [ExercisesController::class, 'update'])->nam
 
 // To delete the exercise
 Route::delete('/exercises/{id}', [ExercisesController::class, 'destroy'])->name('exercises.destroy');
+
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

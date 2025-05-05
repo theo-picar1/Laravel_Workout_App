@@ -97,7 +97,7 @@ window.setCheckedEquipmentAndName = function () {
     input.value = exerciseName
 
     Array.from(checkboxes).forEach(checkbox => {
-        if(checkbox.value === equipmentTypeId) { checkbox.checked = true }
+        if (checkbox.value === equipmentTypeId) { checkbox.checked = true }
         else { checkbox.checked = false }
     })
 }
@@ -110,7 +110,7 @@ window.setIdsForSaveButton = function (inputId, saveId) {
 // Function to set the data attribute in the corresponding crud modal so we can either delete or edit the corresponding exercise the user chose
 window.setExerciseIdForCrudModals = function (modal, attribute) {
     document.getElementById(modal).setAttribute(attribute, exerciseId)
-    console.log("Attribute: ", attribute," Exercise ID: ", exerciseId)
+    console.log("Attribute: ", attribute, " Exercise ID: ", exerciseId)
 }
 
 // Then we can delete
@@ -135,27 +135,27 @@ window.confirmEdit = function () {
 
 // Function that will make it so that save button is not accessible if the input is blank
 window.showOrHideSaveButton = function (e) {
-    if(e.target.value === "" || e.target.length < 1) { 
+    if (e.target.value === "" || e.target.length < 1) {
         saveButton.style.pointerEvents = "none"
-        saveButton.style.color =  "#808080"
+        saveButton.style.color = "#808080"
     }
     else {
         saveButton.style.pointerEvents = "auto"
-        saveButton.style.color =  "#ff0000"
+        saveButton.style.color = "#ff0000"
     }
 }
 
 // Same as above but with a click of a button due to a bug
-window.showOrHideSaveButtonByClick  = function (inputId) {
+window.showOrHideSaveButtonByClick = function (inputId) {
     input = document.getElementById(inputId)
 
-    if(input.value === "" || input.length < 1) { 
+    if (input.value === "" || input.length < 1) {
         saveButton.style.pointerEvents = "none"
-        saveButton.style.color =  "#808080"
+        saveButton.style.color = "#808080"
     }
     else {
         saveButton.style.pointerEvents = "auto"
-        saveButton.style.color =  "#ff0000"
+        saveButton.style.color = "#ff0000"
     }
 }
 
@@ -314,3 +314,9 @@ window.toggleEditProfileModal = function () {
     modal = document.getElementById('user-profile-section');
     modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block';
 }
+
+document.getElementById('profile_picture').addEventListener('change', function () {
+    var img = document.querySelector('.profile-pic');
+    img.src = URL.createObjectURL(this.files[0]);
+});
+
