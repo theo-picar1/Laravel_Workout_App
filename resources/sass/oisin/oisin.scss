@@ -1,4 +1,4 @@
-// colors
+// Colours
 $website-red: #ff0000;
 $website-dark-red: #9b0202;
 $website-light-red: #fb4747;
@@ -22,8 +22,7 @@ $website-hover-green: #71ed4f;
 
     .connect-container {
         flex: 1;
-        padding-bottom: 60px; // Space for footer
-
+        padding-bottom: 60px;
 
         // Header
         header {
@@ -225,6 +224,235 @@ $website-hover-green: #71ed4f;
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+#edit-profile-container {
+    display: none;
+}
+
+#user-profile-section {
+    display: block;
+}
+
+
+// Modal Container
+#edit-profile-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: none;
+    backdrop-filter: blur(5px);
+
+    &.active {
+        display: block;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+.profile-edit-container {
+    background-color: $website-darker-gray;
+    width: 100%;
+    max-height: 100vh;
+    padding: 60px 20px 30px;
+    position: relative;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    .modal-close-btn {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+        background: rgba($website-white, 0.1);
+        border-radius: 50%;
+        border: none;
+        color: $website-white;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.2s ease;
+
+        &:active {
+            background: rgba($website-white, 0.2);
+            transform: scale(0.95);
+        }
+    }
+
+    .profile-picture-edit {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+
+        .profile-pic-container {
+            width: 120px;
+            height: 120px;
+            position: relative;
+
+            .profile-pic {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid $website-red;
+                box-shadow: 0 0 15px rgba($website-red, 0.3);
+            }
+
+            .change-photo-btn {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, $website-red);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                color: white;
+                font-size: 16px;
+            }
+        }
+    }
+
+    .profile-edit-form {
+        .form-group {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: $website-white;
+                font-weight: 500;
+                font-size: 15px;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 14px 16px;
+                background-color: $website-dark-gray;
+                border: 1px solid $website-dark-gray;
+                border-radius: 10px;
+                color: $website-white;
+                font-size: 15px;
+
+                &:focus {
+                    border-color: $website-red;
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgba($website-red, 0.2);
+                }
+            }
+
+            .char-count {
+                color: $website-light-gray;
+                font-size: 13px;
+                text-align: right;
+                margin-top: 5px;
+            }
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 52px;
+                height: 28px;
+
+                input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: $website-dark-gray;
+                    transition: .3s;
+                    border-radius: 34px;
+
+                    &:before {
+                        position: absolute;
+                        content: "";
+                        height: 22px;
+                        width: 22px;
+                        left: 3px;
+                        bottom: 3px;
+                        background-color: white;
+                        transition: .3s;
+                        border-radius: 50%;
+                    }
+                }
+
+                input:checked+.slider {
+                    background: $website-red;
+                }
+
+                input:checked+.slider:before {
+                    transform: translateX(24px);
+                }
+            }
+
+            .privacy-option {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 14px 0;
+                border-bottom: 1px solid $website-dark-gray;
+            }
+
+            .privacy-description {
+                color: $website-light-gray;
+                font-size: 13px;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .action-buttons {
+        margin-top: 30px;
+
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .change-password-btn {
+            background-color: lighten($website-darker-gray, 5%);
+            color: $website-white;
+            border: 1px solid $website-dark-gray;
+
+            &:active {
+                background-color: lighten($website-darker-gray, 8%);
+            }
+        }
+
+        .logout-btn {
+            background-color: transparent;
+            color: $website-red;
+            border: 1px solid $website-red;
+
+            &:active {
+                background-color: rgba($website-red, 0.1);
             }
         }
     }

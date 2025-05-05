@@ -115,12 +115,12 @@
             </div>
         </div>
 
-        <footer id="exercises-page-footer">
+        <footer id="discover-page-footer">
             <a href="{{ route('pages.profile') }}">
                 <img src="{{ asset('images/profile-icon.png') }}">
                 <p>Profile</p>
             </a>
-            <a href="{{ route('pages.discover') }}">
+            <a href="{{ route('pages.discover') }}" id="discover-href">
                 <img src="{{ asset('images/globe-icon.png') }}">
                 <p>Discover</p>
             </a>
