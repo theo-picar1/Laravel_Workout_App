@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Exercises;
+use App\Models\EquipmentTypes;
 
 class PagesController extends Controller
 {
@@ -22,11 +23,12 @@ class PagesController extends Controller
         return view('pages.profile');
     }
 
-    // Returns the exercises page view
+    // Returns the exercises page view along with data from the exercises and quipment-types tables
     public function exercisesPage() {
         $exercises = Exercises::all();
+        $equipment_types = EquipmentTypes::all();
 
-        return view('pages.exercises');
+        return view('pages.exercises', compact('exercises', 'equipment_types'));
     }
 
     // Returns the profile page view

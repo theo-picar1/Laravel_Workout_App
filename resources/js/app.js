@@ -6,10 +6,15 @@ Alpine.start()
 
 let timerInterval
 let startTime
+
 let clearSearchButton
 let searchInput
 let clearSearchButtonId
 
+let equipmentTypeId
+
+let saveButton
+let input
 // ********** Event listeners **********
 
 window.addEventListener('resize', formatExerciseName)
@@ -82,9 +87,49 @@ function startStopwatch() {
         1000) // This is updating the timer every 1 second (1000ms)
 }
 
+// Function that will check the corresponding equipment checkbox when clicking the edit button in the exercise view modal
+window.setCheckedEquipment = function () {
+    let checkboxes = document.getElementsByClassName(`${equipmentTypeId}-checkboxes`)
+
+    Array.from(checkboxes).forEach(checkbox => {
+        if(checkbox.value === equipmentTypeId) { checkbox.checked = true }
+        else { checkbox.checked = false }
+    })
+}
+
+window.setIdsForSaveButton = function (inputId, saveId) {
+    saveButton = document.getElementById(saveId)
+    input = document.getElementById(inputId)
+}
+
+// Function that will make it so that save button is not accessible if the input is blank
+window.showOrHideSaveButton = function (e) {
+    if(e.target.value === "" || e.target.length < 1) { 
+        saveButton.style.pointerEvents = "none"
+        saveButton.style.color =  "#808080"
+    }
+    else {
+        saveButton.style.pointerEvents = "auto"
+        saveButton.style.color =  "#ff0000"
+    }
+}
+
+// Same as above but with a click of a button due to a bug
+window.showOrHideSaveButtonByClick  = function (inputId) {
+    input = document.getElementById(inputId)
+
+    if(input.value === "" || input.length < 1) { 
+        saveButton.style.pointerEvents = "none"
+        saveButton.style.color =  "#808080"
+    }
+    else {
+        saveButton.style.pointerEvents = "auto"
+        saveButton.style.color =  "#ff0000"
+    }
+}
+
 // MODAL FUNCTIONS
 window.openModal = function (modalToOpen) {
-    console.log("hola")
     let modal = document.getElementById(modalToOpen)
 
     // So that the stopwatch ONLY starts when the user decides to start a workout
@@ -95,16 +140,16 @@ window.openModal = function (modalToOpen) {
     modal.classList.add('openOrClose')
 }
 
-window.hello = function () {
-    console.log("holda")
-}
-
 window.closeModal = function (modalToClose) {
     let modal = document.getElementById(modalToClose)
 
     if (modalToClose === 'start-empty-workout-modal') {
         clearInterval(timerInterval)
-        document.getElementById('time').textContent = '00:00'
+        let timeElement = document.getElementById('time')
+
+        if (timeElement) {
+            document.getElementById('time').textContent = '00:00'
+        }
     }
 
     modal.classList.remove('openOrClose')
@@ -118,6 +163,7 @@ window.minimiseModal = function (modalToMinimise, imageToFlip) {
     image.classList.toggle('minimise')
 }
 
+// Function for general popups that have the exact same layout
 window.openPopupModal = function (modalToOpen, title, description, cancelText, continueText, cancelColor, continueColor) {
     let modal = document.getElementById(modalToOpen)
     let modalTitle = document.getElementById(`${modalToOpen}-title`)
@@ -136,6 +182,12 @@ window.openPopupModal = function (modalToOpen, title, description, cancelText, c
     modal.classList.add('openPopup')
 }
 
+window.openCustomPopUpModal = function (modalToOpen) {
+    let modal = document.getElementById(modalToOpen)
+
+    modal.classList.add('openPopup')
+}
+
 window.closePopupModal = function (modalToClose) {
     let modal = document.getElementById(modalToClose)
 
@@ -143,7 +195,9 @@ window.closePopupModal = function (modalToClose) {
 }
 
 // Function to fill in the specified elements depending on what exercise was chosen
-window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage) {
+window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId) {
+    equipmentTypeId = selectedEquipmentTypeId
+
     let nameElement = document.getElementById('selected-exercise-name')
     nameElement.textContent = exerciseName
 
@@ -185,10 +239,10 @@ function searchExercisesByName(name) {
             exercise.style.display = "flex"
             clearSearchButton.style.display = "none"
         }
-        else if (exercise.getAttribute('exercise-name') === name) {
+        else if (exercise.getAttribute('exercise-name').toLowerCase() === name.toLowerCase()) {
             exercise.style.display = "flex"
         }
-        else if (exercise.getAttribute('exercise-name') !== name) {
+        else if (exercise.getAttribute('exercise-name').toLowerCase() !== name.toLowerCase()) {
             exercise.style.display = "none"
         }
     })
@@ -211,4 +265,11 @@ window.clearSearchInput = function () {
 
     searchInput.value = ""
     clearSearchButton.style.display = "none"
+}
+
+// Come on now
+window.clearInput = function (inputId) {
+    let inputToClear = document.getElementById(inputId)
+
+    inputToClear.value = ""
 }

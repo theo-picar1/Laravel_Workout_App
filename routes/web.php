@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EquipmentTypesController;
 use Illuminate\Support\Facades\Route;
 
 // Basically importing the Controllers to make use of them. Like Java
@@ -39,6 +40,3 @@ Auth::routes();
 
 // For logging in a user
 Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-// Exercises database routes
-Route::get('/exercises', [ExercisesController::class, 'index'])->name('pages.exercises'); // Now the exercises page can have all exercises from the database
