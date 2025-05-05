@@ -12,6 +12,7 @@ let searchInput
 let clearSearchButtonId
 
 let equipmentTypeId
+let exerciseId
 
 let saveButton
 let input
@@ -31,12 +32,6 @@ if (searchBar) {
             searchExercisesByName(name)
         }
     })
-}
-
-window.submitForm = function () {
-    let addExerciseForm = document.getElementById('add-exercise-form')
-    
-    if(addExerciseForm) { addExerciseForm.submit() }
 }
 
 // *************************************
@@ -106,6 +101,21 @@ window.setCheckedEquipment = function () {
 window.setIdsForSaveButton = function (inputId, saveId) {
     saveButton = document.getElementById(saveId)
     input = document.getElementById(inputId)
+}
+
+// Function to set the data attribute in the delete modal so we can delete the corresponding exercise the user chose
+window.setExerciseIdForDeleteModal = function () {
+    document.getElementById('delete-pop-up-modal').setAttribute('exercise-id', exerciseId)
+}
+
+// Then we can delete
+window.confirmDelete = function () {
+    let modal = document.getElementById('delete-pop-up-modal')
+    let exerciseId = modal.getAttribute('exercise-id') // This will be filled in from the function so there will be no errors, hopefully
+
+    let form = document.getElementById('delete-exercise-form')
+    form.setAttribute('action', `/exercises/${exerciseId}`) // then we set the action attribute in the form to match the route thing
+    form.submit()
 }
 
 // Function that will make it so that save button is not accessible if the input is blank
@@ -201,14 +211,15 @@ window.closePopupModal = function (modalToClose) {
 }
 
 // Function to fill in the specified elements depending on what exercise was chosen
-window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId) {
+window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId, selectedExerciseId) {
     equipmentTypeId = selectedEquipmentTypeId
+    exerciseId = selectedExerciseId
 
     let nameElement = document.getElementById('selected-exercise-name')
     nameElement.textContent = exerciseName
 
     let htmlString = ""
-    let instructions = exerciseInstructions.match(/\d+\.\s[^(\d+\.)]+/g) || [];
+    let instructions = exerciseInstructions.match(/\d+\.\s[^(\d+\.)]+/g) || []
     let imageToShow = exerciseImage ? exerciseImage : '/images/weight-icon.png'
 
     htmlString += `

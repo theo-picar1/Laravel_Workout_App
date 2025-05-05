@@ -1114,6 +1114,7 @@ p {
   }
   .main-pages .exercises-page .main-content .exercises-list {
     margin-top: 15px;
+    padding-bottom: 100px;
   }
   .main-pages .exercises-page .main-content .exercises-list .exercise {
     border-top: thin solid #808080;
