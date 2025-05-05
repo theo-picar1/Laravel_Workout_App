@@ -1,13 +1,10 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
-// Variables
-@import 'variables';
-
 // IMPORTANT: KEEP TRACK FOLLOWIN Z INDEXES
 /*
     #start-empty-workout-modal: 1
-    All modals that use pop-up-transition mixin: 2
+    All modals that use pop-up-transition mixin: 11
     footer: 10
     #clear-exercise-search-button: 5
 */
@@ -177,6 +174,37 @@ p {
     }
 }
 
+// CSS for checkboxes 
+@mixin checkbox-css() {
+    @include display-flex(column, center, center, 0);
+    border-radius: 15px;
+    color: $website-white;
+    padding: 0 15px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+
+    input {
+        appearance: none;
+        width: 100%;
+        height: inherit;
+        position: absolute;
+        border-radius: 15px;
+        border: thin solid $website-white;
+        cursor: pointer;
+
+        &:checked {
+            border: 2px solid $website-green;
+            z-index: 10;
+        }
+    }
+
+    span {
+        z-index: 11;
+        text-wrap: nowrap;
+    }
+}
+
 // CSS for smooth popup. I'd reccomend you use this for small popup modals @Oisin
 @mixin pop-up-transition() {
     position: fixed;
@@ -185,8 +213,7 @@ p {
     left: 0;
     opacity: 0;
     transition: transform 0.2s ease-out, opacity 0.1s ease;
-    z-index: 2;
-    background: $translucent;
+    z-index: 11;
     pointer-events: none;
     width: 100%;
     height: 100%;
@@ -196,6 +223,67 @@ p {
         transform: scale(1);
         opacity: 1;
         pointer-events: auto;
+        background-color: $translucent;
+    }
+}
+
+// CSS for the add and edit modals in the exercise modal. Most likely will be used for other modals later on like edit profile
+@mixin crud-modal-css() {
+    @include pop-up-transition();
+
+    .crud-content {
+        background-color: $website-dark-gray;
+        width: 90%;
+        padding: 20px;
+        border-radius: 15px;
+        margin: auto;
+        @include display-flex(column, unset, unset, 15px);
+
+        .title {
+            @include display-flex(row, space-between, center, 0);
+
+            .image-container {
+                background-color: $website-darker-gray;
+                padding: 2px;
+                border-radius: 50%;
+                @include display-flex(unset, center, center, 0);
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .crud-save-button {
+                color: $website-light-gray;
+                pointer-events: none;
+            }
+        }
+
+        .crud-input {
+            @include text-input-base-css(100%, 8px);
+            border: none;
+            background-color: $website-darker-gray;
+            border: 2px solid $invisible;
+
+            &:focus {
+                border-color: $website-white;
+            }
+        }
+
+        .choose-equipment-section {
+
+            .equipment-types {
+                @include display-flex(row, unset, center, 10px);
+                overflow-x: scroll;
+                scrollbar-width: none;
+                margin-top: 10px;
+
+                label {
+                    @include checkbox-css();
+                }
+            }
+        }
     }
 }
 
@@ -251,7 +339,7 @@ p {
 
                 .login-button {
                     background-color: $website-black;
-                    @include app-button-base-css(15px 0, 20px, $website-black, $website-white, 100%, $website-black, $website-black);
+                    @include app-button-base-css(16px 0, 20px, $website-black, $website-white, 100%, $website-black, $website-black);
                 }
             }
         }
@@ -364,6 +452,7 @@ p {
             background-color: $website-dark-gray;
             border-radius: 8px 8px 0 0;
             padding: 15px;
+            padding-bottom: 100px;
             transform: translateY(100%);
             transition: transform 0.3s ease;
             overflow-y: scroll;
@@ -374,7 +463,7 @@ p {
             }
 
             &.minimise {
-                transform: translateY(90%);
+                transform: translateY(78%);
             }
 
             .header {
@@ -720,10 +809,31 @@ p {
         .exercises-page {
             scrollbar-width: none;
 
+            #add-exercise-modal {
+                @include crud-modal-css();
+            }
+
+            #edit-exercise-modal {
+                @include crud-modal-css();
+            }
+
             header {
                 background-color: $website-dark-gray;
-                @include display-flex(unset, center, center, 0);
+                @include display-flex(row, space-between, center, 0);
                 height: 50px;
+                padding: 0 20px;
+
+                .add-exercise-p {
+                    color: $website-red;
+                    text-align: left;
+                }
+
+                p {
+                    width: 100%;
+                    text-align: center;
+                    text-wrap: nowrap;
+                    font-size: 14px;
+                }
             }
 
             .main-content {
@@ -748,7 +858,7 @@ p {
                         img {
                             filter: $website-white-to-light-gray;
                         }
-    
+
                         #exercises-searchbar {
                             appearance: none;
                             border: none;
@@ -785,7 +895,7 @@ p {
                             }
 
                             .name-and-muscle-group-container {
-                                
+
                                 p {
                                     font-size: 16px;
                                 }
@@ -825,6 +935,25 @@ p {
                     background-color: $website-dark-gray;
                     @include display-flex(row, space-between, center, 0);
                     padding: 20px;
+
+                    div {
+                        width: 100%;
+                    }
+                }
+
+                .edit-or-delete-section {
+                    font-size: 14px;
+                    @include display-flex(row, space-between, center, 0);
+                    padding: 0px 20px;
+                    margin-top: 15px;
+
+                    .delete {
+                        color: $website-red;
+                    }
+
+                    .edit {
+                        color: $website-green;
+                    }
                 }
 
                 #exercise-details-section {
