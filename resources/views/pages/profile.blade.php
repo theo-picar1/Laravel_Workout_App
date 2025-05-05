@@ -27,10 +27,15 @@
                     <h2>Account Details</h2>
 
                     <div class="user-profile-picture-section">
-                        <img src="{{ asset('images/profile-icon.png') }}">
+                        @if (auth()->user()->profile_picture == null)
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Profile Picture" class="profile-pic">
+                        @else
+                            <img src="data:image/{{ auth()->user()->profile_picture_type }};base64,{{ auth()->user()->profile_picture }}"
+                                alt="Profile Picture" class="profile-pic">
+                        @endif
 
                         <div class="user-profile-details">
-                            <p>username here</p>
+                            <p>{{ auth()->user()->username }}</p>
 
                             <div class="user-profile-stats">
                                 <div>
@@ -55,8 +60,7 @@
 
                     <div class="user-bio-section">
                         <p>
-                            Newbie weightlifter 💪. Started 3 months ago and getting better each day!
-                            😤 Critique and feedback to my workouts would be helpful 😎
+                            {{ auth()->user()->bio }}
                         </p>
                     </div>
                 </div>
@@ -86,56 +90,96 @@
                     <button class="modal-close-btn" onclick="toggleEditProfileModal()">&times;</button>
                     <div class="profile-picture-edit">
                         <div class="profile-pic-container">
-                            <img src="https://i.pravatar.cc/150?img=5" alt="Profile Picture" class="profile-pic">
-                            <button class="change-photo-btn">
+                            @if (auth()->user()->profile_picture == null)
+                                <img src="https://i.pravatar.cc/150?img=5" alt="Profile Picture" class="profile-pic">
+                            @else
+                                <img src="data:image/{{ auth()->user()->profile_picture_type }};base64,{{ auth()->user()->profile_picture }}"
+                                    alt="Profile Picture" class="profile-pic">
+                            @endif
+                            <label for="profile_picture" class="change-photo-btn">
                                 <i class="fas fa-camera"></i>
-                            </button>
+                            </label>
                         </div>
                     </div>
 
-                    <form class="profile-edit-form">
+                    <form class="profile-edit-form" id="profileForm" method="POST" action="{{ route('profile.update') }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
+
+                        <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
+
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" id="username" value="fitAthlete22" placeholder="Enter your username">
+                            <input type="text" id="username" name="username" value="{{ auth()->user()->username }}"
+                                placeholder="Enter your username" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" value="Alex Johnson" placeholder="Enter your full name">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" value="{{ auth()->user()->email }}"
+                                placeholder="Enter your email" required>
                         </div>
 
                         <div class="form-group">
                             <label for="bio">Bio</label>
-                            <textarea id="bio" placeholder="Tell others about yourself">Fitness enthusiast | Marathon runner | Personal trainer</textarea>
-                            <span class="char-count">0/150</span>
+                            <textarea id="bio" name="bio" placeholder="Tell others about yourself">{{ auth()->user()->bio }}</textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label>Privacy Settings</label>
-                            <div class="privacy-option">
-                                <span>Private Account</span>
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-                            <p class="privacy-description">When your account is private, only approved followers can see
-                                your posts</p>
+                        <div class="save-button-container">
+                            <button type="submit" class="save-btn">Save Changes</button>
                         </div>
                     </form>
-
                     <div class="action-buttons">
                         <button class="change-password-btn">Change Password</button>
-                        <div x-data id="logout">
+                        {{-- <div x-data id="logout">
                             <button @click="$refs.logoutForm.submit()" class="logout-button">Logout</botton>
 
-                                <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}" style="display: none"
-                                    hidden>
+                                <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}"
+                                    style="display: none" hidden>
                                     @csrf
                                 </form>
-                        </div>
-                    </div>
+                        </div> --}}
+                        <form class="delete-account-form" id="deleteAccountForm" method="POST"
+                            action="{{ route('profile.destroy') }}">
+                            @csrf
+                            @method('DELETE')
 
+                            {{-- <div class="delete-button-container">
+                                <button type="button" class="delete-btn" data-toggle="modal"
+                                    data-target="#confirmDeleteModal">Delete Account</button>
+                            </div> --}}
+
+                            <form id="deleteAccountForm" method="POST" action="{{ route('profile.destroy') }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn">Delete Account</button>
+                            </form>
+                        </form>
+
+                        {{-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete your account?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="submit" form="deleteAccountForm"
+                                            class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
                 </div>
             </div>
         </div>

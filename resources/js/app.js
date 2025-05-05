@@ -405,3 +405,9 @@ window.toggleEditProfileModal = function () {
     modal = document.getElementById('user-profile-section');
     modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block';
 }
+
+document.getElementById('profile_picture').addEventListener('change', function () {
+    var img = document.querySelector('.profile-pic');
+    img.src = URL.createObjectURL(this.files[0]);
+});
+
