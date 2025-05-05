@@ -37,6 +37,14 @@ class ExercisesController extends Controller
 
         Exercises::create($validated);
 
-        return redirect()->back()->with('success', 'Exercise added successfully!');
+        return redirect()->back()->with('Added exercise success', 'Exercise added successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $exercise = Exercises::findOrFail($id);
+        $exercise->delete();
+
+        return redirect()->back()->with('Deleted exercise success', 'Exercise deleted successfully!');
     }
 }

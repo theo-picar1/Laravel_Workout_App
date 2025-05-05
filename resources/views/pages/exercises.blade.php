@@ -1,6 +1,18 @@
 @extends('layouts.pages')
 
 @section('content')
+    <script>
+        // Check if the success session exists, then call the function to close the modal
+        @if (session('Added exercise success'))
+            alert('Success!')
+            closePopupModal('add-exercise-modal')
+        @elseif (session('Deleted exercise success'))
+            alert('Success!')
+            closePopupModal('delete-pop-up-modal')
+            closeModal('specific-exercise-view-modal')
+        @endif
+    </script>
+
     <div class="exercises-page">
         <div class="pop-up-modal" id="general-pop-up-modal">
             <div class="pop-up-modal-content">
@@ -26,14 +38,15 @@
 
                     <p>Create new exercise</p>
 
-                    <button type="submit" form="add-exercise-form" id="save-added-button" class="crud-save-button" onclick="closePopupModal('add-exercise-modal');" onsubmit="event.preventDefault(); submitForm();">Save</button>
+                    <button type="submit" form="add-exercise-form" id="save-added-button"
+                        class="crud-save-button">Save</button>
                 </div>
 
                 <form id="add-exercise-form" method="POST" action="{{ route('exercises.store') }}">
                     @csrf {{-- IMPORTANT! --}}
 
-                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name" id="new-exercise-name"
-                        class="crud-input" oninput="showOrHideSaveButton(event)" required>
+                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name"
+                        id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)" required>
 
                     <div class="choose-equipment-section">
                         <p>Equipment Type</p>
@@ -43,7 +56,8 @@
                                 <label>
                                     <span>{{ $equipment->name }}</span>
 
-                                    <input type="radio" name="equipment_type_id" value="{{ $equipment->equipment_type_id }}" required>
+                                    <input type="radio" name="equipment_type_id"
+                                        value="{{ $equipment->equipment_type_id }}" required>
                                 </label>
                             @endforeach
                         </div>
@@ -86,6 +100,26 @@
             </div>
         </div>
 
+        {{-- Pop up modal for deleting since there is a form --}}
+        <div class="pop-up-modal" id="delete-pop-up-modal" exercise-id="">
+            <div class="pop-up-modal-content">
+                <h4 id="delete-pop-up-modal-title"></h4>
+
+                <p id="delete-pop-up-modal-description"></p>
+
+                <div>
+                    <button id="delete-pop-up-modal-cancel-button"
+                        onclick="closePopupModal('delete-pop-up-modal')"></button>
+                    <button id="delete-pop-up-modal-continue-button" onclick="confirmDelete()"></button>
+                </div>
+
+                <form id="delete-exercise-form" method="POST" style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
+            </div>
+        </div>
+
         <header class="exercises-page-header">
             <p class="add-exercise-p"
                 onclick="setIdsForSaveButton('new-exercise-name', 'save-added-button'); openCustomPopUpModal('add-exercise-modal'); showOrHideSaveButtonByClick('new-exercise-name')">
@@ -109,7 +143,7 @@
             <div class="exercises-list">
                 @foreach ($exercises as $exercise)
                     <div exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row"
-                        onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}', '{{ $exercise->equipment_type_id }}')">
+                        onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}', '{{ $exercise->equipment_type_id }}', '{{ $exercise->exercise_id }}')">
                         <div class="left-side">
                             <div class="image-container">
                                 <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}"
@@ -149,7 +183,7 @@
             </header>
 
             <div class="edit-or-delete-section">
-                <p onclick="openPopupModal('general-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000')"
+                <p onclick="openPopupModal('delete-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000'); setExerciseIdForDeleteModal()"
                     class="delete">Delete</p>
 
                 <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipment(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name')"
