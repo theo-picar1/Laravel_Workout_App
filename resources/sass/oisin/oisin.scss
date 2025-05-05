@@ -1,0 +1,231 @@
+// colors
+$website-red: #ff0000;
+$website-dark-red: #9b0202;
+$website-light-red: #fb4747;
+$website-darker-gray: #171717;
+$website-dark-gray: #262626;
+$website-light-gray: #808080;
+$website-black: #000000;
+$website-white: #ffffff;
+$website-green: #81fe5e;
+$website-hover-green: #71ed4f;
+
+// Base styles
+.discover-page {
+    background-color: $website-black;
+    color: $website-white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+
+    .connect-container {
+        flex: 1;
+        padding-bottom: 60px; // Space for footer
+
+
+        // Header
+        header {
+            padding: 1rem;
+            text-align: center;
+
+            p {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin: 0;
+                color: $website-white;
+            }
+        }
+
+        // Discover Athletes Section
+        .discover-athletes {
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+                color: $website-white;
+            }
+
+            .athletes-scroll-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.5rem;
+
+                &::-webkit-scrollbar {
+                    height: 3px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: rgba($website-light-red, 0.5);
+                    border-radius: 3px;
+                }
+            }
+
+            .athletes-grid {
+                display: inline-flex;
+                gap: 1rem;
+                padding-right: 1rem;
+            }
+
+            .athlete-card {
+                background: $website-darker-gray;
+                border-radius: 0.75rem;
+                padding: 1rem;
+                width: 120px;
+                flex-shrink: 0;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+                .profile-pic {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    margin: 0 auto 0.75rem;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .username {
+                    display: block;
+                    font-weight: 600;
+                    margin-bottom: 0.75rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .follow-btn {
+                    background: $website-light-red;
+                    border: none;
+                    border-radius: 1rem;
+                    padding: 0.5rem 0.75rem;
+                    font-weight: 600;
+                    width: 100%;
+                    font-size: 0.875rem;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                    color: $website-white;
+
+                    &:active {
+                        background: darken($website-light-red, 10%);
+                    }
+                }
+            }
+        }
+
+        // Recent Posts Section
+        .recent-posts {
+            padding: 0 1rem;
+
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .post-card {
+                background: $website-darker-gray;
+                border-radius: 0.75rem;
+                padding: 1.25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+                .post-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 1rem;
+
+                    .post-user {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+
+                        .post-profile-pic {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            overflow: hidden;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+
+                        .post-username {
+                            font-weight: 600;
+                        }
+                    }
+
+                    .post-date {
+                        color: $website-light-gray;
+                        font-size: 0.875rem;
+                    }
+                }
+
+                .post-content {
+                    margin-bottom: 1rem;
+
+                    .routine-name {
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .workout-stats {
+                        display: flex;
+                        gap: 1.5rem;
+                        margin-bottom: 0.75rem;
+
+                        .stat {
+                            display: flex;
+                            flex-direction: column;
+
+                            .stat-label {
+                                font-size: 0.875rem;
+                                color: $website-light-gray;
+                            }
+
+                            .stat-value {
+                                font-weight: 600;
+                            }
+                        }
+                    }
+
+                    .workout-description {
+                        line-height: 1.5;
+                    }
+                }
+
+                .post-footer {
+                    display: flex;
+                    gap: 1rem;
+                    padding-top: 0.75rem;
+                    border-top: 1px solid $website-light-gray;
+                    font-size: 0.875rem;
+                    color: $website-light-gray;
+
+                    .likes,
+                    .comments {
+                        &:active {
+                            color: $website-light-red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

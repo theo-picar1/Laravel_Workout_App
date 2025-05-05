@@ -30,4 +30,9 @@ class PagesController extends Controller
 
         return view('pages.exercises', compact('exercises', 'equipment_types'));
     }
+
+    // Returns the profile page view
+    public function discoverPage() {
+        return view('pages.discover');
+    }
 }

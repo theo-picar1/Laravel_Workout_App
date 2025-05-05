@@ -33,6 +33,8 @@ Route::get('/profile', [PagesController::class, 'profilePage'])->name('pages.pro
 
 Route::get('/exercises', [PagesController::class, 'exercisesPage'])->name('pages.exercises');
 
+Route::get('/discover', [PagesController::class, 'discoverPage'])->name('pages.discover');
+
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
 
