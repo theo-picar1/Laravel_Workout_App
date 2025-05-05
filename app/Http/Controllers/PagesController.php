@@ -28,4 +28,9 @@ class PagesController extends Controller
 
         return view('pages.exercises');
     }
+
+    // Returns the profile page view
+    public function discoverPage() {
+        return view('pages.discover');
+    }
 }

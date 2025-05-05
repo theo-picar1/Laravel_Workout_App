@@ -1,0 +1,179 @@
+.discover-page {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.discover-page .connect-container {
+  flex: 1;
+  padding-bottom: 60px;
+}
+.discover-page .connect-container header {
+  padding: 1rem;
+  text-align: center;
+}
+.discover-page .connect-container header p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+.discover-page .connect-container .discover-athletes {
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+}
+.discover-page .connect-container .discover-athletes h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+.discover-page .connect-container .discover-athletes .athletes-scroll-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+}
+.discover-page .connect-container .discover-athletes .athletes-scroll-container::-webkit-scrollbar {
+  height: 3px;
+}
+.discover-page .connect-container .discover-athletes .athletes-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.discover-page .connect-container .discover-athletes .athletes-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(251, 71, 71, 0.5);
+  border-radius: 3px;
+}
+.discover-page .connect-container .discover-athletes .athletes-grid {
+  display: inline-flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+.discover-page .connect-container .discover-athletes .athlete-card {
+  background: #171717;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  width: 120px;
+  flex-shrink: 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.discover-page .connect-container .discover-athletes .athlete-card .profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.75rem;
+}
+.discover-page .connect-container .discover-athletes .athlete-card .profile-pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.discover-page .connect-container .discover-athletes .athlete-card .username {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.discover-page .connect-container .discover-athletes .athlete-card .follow-btn {
+  background: #fb4747;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  width: 100%;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #ffffff;
+}
+.discover-page .connect-container .discover-athletes .athlete-card .follow-btn:active {
+  background: #fa1515;
+}
+.discover-page .connect-container .recent-posts {
+  padding: 0 1rem;
+}
+.discover-page .connect-container .recent-posts h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.discover-page .connect-container .recent-posts .post-card {
+  background: #171717;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.discover-page .connect-container .recent-posts .post-card .post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-header .post-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-header .post-user .post-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.discover-page .connect-container .recent-posts .post-card .post-header .post-user .post-profile-pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.discover-page .connect-container .recent-posts .post-card .post-header .post-user .post-username {
+  font-weight: 600;
+}
+.discover-page .connect-container .recent-posts .post-card .post-header .post-date {
+  color: #808080;
+  font-size: 0.875rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content {
+  margin-bottom: 1rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .routine-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .workout-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .workout-stats .stat {
+  display: flex;
+  flex-direction: column;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .workout-stats .stat .stat-label {
+  font-size: 0.875rem;
+  color: #808080;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .workout-stats .stat .stat-value {
+  font-weight: 600;
+}
+.discover-page .connect-container .recent-posts .post-card .post-content .workout-description {
+  line-height: 1.5;
+}
+.discover-page .connect-container .recent-posts .post-card .post-footer {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #808080;
+  font-size: 0.875rem;
+  color: #808080;
+}
+.discover-page .connect-container .recent-posts .post-card .post-footer .likes:active,
+.discover-page .connect-container .recent-posts .post-card .post-footer .comments:active {
+  color: #fb4747;
+}/*# sourceMappingURL=oisin.css.map */
