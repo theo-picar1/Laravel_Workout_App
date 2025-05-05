@@ -40,6 +40,23 @@ class ExercisesController extends Controller
         return redirect()->back()->with('Added exercise success', 'Exercise added successfully!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $exercise = Exercises::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'equipment_type_id' => 'required|exists:equipment_types,equipment_type_id',
+        ]);
+
+        $exercise->update([
+            'name' => $request->input('name'),
+            'equipment_type_id' => $request->input('equipment_type_id'),
+        ]);
+
+        return redirect()->back()->with('Update exercise success', 'Exercise updated successfully');
+    }
+
     public function destroy($id)
     {
         $exercise = Exercises::findOrFail($id);

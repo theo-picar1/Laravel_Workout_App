@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div id="edit-exercise-modal" class="crud-modal">
+        <div id="edit-exercise-modal" class="crud-modal" exercise-id="">
             <div class="edit-exercise-content crud-content">
                 <div class="title">
                     <div onclick="closePopupModal('edit-exercise-modal')" class="image-container">
@@ -75,28 +75,31 @@
 
                     <p>Edit exercise</p>
 
-                    <p id="save-edited-button" class="crud-save-button"
-                        onclick="closePopupModal('edit-exercise-modal'); clearInput('edited-exercise-name');">Save</p>
+                    <button type="submit" id="save-edited-button" class="crud-save-button" form="edit-exercise-form" onclick="confirmEdit()">Save</button>
                 </div>
 
-                <input type="text" autocomplete="off" placeholder="Exercise name" id="edited-exercise-name"
-                    class="crud-input" oninput="showOrHideSaveButton(event)">
+                <form method="POST" id="edit-exercise-form">
+                    @csrf
+                    @method('PUT')
 
-                <div class="choose-equipment-section">
-                    <p>Equipment Type</p>
+                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name" id="edited-exercise-name" value="" class="crud-input" oninput="showOrHideSaveButton(event)">
 
-                    <div class="equipment-types">
-                        @foreach ($equipment_types as $equipment)
-                            <label>
-                                <span>{{ $equipment->name }}</span>
+                    <div class="choose-equipment-section">
+                        <p>Equipment Type</p>
 
-                                <input type="radio" name="equipment-type"
-                                    class="{{ $equipment->equipment_type_id }}-checkboxes"
-                                    value={{ $equipment->equipment_type_id }}>
-                            </label>
-                        @endforeach
+                        <div class="equipment-types">
+                            @foreach ($equipment_types as $equipment)
+                                <label>
+                                    <span>{{ $equipment->name }}</span>
+
+                                    <input type="radio" name="equipment_type_id"
+                                        class="{{ $equipment->equipment_type_id }}-checkboxes"
+                                        value={{ $equipment->equipment_type_id }}>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -183,10 +186,10 @@
             </header>
 
             <div class="edit-or-delete-section">
-                <p onclick="openPopupModal('delete-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000'); setExerciseIdForDeleteModal()"
+                <p onclick="openPopupModal('delete-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000'); setExerciseIdForCrudModals('delete-pop-up-modal', 'exercise-id')"
                     class="delete">Delete</p>
 
-                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipment(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name')"
+                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipmentAndName(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name'); setExerciseIdForCrudModals('edit-exercise-modal', 'exercise-id')"
                     class="edit">Edit</p>
             </div>
 

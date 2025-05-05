@@ -44,5 +44,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 // To add a new exercise to the database
 Route::post('/exercises', [ExercisesController::class, 'store'])->name('exercises.store');
 
+// To edit existing exercise
+Route::put('/exercises/{exercise}', [ExercisesController::class, 'update'])->name('exercises.update');
+
 // To delete the exercise
 Route::delete('/exercises/{id}', [ExercisesController::class, 'destroy'])->name('exercises.destroy');

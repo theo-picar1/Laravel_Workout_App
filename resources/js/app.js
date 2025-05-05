@@ -13,6 +13,7 @@ let clearSearchButtonId
 
 let equipmentTypeId
 let exerciseId
+let exerciseName
 
 let saveButton
 let input
@@ -89,8 +90,11 @@ function startStopwatch() {
 }
 
 // Function that will check the corresponding equipment checkbox when clicking the edit button in the exercise view modal
-window.setCheckedEquipment = function () {
+window.setCheckedEquipmentAndName = function () {
     let checkboxes = document.getElementsByClassName(`${equipmentTypeId}-checkboxes`)
+    let input = document.getElementById('edited-exercise-name')
+
+    input.value = exerciseName
 
     Array.from(checkboxes).forEach(checkbox => {
         if(checkbox.value === equipmentTypeId) { checkbox.checked = true }
@@ -103,9 +107,10 @@ window.setIdsForSaveButton = function (inputId, saveId) {
     input = document.getElementById(inputId)
 }
 
-// Function to set the data attribute in the delete modal so we can delete the corresponding exercise the user chose
-window.setExerciseIdForDeleteModal = function () {
-    document.getElementById('delete-pop-up-modal').setAttribute('exercise-id', exerciseId)
+// Function to set the data attribute in the corresponding crud modal so we can either delete or edit the corresponding exercise the user chose
+window.setExerciseIdForCrudModals = function (modal, attribute) {
+    document.getElementById(modal).setAttribute(attribute, exerciseId)
+    console.log("Attribute: ", attribute," Exercise ID: ", exerciseId)
 }
 
 // Then we can delete
@@ -114,6 +119,16 @@ window.confirmDelete = function () {
     let exerciseId = modal.getAttribute('exercise-id') // This will be filled in from the function so there will be no errors, hopefully
 
     let form = document.getElementById('delete-exercise-form')
+    form.setAttribute('action', `/exercises/${exerciseId}`) // then we set the action attribute in the form to match the route thing
+    form.submit()
+}
+
+// Or edit
+window.confirmEdit = function () {
+    let modal = document.getElementById('edit-exercise-modal')
+    let exerciseId = modal.getAttribute('exercise-id') // This will be filled in from the function so there will be no errors, hopefully
+
+    let form = document.getElementById('edit-exercise-form')
     form.setAttribute('action', `/exercises/${exerciseId}`) // then we set the action attribute in the form to match the route thing
     form.submit()
 }
@@ -211,12 +226,13 @@ window.closePopupModal = function (modalToClose) {
 }
 
 // Function to fill in the specified elements depending on what exercise was chosen
-window.fillExerciseViewModal = function (exerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId, selectedExerciseId) {
+window.fillExerciseViewModal = function (selectedExerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId, selectedExerciseId) {
     equipmentTypeId = selectedEquipmentTypeId
     exerciseId = selectedExerciseId
+    exerciseName = selectedExerciseName
 
     let nameElement = document.getElementById('selected-exercise-name')
-    nameElement.textContent = exerciseName
+    nameElement.textContent = selectedExerciseName
 
     let htmlString = ""
     let instructions = exerciseInstructions.match(/\d+\.\s[^(\d+\.)]+/g) || []
