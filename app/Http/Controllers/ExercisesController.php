@@ -32,7 +32,8 @@ class ExercisesController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'equipment_type_id' => 'required|exists:equipment_types,equipment_type_id'
+            'equipment_type_id' => 'required|exists:equipment_types,equipment_type_id',
+            'instructions' => 'string'
         ]);
 
         Exercises::create($validated);
@@ -47,11 +48,13 @@ class ExercisesController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'equipment_type_id' => 'required|exists:equipment_types,equipment_type_id',
+            'instructions' => 'string'
         ]);
 
         $exercise->update([
             'name' => $request->input('name'),
             'equipment_type_id' => $request->input('equipment_type_id'),
+            'instructions' => $request->input('instructions-to-send-for-edit')
         ]);
 
         return redirect()->back()->with('Update exercise success', 'Exercise updated successfully');

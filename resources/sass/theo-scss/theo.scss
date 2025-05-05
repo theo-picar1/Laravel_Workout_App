@@ -282,10 +282,39 @@ p {
                     @include display-flex(row, unset, center, 10px);
                     overflow-x: scroll;
                     scrollbar-width: none;
-                    margin-top: 10px;
+                    margin-top: 5px;
     
                     label {
                         @include checkbox-css();
+                    }
+                }
+            }
+
+            .instructions-section {
+                margin-top: 15px;
+                @include display-flex(column, unset, unset, 10px);
+
+                h4 {
+                    font-weight: normal
+                }
+
+                .instructions-container {
+                    margin-top: -5px;
+                    @include display-flex(column, unset, unset, 5px);
+
+                    textarea {
+                        @include text-input-base-css(100%, 8px);
+                        font-family: 'Times New Roman', Times, serif;
+                        background-color: $website-darker-gray;
+                        border: 2px solid $invisible;
+
+                        &:focus {
+                            border: 2px solid $website-white;
+                        }
+                    }
+
+                    .mandatory-textarea {
+                        resize: none;
                     }
                 }
             }

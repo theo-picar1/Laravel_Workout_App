@@ -882,7 +882,7 @@ p {
     gap: 10px;
     overflow-x: scroll;
     scrollbar-width: none;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .main-pages .exercises-page #add-exercise-modal .crud-content form .choose-equipment-section .equipment-types label {
     display: flex;
@@ -915,6 +915,45 @@ p {
   .main-pages .exercises-page #add-exercise-modal .crud-content form .choose-equipment-section .equipment-types label span {
     z-index: 11;
     text-wrap: nowrap;
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 10px;
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section h4 {
+    font-weight: normal;
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section .instructions-container {
+    margin-top: -5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 5px;
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section .instructions-container textarea {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #171717;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section .instructions-container textarea:focus {
+    border: 2px solid #ffffff;
+  }
+  .main-pages .exercises-page #add-exercise-modal .crud-content form .instructions-section .instructions-container .mandatory-textarea {
+    resize: none;
   }
   .main-pages .exercises-page #edit-exercise-modal {
     position: fixed;
@@ -1007,7 +1046,7 @@ p {
     gap: 10px;
     overflow-x: scroll;
     scrollbar-width: none;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .main-pages .exercises-page #edit-exercise-modal .crud-content form .choose-equipment-section .equipment-types label {
     display: flex;
@@ -1040,6 +1079,45 @@ p {
   .main-pages .exercises-page #edit-exercise-modal .crud-content form .choose-equipment-section .equipment-types label span {
     z-index: 11;
     text-wrap: nowrap;
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 10px;
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section h4 {
+    font-weight: normal;
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section .instructions-container {
+    margin-top: -5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 5px;
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section .instructions-container textarea {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #171717;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section .instructions-container textarea:focus {
+    border: 2px solid #ffffff;
+  }
+  .main-pages .exercises-page #edit-exercise-modal .crud-content form .instructions-section .instructions-container .mandatory-textarea {
+    resize: none;
   }
   .main-pages .exercises-page header {
     background-color: #262626;
