@@ -306,3 +306,11 @@ window.clearInput = function (inputId) {
 
     inputToClear.value = ""
 }
+
+window.toggleEditProfileModal = function () {
+    let modal = document.getElementById('edit-profile-container');
+    modal.style.display = (modal.style.display === 'none' || !modal.style.display) ? 'block' : 'none';
+
+    modal = document.getElementById('user-profile-section');
+    modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block';
+}

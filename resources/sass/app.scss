@@ -1001,6 +1001,10 @@ p {
         #exercises-page-footer {
             @include selected-footer-href-css('#exercises-href');
         }
+
+        #discover-page-footer {
+            @include selected-footer-href-css('#discover-href');
+        }
     }
 }
 
