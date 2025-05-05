@@ -14,6 +14,7 @@ let clearSearchButtonId
 let equipmentTypeId
 let exerciseId
 let exerciseName
+let exerciseInstructions
 
 let saveButton
 let input
@@ -29,7 +30,7 @@ let searchBar = document.getElementById('exercises-searchbar')
 if (searchBar) {
     searchBar.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            const name = this.value
+            let name = this.value
             searchExercisesByName(name)
         }
     })
@@ -67,6 +68,59 @@ function formatExerciseName() {
     })
 }
 
+let addInstructionCount = 1 // 1 Because there is alreay a text area in the container
+// Function that will allow the user to add another step to either their new or edited exercise
+window.addInstructionInput = function (containerId, textareaClass) {
+    if (addInstructionCount >= 5) {
+        alert("Can only have 5 instructions for each exercise")
+        return
+    }
+
+    addInstructionCount++
+    let container = document.getElementById(containerId)
+
+    let textarea = document.createElement('textarea')
+    textarea.classList.add('added-textarea')
+    textarea.classList.add(textareaClass)
+    textarea.placeholder = `Step ${addInstructionCount}`
+    textarea.autocomplete = 'off'
+    textarea.style.resize = "none"
+
+    container.appendChild(textarea)
+}
+
+let editInstructionCount = 0
+let alreadyCalled = false
+// Function to fill in the textarea inputs in the edit modal 
+window.fillEditTextAreas = function () {
+    if(alreadyCalled) return // Just to stop repeatedly filling the modal with text areas
+
+    let container = document.getElementById('edit-instructions-container')
+    let instructionsToPut = exerciseInstructions.match(/\d+\.\s.*?(?=\d+\.\s|$)/gs)?.map(step => step.replace(/^\d+\.\s/, '').trim()) || [] // Separate into paragraphs but I also remove the numbers in case of future errors
+
+    instructionsToPut.forEach(instruction => {
+        editInstructionCount++
+
+        let textarea = document.createElement('textarea')
+        textarea.classList.add('added-textarea')
+        textarea.classList.add('edit-exercise-textarea')
+        textarea.placeholder = `Step ${instruction}`
+        textarea.autocomplete = 'off'
+        textarea.style.resize = "none"
+        textarea.value = `${instruction}`
+
+        container.appendChild(textarea)
+    })
+
+    addInstructionCount = editInstructionCount
+    alreadyCalled = true
+}
+
+window.setCountToZero = function () {
+    addInstructionCount = 0
+    alreadyCalled = false
+}
+
 // TIME FUNCTION (FOR WORKOUTS) Code by: ChatGPT
 function startStopwatch() {
     let timeElement = document.getElementById('time')
@@ -97,7 +151,7 @@ window.setCheckedEquipmentAndName = function () {
     input.value = exerciseName
 
     Array.from(checkboxes).forEach(checkbox => {
-        if(checkbox.value === equipmentTypeId) { checkbox.checked = true }
+        if (checkbox.value === equipmentTypeId) { checkbox.checked = true }
         else { checkbox.checked = false }
     })
 }
@@ -107,10 +161,32 @@ window.setIdsForSaveButton = function (inputId, saveId) {
     input = document.getElementById(inputId)
 }
 
+// To submit the add or edit modal. It's mainly just to get all the text area values and put them as one string
+window.finaliseAndSubmit = function (textareaIds) {
+    let textareas = document.getElementsByClassName(textareaIds)
+
+    console.log(textareaIds)
+
+    let instructionsToSend = []
+    let count = 1
+
+    Array.from(textareas).forEach(textarea => {
+        // Ignore all text areas that do not have a value in them
+        if (textarea.value.trim() !== "") {
+            instructionsToSend.push(`${count}. ${textarea.value.trim()}`) // Format it as 1. 'Instructions' for formatting purposes
+            count++
+        }
+    })
+
+    document.getElementById('instructions-to-send').value = instructionsToSend.join(' ') // Put the array into the corresponding input by breaking up each element with \n
+
+    document.getElementById('add-exercise-form').submit()
+}
+
 // Function to set the data attribute in the corresponding crud modal so we can either delete or edit the corresponding exercise the user chose
 window.setExerciseIdForCrudModals = function (modal, attribute) {
     document.getElementById(modal).setAttribute(attribute, exerciseId)
-    console.log("Attribute: ", attribute," Exercise ID: ", exerciseId)
+    console.log("Attribute: ", attribute, " Exercise ID: ", exerciseId)
 }
 
 // Then we can delete
@@ -128,6 +204,20 @@ window.confirmEdit = function () {
     let modal = document.getElementById('edit-exercise-modal')
     let exerciseId = modal.getAttribute('exercise-id') // This will be filled in from the function so there will be no errors, hopefully
 
+    let textareas = document.getElementsByClassName('edit-exercise-textarea')
+    let instructionsToSend = []
+
+    let count = 1
+    Array.from(textareas).forEach(textarea => {
+        // Ignore all text areas that do not have a value in them
+        if (textarea.value.trim() !== "") {
+            instructionsToSend.push(`${count}. ${textarea.value.trim()}`) // Format it as 1. 'Instructions' for formatting purposes
+            count++
+        }
+    })
+
+    document.getElementById('instructions-to-send-for-edit').value = instructionsToSend.join(' ')
+
     let form = document.getElementById('edit-exercise-form')
     form.setAttribute('action', `/exercises/${exerciseId}`) // then we set the action attribute in the form to match the route thing
     form.submit()
@@ -135,27 +225,27 @@ window.confirmEdit = function () {
 
 // Function that will make it so that save button is not accessible if the input is blank
 window.showOrHideSaveButton = function (e) {
-    if(e.target.value === "" || e.target.length < 1) { 
+    if (e.target.value === "" || e.target.length < 1) {
         saveButton.style.pointerEvents = "none"
-        saveButton.style.color =  "#808080"
+        saveButton.style.color = "#808080"
     }
     else {
         saveButton.style.pointerEvents = "auto"
-        saveButton.style.color =  "#ff0000"
+        saveButton.style.color = "#ff0000"
     }
 }
 
 // Same as above but with a click of a button due to a bug
-window.showOrHideSaveButtonByClick  = function (inputId) {
+window.showOrHideSaveButtonByClick = function (inputId) {
     input = document.getElementById(inputId)
 
-    if(input.value === "" || input.length < 1) { 
+    if (input.value === "" || input.length < 1) {
         saveButton.style.pointerEvents = "none"
-        saveButton.style.color =  "#808080"
+        saveButton.style.color = "#808080"
     }
     else {
         saveButton.style.pointerEvents = "auto"
-        saveButton.style.color =  "#ff0000"
+        saveButton.style.color = "#ff0000"
     }
 }
 
@@ -226,10 +316,11 @@ window.closePopupModal = function (modalToClose) {
 }
 
 // Function to fill in the specified elements depending on what exercise was chosen
-window.fillExerciseViewModal = function (selectedExerciseName, exerciseInstructions, exerciseImage, selectedEquipmentTypeId, selectedExerciseId) {
+window.fillExerciseViewModal = function (selectedExerciseName, selectedExerciseInstructions, exerciseImage, selectedEquipmentTypeId, selectedExerciseId) {
     equipmentTypeId = selectedEquipmentTypeId
     exerciseId = selectedExerciseId
     exerciseName = selectedExerciseName
+    exerciseInstructions = selectedExerciseInstructions
 
     let nameElement = document.getElementById('selected-exercise-name')
     nameElement.textContent = selectedExerciseName

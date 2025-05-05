@@ -38,15 +38,13 @@
 
                     <p>Create new exercise</p>
 
-                    <button type="submit" form="add-exercise-form" id="save-added-button"
-                        class="crud-save-button">Save</button>
+                    <button id="save-added-button" class="crud-save-button" onclick="finaliseAndSubmit('add-exercise-textarea')">Save</button>
                 </div>
 
                 <form id="add-exercise-form" method="POST" action="{{ route('exercises.store') }}">
                     @csrf {{-- IMPORTANT! --}}
 
-                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name"
-                        id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)" required>
+                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name" id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)" onclick="setCountToZero()" required>
 
                     <div class="choose-equipment-section">
                         <p>Equipment Type</p>
@@ -56,11 +54,22 @@
                                 <label>
                                     <span>{{ $equipment->name }}</span>
 
-                                    <input type="radio" name="equipment_type_id"
-                                        value="{{ $equipment->equipment_type_id }}" required>
+                                    <input type="radio" name="equipment_type_id" value="{{ $equipment->equipment_type_id }}" required>
                                 </label>
                             @endforeach
                         </div>
+                    </div>
+
+                    <div class="instructions-section">
+                        <h4>Instructions <span>(Optional)</span></h4>
+                    
+                        <div id="add-instructions-container" class="instructions-container">
+                            <textarea placeholder="Step 1" class="mandatory-textarea add-exercise-textarea"></textarea>
+                        </div> {{-- JavaScript --}}
+                    
+                        <button type="button" onclick="addInstructionInput('add-instructions-container', 'add-exercise-textarea')" class="add-instruction-button">Add Step</button>
+
+                        <input type="text" name="instructions" id="instructions-to-send" style="display: none">
                     </div>
                 </form>
             </div>
@@ -75,7 +84,7 @@
 
                     <p>Edit exercise</p>
 
-                    <button type="submit" id="save-edited-button" class="crud-save-button" form="edit-exercise-form" onclick="confirmEdit()">Save</button>
+                    <button id="save-edited-button" class="crud-save-button" onclick="confirmEdit(); setCountToZero()">Save</button>
                 </div>
 
                 <form method="POST" id="edit-exercise-form">
@@ -99,6 +108,16 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <div class="instructions-section">
+                        <h4>Instructions <span>(Optional)</span></h4>
+                    
+                        <div id="edit-instructions-container" class="instructions-container"></div> {{-- JavaScript --}}
+                    
+                        <button type="button" onclick="addInstructionInput('edit-instructions-container', 'edit-exercise-textarea')" class="edit-instruction-button">Add Step</button>
+
+                        <input type="text" name="instructions-to-send-for-edit" id="instructions-to-send-for-edit" style="display: none">
+                    </div>
                 </form>
             </div>
         </div>
@@ -111,8 +130,8 @@
                 <p id="delete-pop-up-modal-description"></p>
 
                 <div>
-                    <button id="delete-pop-up-modal-cancel-button"
-                        onclick="closePopupModal('delete-pop-up-modal')"></button>
+                    <button id="delete-pop-up-modal-cancel-button" onclick="closePopupModal('delete-pop-up-modal')"></button>
+
                     <button id="delete-pop-up-modal-continue-button" onclick="confirmDelete()"></button>
                 </div>
 
@@ -155,7 +174,7 @@
 
                             <div class="name-and-muscle-group-container">
                                 <p>{{ $exercise->name }}</p>
-                                <p id="muscle-group">Muscle group</p>
+                                <p id="muscle-group">{{ $exercise->equipmentType->name }}</p>
                             </div>
                         </div>
 
@@ -189,7 +208,7 @@
                 <p onclick="openPopupModal('delete-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000'); setExerciseIdForCrudModals('delete-pop-up-modal', 'exercise-id')"
                     class="delete">Delete</p>
 
-                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipmentAndName(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name'); setExerciseIdForCrudModals('edit-exercise-modal', 'exercise-id')"
+                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipmentAndName(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name'); setExerciseIdForCrudModals('edit-exercise-modal', 'exercise-id'); fillEditTextAreas()"
                     class="edit">Edit</p>
             </div>
 
