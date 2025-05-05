@@ -5,12 +5,14 @@
         <div class="pop-up-modal" id="general-pop-up-modal">
             <div class="pop-up-modal-content">
                 <h4 id="general-pop-up-modal-title"></h4>
-    
+
                 <p id="general-pop-up-modal-description"></p>
-    
+
                 <div>
-                    <button id="general-pop-up-modal-cancel-button" onclick="closePopupModal('general-pop-up-modal')"></button>
-                    <button id="general-pop-up-modal-continue-button" onclick="closePopupModal('general-pop-up-modal'); closeModal('specific-exercise-view-modal')"></button>
+                    <button id="general-pop-up-modal-cancel-button"
+                        onclick="closePopupModal('general-pop-up-modal')"></button>
+                    <button id="general-pop-up-modal-continue-button"
+                        onclick="closePopupModal('general-pop-up-modal'); closeModal('specific-exercise-view-modal')"></button>
                 </div>
             </div>
         </div>
@@ -21,27 +23,32 @@
                     <div onclick="closePopupModal('add-exercise-modal')" class="image-container">
                         <img src="{{ asset('images/close-icon 09.57.33.png') }}">
                     </div>
-    
+
                     <p>Create new exercise</p>
-    
-                    <p id="save-added-button" class="crud-save-button" onclick="closePopupModal('add-exercise-modal'); clearInput('new-exercise-name')">Save</p>
+
+                    <button type="submit" form="add-exercise-form" id="save-added-button" class="crud-save-button" onclick="closePopupModal('add-exercise-modal');" onsubmit="event.preventDefault(); submitForm();">Save</button>
                 </div>
 
-                <input type="text" autocomplete="off" placeholder="Exercise name" id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
+                <form id="add-exercise-form" method="POST" action="{{ route('exercises.store') }}">
+                    @csrf {{-- IMPORTANT! --}}
 
-                <div class="choose-equipment-section">
-                    <p>Equipment Type</p>
-                    
-                    <div class="equipment-types">
-                        @foreach ($equipment_types as $equipment)
-                            <label>
-                                <span>{{ $equipment->name }}</span>
+                    <input type="text" name="name" autocomplete="off" placeholder="Exercise name" id="new-exercise-name"
+                        class="crud-input" oninput="showOrHideSaveButton(event)" required>
 
-                                <input type="radio" name="equipment-type" value={{ $equipment->id }}>
-                            </label>
-                        @endforeach
+                    <div class="choose-equipment-section">
+                        <p>Equipment Type</p>
+
+                        <div class="equipment-types">
+                            @foreach ($equipment_types as $equipment)
+                                <label>
+                                    <span>{{ $equipment->name }}</span>
+
+                                    <input type="radio" name="equipment_type_id" value="{{ $equipment->equipment_type_id }}" required>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -51,23 +58,27 @@
                     <div onclick="closePopupModal('edit-exercise-modal')" class="image-container">
                         <img src="{{ asset('images/close-icon 09.57.33.png') }}">
                     </div>
-    
+
                     <p>Edit exercise</p>
-    
-                    <p id="save-edited-button" class="crud-save-button" onclick="closePopupModal('edit-exercise-modal'); clearInput('edited-exercise-name');">Save</p>
+
+                    <p id="save-edited-button" class="crud-save-button"
+                        onclick="closePopupModal('edit-exercise-modal'); clearInput('edited-exercise-name');">Save</p>
                 </div>
 
-                <input type="text" autocomplete="off" placeholder="Exercise name" id="edited-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
+                <input type="text" autocomplete="off" placeholder="Exercise name" id="edited-exercise-name"
+                    class="crud-input" oninput="showOrHideSaveButton(event)">
 
                 <div class="choose-equipment-section">
                     <p>Equipment Type</p>
-                    
+
                     <div class="equipment-types">
                         @foreach ($equipment_types as $equipment)
                             <label>
                                 <span>{{ $equipment->name }}</span>
 
-                                <input type="radio" name="equipment-type" class="{{ $equipment->equipment_type_id }}-checkboxes" value={{ $equipment->equipment_type_id }}>
+                                <input type="radio" name="equipment-type"
+                                    class="{{ $equipment->equipment_type_id }}-checkboxes"
+                                    value={{ $equipment->equipment_type_id }}>
                             </label>
                         @endforeach
                     </div>
@@ -76,7 +87,9 @@
         </div>
 
         <header class="exercises-page-header">
-            <p class="add-exercise-p" onclick="setIdsForSaveButton('new-exercise-name', 'save-added-button'); openCustomPopUpModal('add-exercise-modal'); showOrHideSaveButtonByClick('new-exercise-name')">Add exercise</p>
+            <p class="add-exercise-p"
+                onclick="setIdsForSaveButton('new-exercise-name', 'save-added-button'); openCustomPopUpModal('add-exercise-modal'); showOrHideSaveButtonByClick('new-exercise-name')">
+                Add exercise</p>
 
             <p>Exercises</p>
 
@@ -84,7 +97,8 @@
         </header>
 
         <div class="main-content">
-            <label class="exercises-searchbar-container" onclick="setClearSearchAndInputId('clear-exercise-search-button', 'exercises-searchbar')">  
+            <label class="exercises-searchbar-container"
+                onclick="setClearSearchAndInputId('clear-exercise-search-button', 'exercises-searchbar')">
                 <div class="left-side">
                     <img src="{{ asset('images/search-icon.png') }}">
 
@@ -94,10 +108,12 @@
 
             <div class="exercises-list">
                 @foreach ($exercises as $exercise)
-                    <div exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row" onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}', '{{ $exercise->equipment_type_id }}')">
+                    <div exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row"
+                        onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}', '{{ $exercise->equipment_type_id }}')">
                         <div class="left-side">
                             <div class="image-container">
-                                <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}" class="{{ $exercise->image_url ? 'exercise-image' : 'placeholder-image' }}">
+                                <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}"
+                                    class="{{ $exercise->image_url ? 'exercise-image' : 'placeholder-image' }}">
                             </div>
 
                             <div class="name-and-muscle-group-container">
@@ -119,7 +135,8 @@
         <div id="specific-exercise-view-modal">
             <header>
                 <div>
-                    <img src="{{ asset('images/back-icon.png') }}" onclick="closeModal('specific-exercise-view-modal')" id="image">
+                    <img src="{{ asset('images/back-icon.png') }}" onclick="closeModal('specific-exercise-view-modal')"
+                        id="image">
                 </div>
 
                 <div>
@@ -132,9 +149,11 @@
             </header>
 
             <div class="edit-or-delete-section">
-                <p onclick="openPopupModal('general-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000')" class="delete">Delete</p>
+                <p onclick="openPopupModal('general-pop-up-modal', 'Delete exercise?', 'Deleting this exercise is permanent. Proceed anyways?', 'Cancel', 'Delete', '#171717', '#ff0000')"
+                    class="delete">Delete</p>
 
-                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipment(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name')" class="edit">Edit</p>
+                <p onclick="openCustomPopUpModal('edit-exercise-modal'); setCheckedEquipment(); setIdsForSaveButton('edited-exercise-name', 'save-edited-button');  showOrHideSaveButtonByClick('edited-exercise-name')"
+                    class="edit">Edit</p>
             </div>
 
             <div id="exercise-details-section"></div>

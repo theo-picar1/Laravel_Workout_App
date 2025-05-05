@@ -33,6 +33,12 @@ if (searchBar) {
     })
 }
 
+window.submitForm = function () {
+    let addExerciseForm = document.getElementById('add-exercise-form')
+    
+    if(addExerciseForm) { addExerciseForm.submit() }
+}
+
 // *************************************
 
 function formatExerciseName() {
