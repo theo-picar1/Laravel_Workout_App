@@ -13,6 +13,8 @@ class Exercises extends Model
 
     protected $primaryKey = 'exercise_id'; // Not just called id so I need to define it
 
+    public $timestamps = false; // So we dont't need to worry about updated_at and created_at
+
     protected $fillable = [
         'name',
         'equipment_type_id',

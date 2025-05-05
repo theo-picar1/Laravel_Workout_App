@@ -24,4 +24,3 @@ yarn-error.log
 .DS_Store
 resources/sass/app.css
 resources/sass/app.css.map
-resources/sass/theo-scss
