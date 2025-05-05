@@ -239,10 +239,10 @@ function searchExercisesByName(name) {
             exercise.style.display = "flex"
             clearSearchButton.style.display = "none"
         }
-        else if (exercise.getAttribute('exercise-name') === name) {
+        else if (exercise.getAttribute('exercise-name').toLowerCase() === name.toLowerCase()) {
             exercise.style.display = "flex"
         }
-        else if (exercise.getAttribute('exercise-name') !== name) {
+        else if (exercise.getAttribute('exercise-name').toLowerCase() !== name.toLowerCase()) {
             exercise.style.display = "none"
         }
     })

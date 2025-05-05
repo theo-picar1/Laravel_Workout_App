@@ -24,10 +24,10 @@
     
                     <p>Create new exercise</p>
     
-                    <p id="save-added-button" class="crud-save-button" onclick="closePopupModal('add-exercise-modal')">Save</p>
+                    <p id="save-added-button" class="crud-save-button" onclick="closePopupModal('add-exercise-modal'); clearInput('new-exercise-name')">Save</p>
                 </div>
 
-                <input type="text" placeholder="Exercise name" id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
+                <input type="text" autocomplete="off" placeholder="Exercise name" id="new-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
 
                 <div class="choose-equipment-section">
                     <p>Equipment Type</p>
@@ -57,7 +57,7 @@
                     <p id="save-edited-button" class="crud-save-button" onclick="closePopupModal('edit-exercise-modal'); clearInput('edited-exercise-name');">Save</p>
                 </div>
 
-                <input type="text" placeholder="Exercise name" id="edited-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
+                <input type="text" autocomplete="off" placeholder="Exercise name" id="edited-exercise-name" class="crud-input" oninput="showOrHideSaveButton(event)">
 
                 <div class="choose-equipment-section">
                     <p>Equipment Type</p>
@@ -76,7 +76,7 @@
         </div>
 
         <header class="exercises-page-header">
-            <p class="add-exercise-p" onclick="openCustomPopUpModal('add-exercise-modal')">Add exercise</p>
+            <p class="add-exercise-p" onclick="setIdsForSaveButton('new-exercise-name', 'save-added-button'); openCustomPopUpModal('add-exercise-modal'); showOrHideSaveButtonByClick('new-exercise-name')">Add exercise</p>
 
             <p>Exercises</p>
 
