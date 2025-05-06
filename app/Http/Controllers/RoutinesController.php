@@ -14,9 +14,9 @@ class RoutinesController extends Controller
 {
     public function index()
     {
-        $exercises = Routines::all();
+        $routines = Routines::all();
 
-        // It will be used in exercises.blade.php
+        // It will be used in routiness.blade.php
         return view('pages.workout', compact('routines'));
     }
 
@@ -31,5 +31,28 @@ class RoutinesController extends Controller
         Routines::create($validated);
 
         return redirect()->back()->with('success', 'Routine added successfully!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $routines = Routines::findOrFail($id);
+
+        $request->validate([
+            'routine_name' => 'required|string|max:255'
+        ]);
+
+        $routines->update([
+            'routine_name' => $request->input('routine_name')
+        ]);
+
+        return redirect()->back()->with('Update routine success', 'Routine updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $routines = Routines::findOrFail($id);
+        $routines->delete();
+
+        return redirect()->back()->with('Deleted routine success', 'Routine deleted successfully!');
     }
 }

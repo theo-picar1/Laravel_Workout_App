@@ -17,6 +17,9 @@ let exerciseId
 let exerciseName
 let exerciseInstructions
 
+let routineId
+let routineName
+
 let saveButton
 let input
 // ********** Event listeners **********
@@ -122,6 +125,37 @@ window.setCountToZero = function () {
     alreadyCalled = false
 }
 
+//Function to set the routine fields depending 
+window.setRoutineFields = function (selectedRoutineId, selectedRoutineName, modalToSetAttributes) {
+    routineId = selectedRoutineId
+    routineName = selectedRoutineName
+
+    let modal = document.getElementById(modalToSetAttributes)
+
+    modal.setAttribute('routineId', routineId)
+    modal.setAttribute('routineName', routineName)
+}
+
+// Function to finalise fields and call the corresponding route for editing a routine's name
+window.confirmDeleteRoutine = function () {
+    let modal = document.getElementById('delete-routine-pop-up-modal')
+    let routineId = modal.getAttribute('routineId') // This will be filled in from the function so there will be no errors, hopefully
+
+    let form = document.getElementById('delete-routine-form')
+    form.setAttribute('action', `/workout/${routineId}`) // then we set the action attribute in the form to match the route thing
+    form.submit()
+}
+
+// Function to delete the corresponding route
+window.confirmEditRoutine = function () {
+    let modal = document.getElementById('edit-routine-modal')
+    let routineId = modal.getAttribute('routineId') // This will be filled in from the function so there will be no errors, hopefully
+
+    let form = document.getElementById('edit-routine-form')
+    form.setAttribute('action', `/workout/${routineId}`) // then we set the action attribute in the form to match the route thing
+    form.submit()
+}
+
 // TIME FUNCTION (FOR WORKOUTS) Code by: ChatGPT
 function startStopwatch() {
     let timeElement = document.getElementById('time')
@@ -187,7 +221,6 @@ window.finaliseAndSubmit = function (textareaIds) {
 // Function to set the data attribute in the corresponding crud modal so we can either delete or edit the corresponding exercise the user chose
 window.setExerciseIdForCrudModals = function (modal, attribute) {
     document.getElementById(modal).setAttribute(attribute, exerciseId)
-    console.log("Attribute: ", attribute, " Exercise ID: ", exerciseId)
 }
 
 // Then we can delete
