@@ -9,19 +9,25 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = auth()->user();
+
+        // Update basic info first
         $user->update([
             'username' => $request->input('username'),
             'email' => $request->input('email'),
             'bio' => $request->input('bio'),
         ]);
 
-        if ($request->hasFile('profile_picture')) {
+        // Handle profile picture upload
+        if ($request->hasFile('profile_picture') && $request->file('profile_picture')->isValid()) {
             $image = $request->file('profile_picture');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
             $imageData = base64_encode(file_get_contents($image));
+            $imageType = $image->getClientMimeType(); // Get MIME type (e.g., "image/webp")
 
-            $user->profile_picture = $imageData;
-            $user->save();
+            // Update both fields at once
+            $user->update([
+                'profile_picture' => $imageData,
+                'profile_picture_type' => $imageType
+            ]);
         }
 
         return redirect()->back()->with('success', 'Profile updated successfully');
