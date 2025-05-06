@@ -28,7 +28,7 @@
 
                     <div class="user-profile-picture-section">
                         @if (auth()->user()->profile_picture == null)
-                            <img src="https://i.pravatar.cc/150?img=5" alt="Profile Picture" class="profile-pic">
+                            <img src="images/profile-icon.png" alt="Profile Picture" class="profile-pic">
                         @else
                             <img src="data:image/{{ auth()->user()->profile_picture_type }};base64,{{ auth()->user()->profile_picture }}"
                                 alt="Profile Picture" class="profile-pic">
@@ -59,9 +59,11 @@
                     <h2>Bio</h2>
 
                     <div class="user-bio-section">
-                        <p>
-                            {{ auth()->user()->bio }}
-                        </p>
+                        @if (auth()->user()->bio != null)
+                            <p>{{ auth()->user()->bio }}</p>
+                        @else
+                            <p>No bio</p>
+                        @endif
                     </div>
                 </div>
 
@@ -91,7 +93,7 @@
                     <div class="profile-picture-edit">
                         <div class="profile-pic-container">
                             @if (auth()->user()->profile_picture == null)
-                                <img src="https://i.pravatar.cc/150?img=5" alt="Profile Picture" class="profile-pic">
+                                <img src="images/profile-icon.png" alt="Profile Picture" class="profile-pic">
                             @else
                                 <img src="data:image/{{ auth()->user()->profile_picture_type }};base64,{{ auth()->user()->profile_picture }}"
                                     alt="Profile Picture" class="profile-pic">
@@ -132,80 +134,106 @@
                     </form>
                     <div class="action-buttons">
                         <button class="change-password-btn">Change Password</button>
-                        {{-- <div x-data id="logout">
-                            <button @click="$refs.logoutForm.submit()" class="logout-button">Logout</botton>
+                        <button class="delete-btn" onClick="openCustomPopUpModal('deleteAccountModal')">
+                            Delete Account
+                        </button>
 
-                                <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}"
-                                    style="display: none" hidden>
-                                    @csrf
-                                </form>
-                        </div> --}}
-                        <form class="delete-account-form" id="deleteAccountForm" method="POST"
-                            action="{{ route('profile.destroy') }}">
-                            @csrf
-                            @method('DELETE')
+                        <div id="deleteAccountModal" class="modal">
+                            <div onClick="closePopupModal('deleteAccountModal')"></div>
 
-                            {{-- <div class="delete-button-container">
-                                <button type="button" class="delete-btn" data-toggle="modal"
-                                    data-target="#confirmDeleteModal">Delete Account</button>
-                            </div> --}}
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h3 class="modal-title">Delete Your Account?</h3>
+                                    <p class="modal-text">This will permanently remove all your data. This action
+                                        cannot be
+                                        undone.</p>
+                                </div>
 
-                            <form id="deleteAccountForm" method="POST" action="{{ route('profile.destroy') }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-btn">Delete Account</button>
-                            </form>
-                        </form>
+                                <div class="modal-actions">
+                                    <button type="button" onClick="closePopupModal('deleteAccountModal')"
+                                        class="modal-button cancel-button">
+                                        Cancel
+                                    </button>
 
-                        {{-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
-                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Delete</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                    <form id="deleteAccountForm" method="POST" action="{{ route('profile.destroy') }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="modal-button delete-button">
+                                            Delete Account
                                         </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete your account?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="submit" form="deleteAccountForm"
-                                            class="btn btn-danger">Delete</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <footer id="profile-page-footer">
-        <a href="{{ route('pages.profile') }}" id="profile-href">
-            <img src="{{ asset('images/profile-icon.png') }}">
-            <p>Profile</p>
-        </a>
-        <a href="{{ route('pages.discover') }}">
-            <img src="{{ asset('images/globe-icon.png') }}">
-            <p>Discover</p>
-        </a>
-        <a href="{{ route('pages.workout') }}">
-            <img src="{{ asset('images/add-icon.png') }}">
-            <p>Workout</p>
-        </a>
-        <a href="{{ route('pages.exercises') }}">
-            <img src="{{ asset('images/weight-icon.png') }}">
-            <p>Exercises</p>
-        </a>
-        <a href="{{ route('pages.exercises') }}">
-            <img src="{{ asset('images/history-icon.png') }}">
-            <p>History</p>
-        </a>
-    </footer>
+            {{-- <!-- Button to trigger modal -->
+            <button class="confirm-password-btn" onclick="openCustomPopUpModal('password-modal')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                </svg>
+                Change Password
+            </button> --}}
+
+            {{-- <!-- Password Confirmation Modal -->
+            <div id="password-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#4CAF50"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg>
+                        <h3>Security Verification</h3>
+                        <p>For your security, please confirm your current password</p>
+                    </div>
+
+                    <form id="passwordForm">
+                        @csrf
+                        <div class="input-group">
+                            <input type="password" name="password" id="password-input" placeholder="Enter current password" required>
+                        </div>
+                        <p id="password-error" class="error-message"></p>
+                        <div class="modal-footer">
+                            <button type="button" onclick="closePopupModal('password-modal')" class="btn btn-outline">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Verify & Continue
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> --}}
+
+        </div>
+
+        <footer id="profile-page-footer">
+            <a href="{{ route('pages.profile') }}" id="profile-href">
+                <img src="{{ asset('images/profile-icon.png') }}">
+                <p>Profile</p>
+            </a>
+            <a href="{{ route('pages.discover') }}">
+                <img src="{{ asset('images/globe-icon.png') }}">
+                <p>Discover</p>
+            </a>
+            <a href="{{ route('pages.workout') }}">
+                <img src="{{ asset('images/add-icon.png') }}">
+                <p>Workout</p>
+            </a>
+            <a href="{{ route('pages.exercises') }}">
+                <img src="{{ asset('images/weight-icon.png') }}">
+                <p>Exercises</p>
+            </a>
+            <a href="{{ route('pages.exercises') }}">
+                <img src="{{ asset('images/history-icon.png') }}">
+                <p>History</p>
+            </a>
+        </footer>
     </div>
 @endsection

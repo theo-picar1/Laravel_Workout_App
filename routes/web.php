@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\Auth\PasswordVerificationController;
+
 Auth::routes();
 
 // Get index.blade.php inside the auth folder of views
@@ -50,11 +52,12 @@ Route::put('/exercises/{exercise}', [ExercisesController::class, 'update'])->nam
 // To delete the exercise
 Route::delete('/exercises/{id}', [ExercisesController::class, 'destroy'])->name('exercises.destroy');
 
-// To update profile
-Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 // To delete profile
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // To add a new routine 
 Route::post('/workout', [RoutinesController::class, 'store'])->name('routines.store');
+
+// Route::post('/verify-password', [PasswordVerificationController::class, 'verify'])->name('password.verify');

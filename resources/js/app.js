@@ -1,4 +1,5 @@
 import './bootstrap'
+import axios from 'axios';
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
@@ -93,7 +94,7 @@ let editInstructionCount = 0
 let alreadyCalled = false
 // Function to fill in the textarea inputs in the edit modal 
 window.fillEditTextAreas = function () {
-    if(alreadyCalled) return // Just to stop repeatedly filling the modal with text areas
+    if (alreadyCalled) return // Just to stop repeatedly filling the modal with text areas
 
     let container = document.getElementById('edit-instructions-container')
     let instructionsToPut = exerciseInstructions.match(/\d+\.\s.*?(?=\d+\.\s|$)/gs)?.map(step => step.replace(/^\d+\.\s/, '').trim()) || [] // Separate into paragraphs but I also remove the numbers in case of future errors
@@ -396,16 +397,61 @@ window.clearInput = function (inputId) {
     inputToClear.value = ""
 }
 
+let originalProfilePicSrc = null;
+
 window.toggleEditProfileModal = function () {
-    let modal = document.getElementById('edit-profile-container')
-    modal.style.display = (modal.style.display === 'none' || !modal.style.display) ? 'block' : 'none'
+    const form = document.getElementById('profileForm');
+    const profilePic = document.querySelector('.profile-pic-container .profile-pic');
+    const modal = document.getElementById('edit-profile-container');
+    const mainProfileSection = document.getElementById('user-profile-section');
 
-    modal = document.getElementById('user-profile-section')
-    modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block'
-}
+    // Toggle modal visibility
+    const isModalOpen = modal.style.display === 'block';
 
-document.getElementById('profile_picture').addEventListener('change', function () {
-    var img = document.querySelector('.profile-pic')
-    img.src = URL.createObjectURL(this.files[0])
-})
+    if (!isModalOpen) {
+        // Store the original image source when opening the modal
+        originalProfilePicSrc = profilePic.src;
+        modal.style.display = 'block';
+        mainProfileSection.style.display = 'none';
+    } else {
+        // Reset the image and form when closing the modal
+        if (originalProfilePicSrc) {
+            // Reset all profile picture previews
+            document.querySelectorAll('.profile-pic').forEach(img => {
+                img.src = originalProfilePicSrc;
+            });
+        }
 
+        form.reset(); // Reset the form fields
+        modal.style.display = 'none';
+        mainProfileSection.style.display = 'block';
+
+        // Clear any selected file
+        const fileInput = document.getElementById('profile_picture');
+        if (fileInput) {
+            fileInput.value = '';
+        }
+    }
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('profile_picture');
+    const previewImage = document.querySelector('.profile-pic-container .profile-pic');
+    const cameraIcon = document.querySelector('.change-photo-btn i');
+    
+    fileInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+            const objectUrl = URL.createObjectURL(e.target.files[0]);
+            previewImage.src = objectUrl;
+            
+            previewImage.onload = function() {
+                URL.revokeObjectURL(objectUrl);
+            };
+        }
+    });
+    
+    document.querySelector('.change-photo-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        fileInput.click();
+    });
+});
