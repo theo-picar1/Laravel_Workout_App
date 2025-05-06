@@ -32,6 +32,26 @@
         </div>
     </div>
 
+    {{-- Delete pop up modal --}}
+    <div class="pop-up-modal" id="delete-routine-pop-up-modal" routineId="" routineName="">
+        <div class="pop-up-modal-content">
+            <h4 id="delete-routine-pop-up-modal-title"></h4>
+
+            <p id="delete-routine-pop-up-modal-description"></p>
+
+            <div>
+                <button id="delete-routine-pop-up-modal-cancel-button" onclick="closePopupModal('delete-routine-pop-up-modal')"></button>
+
+                <button id="delete-routine-pop-up-modal-continue-button" onclick="confirmDeleteRoutine()"></button>
+            </div>
+
+            <form id="delete-routine-form" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+        </div>
+    </div>
+
     {{-- Start empty workout modal --}}
     <div id="start-empty-workout-modal">
         <div class="header">
@@ -57,262 +77,8 @@
 
         <p id="time">0:00:00</p>
 
-        <div class="exercises-list">
-            <div class="exercise">
-                <div class="exercise-header">
-                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable
-                        - Straight Bar)</p>
-
-                    <div
-                        onclick="openPopupModal('general-pop-up-modal', 'Remove exercise?', 'Are you sure you want to remove this exercise? You can add it again later.', 'Cancel', 'Remove', '#171717', '#ff0000')">
-                        <img src="{{ asset('images/remove-icon.png') }}">
-                    </div>
-                </div>
-
-                <div class="exercise-stats">
-                    <div class="columns set-number-column">
-                        <p>Set</p>
-
-                        <div>
-                            <p>1</p>
-                        </div>
-
-                        <div>
-                            <p>2</p>
-                        </div>
-
-                        <div>
-                            <p>3</p>
-                        </div>
-
-                        <div>
-                            <p>4</p>
-                        </div>
-
-                        <div>
-                            <p>5</p>
-                        </div>
-
-                        <div>
-                            <p>6</p>
-                        </div>
-                    </div>
-
-                    <div class="columns previous-stat-column">
-                        <p>Previous</p>
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-                    </div>
-
-                    <div class="columns kg-column">
-                        <p>KG</p>
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                    </div>
-
-                    <div class="columns reps-column">
-                        <p>Reps</p>
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                    </div>
-
-                    <div class="columns is-finished-column">
-                        <img src="{{ asset('images/check-icon.png') }}">
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-                    </div>
-                </div>
-
-                <div id="add-set-button">
-                    <img src="{{ asset('images/add-icon.png') }}">
-                    <p>Add Set</p>
-                </div>
-            </div>
-
-            <div class="exercise">
-                <div class="exercise-header">
-                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown
-                        (Cable - Straight Bar)</p>
-
-                    <div>
-                        <img src="{{ asset('images/remove-icon.png') }}">
-                    </div>
-                </div>
-
-                <div class="exercise-stats">
-                    <div class="columns set-number-column">
-                        <p>Set</p>
-
-                        <div>
-                            <p>1</p>
-                        </div>
-
-                        <div>
-                            <p>2</p>
-                        </div>
-
-                        <div>
-                            <p>3</p>
-                        </div>
-
-                        <div>
-                            <p>4</p>
-                        </div>
-
-                        <div>
-                            <p>5</p>
-                        </div>
-
-                        <div>
-                            <p>6</p>
-                        </div>
-                    </div>
-
-                    <div class="columns previous-stat-column">
-                        <p>Previous</p>
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-
-                        <div>
-                            <p>10kg x 10rps</p>
-                        </div>
-                    </div>
-
-                    <div class="columns kg-column">
-                        <p>KG</p>
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                    </div>
-
-                    <div class="columns reps-column">
-                        <p>Reps</p>
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                        <input type="number" placeholder="10" min="0" max="999">
-                    </div>
-
-                    <div class="columns is-finished-column">
-                        <img src="{{ asset('images/check-icon.png') }}">
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-
-                        <label>
-                            <input type="checkbox">
-                            <img src="{{ asset('images/check-icon.png') }}">
-                        </label>
-                    </div>
-                </div>
-
-                <div id="add-set-button">
-                    <img src="{{ asset('images/add-icon.png') }}">
-                    <p>Add Set</p>
-                </div>
-            </div>
-        </div>
+        {{-- For each of exercises here with weight, reps and sets --}}
+        <div class="exercises-list"></div> 
 
         <div class="buttons-section">
             <button id="add-exercises-button">Add Exercises</button>
@@ -322,10 +88,11 @@
         </div>
     </div>
 
+    {{-- Add routine modal --}}
     <div id="add-routine-modal" class="crud-modal">
         <div class="crud-content">
             <div class="title">
-                <div class="image-container" onclick="closePopupModal('add-routine-modal'); showOrHideSaveButtonByClick('new-routine-name')">
+                <div class="image-container" onclick="closePopupModal('add-routine-modal')">
                     <img src="{{ asset('images/close-icon 09.57.33.png') }}">
                 </div>
 
@@ -338,6 +105,28 @@
                 @csrf
 
                 <input type="text" class="crud-input" placeholder="Enter routine name" id="new-routine-name" name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
+            </form>
+        </div>
+    </div>
+
+    {{-- Edit routine modal --}}
+    <div id="edit-routine-modal" class="crud-modal" routineId="" routineName="">
+        <div class="crud-content">
+            <div class="title">
+                <div class="image-container" onclick="closePopupModal('edit-routine-modal'); showOrHideSaveButtonByClick('edit-routine-name')">
+                    <img src="{{ asset('images/close-icon 09.57.33.png') }}">
+                </div>
+
+                <h4>Edit routine</h4>
+
+                <button class="crud-save-button" id="edit-routine-save-button" onclick="confirmEditRoutine()">Save</button>
+            </div>
+
+            <form id="edit-routine-form" method="POST">
+                @csrf
+                @method('PUT')
+
+                <input type="text" class="crud-input" placeholder="Enter routine name" id="edit-routine-name" name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
             </form>
         </div>
     </div>
@@ -359,9 +148,18 @@
             <div class="routines-list">
                 @foreach ($routines as $routine)
                     <div class="routine">
+                        <div class="routine-pop-up-modal">
+                            <div></div>
+                        </div>
+
                         <div class="title">
                             <h2>{{ $routine->routine_name }}</h2>
-                            <img src="{{ asset('images/more-icon.png') }} ">
+
+                            <div style="display: flex; flex-direction: row; gap: 5px;">
+                                <img src="{{ asset('images/edit-icon.png') }}" onclick="openCustomPopUpModal('edit-routine-modal'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'edit-routine-modal'); setIdsForSaveButton('edit-routine-name', 'edit-routine-save-button')">
+
+                                <img src="{{ asset('images/remove-icon.png') }}" onclick="openPopupModal('delete-routine-pop-up-modal', 'Delete routine?', 'Deleting this routine is permanent. Proceed anyways?', 'Cancel', 'Remove', '#171717', '#ff0000'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'delete-routine-pop-up-modal')">
+                            </div>
                         </div>
 
                         <div class="exercises-preview">

@@ -60,4 +60,10 @@ Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.
 // To add a new routine 
 Route::post('/workout', [RoutinesController::class, 'store'])->name('routines.store');
 
+// To update a routine
+Route::put('/workout/{routineId}', [RoutinesController::class, 'update'])->name('routines.update');
+
+// To delete a routine
+Route::delete('/workout/{routineId}', [RoutinesController::class, 'destroy'])->name('routines.destroy');
+
 // Route::post('/verify-password', [PasswordVerificationController::class, 'verify'])->name('password.verify');

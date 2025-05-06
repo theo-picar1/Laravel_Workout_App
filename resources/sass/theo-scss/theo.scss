@@ -429,6 +429,12 @@ p {
             @include crud-modal-css();
         }
 
+        #edit-routine-modal {
+            @include crud-modal-css();
+
+            
+        }
+
         .pop-up-modal {
             @include pop-up-transition();
 
