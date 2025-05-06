@@ -236,9 +236,7 @@ window.showOrHideSaveButton = function (e) {
 }
 
 // Same as above but with a click of a button due to a bug
-window.showOrHideSaveButtonByClick = function (inputId) {
-    input = document.getElementById(inputId)
-
+window.showOrHideSaveButtonByClick = function () {
     if (input.value === "" || input.length < 1) {
         saveButton.style.pointerEvents = "none"
         saveButton.style.color = "#808080"
@@ -399,15 +397,15 @@ window.clearInput = function (inputId) {
 }
 
 window.toggleEditProfileModal = function () {
-    let modal = document.getElementById('edit-profile-container');
-    modal.style.display = (modal.style.display === 'none' || !modal.style.display) ? 'block' : 'none';
+    let modal = document.getElementById('edit-profile-container')
+    modal.style.display = (modal.style.display === 'none' || !modal.style.display) ? 'block' : 'none'
 
-    modal = document.getElementById('user-profile-section');
-    modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block';
+    modal = document.getElementById('user-profile-section')
+    modal.style.display = (modal.style.display === 'block' || !modal.style.display) ? 'none' : 'block'
 }
 
 document.getElementById('profile_picture').addEventListener('change', function () {
-    var img = document.querySelector('.profile-pic');
-    img.src = URL.createObjectURL(this.files[0]);
-});
+    var img = document.querySelector('.profile-pic')
+    img.src = URL.createObjectURL(this.files[0])
+})
 

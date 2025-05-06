@@ -9,8 +9,10 @@
             <p id="finish-workout-pop-up-modal-description"></p>
 
             <div>
-                <button id="finish-workout-pop-up-modal-cancel-button" onclick="closePopupModal('finish-workout-pop-up-modal')"></button>
-                <button id="finish-workout-pop-up-modal-continue-button" onclick="closeModal('start-empty-workout-modal'); closePopupModal('finish-workout-pop-up-modal')"></button>
+                <button id="finish-workout-pop-up-modal-cancel-button"
+                    onclick="closePopupModal('finish-workout-pop-up-modal')"></button>
+                <button id="finish-workout-pop-up-modal-continue-button"
+                    onclick="closeModal('start-empty-workout-modal'); closePopupModal('finish-workout-pop-up-modal')"></button>
             </div>
         </div>
     </div>
@@ -24,7 +26,8 @@
 
             <div>
                 <button id="general-pop-up-modal-cancel-button" onclick="closePopupModal('general-pop-up-modal')"></button>
-                <button id="general-pop-up-modal-continue-button" onclick="closePopupModal('general-pop-up-modal'); closeModal('start-empty-workout-modal')"></button>
+                <button id="general-pop-up-modal-continue-button"
+                    onclick="closePopupModal('general-pop-up-modal'); closeModal('start-empty-workout-modal')"></button>
             </div>
         </div>
     </div>
@@ -47,7 +50,8 @@
                         id="minimise-start-empty-workout-button">
                 </div>
 
-                <button onclick="openPopupModal('finish-workout-pop-up-modal', 'Finish workout?', 'Any inputs not filled in will be discarded. Would you like to continue?', 'Cancel', 'Finish', '#171717', '#81fe5e')">Finish</button>
+                <button
+                    onclick="openPopupModal('finish-workout-pop-up-modal', 'Finish workout?', 'Any inputs not filled in will be discarded. Would you like to continue?', 'Cancel', 'Finish', '#171717', '#81fe5e')">Finish</button>
             </div>
         </div>
 
@@ -56,9 +60,11 @@
         <div class="exercises-list">
             <div class="exercise">
                 <div class="exercise-header">
-                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable - Straight Bar)</p>
+                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable
+                        - Straight Bar)</p>
 
-                    <div onclick="openPopupModal('general-pop-up-modal', 'Remove exercise?', 'Are you sure you want to remove this exercise? You can add it again later.', 'Cancel', 'Remove', '#171717', '#ff0000')">
+                    <div
+                        onclick="openPopupModal('general-pop-up-modal', 'Remove exercise?', 'Are you sure you want to remove this exercise? You can add it again later.', 'Cancel', 'Remove', '#171717', '#ff0000')">
                         <img src="{{ asset('images/remove-icon.png') }}">
                     </div>
                 </div>
@@ -182,7 +188,8 @@
 
             <div class="exercise">
                 <div class="exercise-header">
-                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown (Cable - Straight Bar)</p>
+                    <p class="exercise-name" original-text="Triceps Pushdown (Cable - Straight Bar)">Triceps Pushdown
+                        (Cable - Straight Bar)</p>
 
                     <div>
                         <img src="{{ asset('images/remove-icon.png') }}">
@@ -309,7 +316,29 @@
 
         <div class="buttons-section">
             <button id="add-exercises-button">Add Exercises</button>
-            <button onclick="openPopupModal('general-pop-up-modal', 'Cancel workout?', 'Are you sure you want to cancel the workout? All progress will be lost!', 'Resume', 'Finish', '#171717', '#ff0000')">Cancel Workout</button>
+            <button
+                onclick="openPopupModal('general-pop-up-modal', 'Cancel workout?', 'Are you sure you want to cancel the workout? All progress will be lost!', 'Resume', 'Finish', '#171717', '#ff0000')">Cancel
+                Workout</button>
+        </div>
+    </div>
+
+    <div id="add-routine-modal" class="crud-modal">
+        <div class="crud-content">
+            <div class="title">
+                <div class="image-container" onclick="closePopupModal('add-routine-modal'); showOrHideSaveButtonByClick('new-routine-name')">
+                    <img src="{{ asset('images/close-icon 09.57.33.png') }}">
+                </div>
+
+                <h4>Add new routine</h4>
+
+                <button type="submit" form="add-routine-form" class="crud-save-button" id="add-routine-save-button">Save</button>
+            </div>
+
+            <form id="add-routine-form" method="POST" action="{{ route('routines.store') }}">
+                @csrf
+
+                <input type="text" class="crud-input" placeholder="Enter routine name" id="new-routine-name" name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
+            </form>
         </div>
     </div>
 
@@ -324,90 +353,26 @@
         <div class="routines-section">
             <div class="title">
                 <h2>Routines</h2>
-                <button>Add Routine</button>
+                <button onclick="openCustomPopUpModal('add-routine-modal'); setIdsForSaveButton('new-routine-name', 'add-routine-save-button')">Add Routine</button>
             </div>
 
             <div class="routines-list">
-                {{-- for-loop for this div --}}
-                <div class="routine">
-                    <div class="title">
-                        <h2>title</h2>
-                        <img src="{{ asset('images/more-icon.png') }} ">
+                @foreach ($routines as $routine)
+                    <div class="routine">
+                        <div class="title">
+                            <h2>{{ $routine->routine_name }}</h2>
+                            <img src="{{ asset('images/more-icon.png') }} ">
+                        </div>
+
+                        <div class="exercises-preview">
+                            @foreach ($routine->exercises as $exercise)
+                                <p>{{ $exercise->name }}</p>
+                            @endforeach
+                        </div>
+
+                        <button>Start routine</button>
                     </div>
-
-                    <div class="exercises-preview">
-                        <p>exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                    </div>
-
-                    <button>Start routine</button>
-                </div>
-
-                <div class="routine">
-                    <div class="title">
-                        <h2>title</h2>
-                        <img src="{{ asset('images/more-icon.png') }} ">
-                    </div>
-
-                    <div class="exercises-preview">
-                        <p>exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                    </div>
-
-                    <button>Start routine</button>
-                </div>
-
-                <div class="routine">
-                    <div class="title">
-                        <h2>title</h2>
-                        <img src="{{ asset('images/more-icon.png') }} ">
-                    </div>
-
-                    <div class="exercises-preview">
-                        <p>exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                    </div>
-
-                    <button>Start routine</button>
-                </div>
-
-                <div class="routine">
-                    <div class="title">
-                        <h2>title</h2>
-                        <img src="{{ asset('images/more-icon.png') }} ">
-                    </div>
-
-                    <div class="exercises-preview">
-                        <p>exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                        <p> , exercise</p>
-                    </div>
-
-                    <button>Start routine</button>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

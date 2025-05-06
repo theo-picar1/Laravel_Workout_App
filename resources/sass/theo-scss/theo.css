@@ -196,6 +196,170 @@ p {
     color: #ffffff;
     scrollbar-width: none;
   }
+  .main-pages #add-routine-modal {
+    position: fixed;
+    transform: scale(0.7);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: transform 0.2s ease-out, opacity 0.1s ease;
+    z-index: 11;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages #add-routine-modal.openPopup {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    background-color: rgba(0, 0, 0, 0.5019607843);
+  }
+  .main-pages #add-routine-modal .crud-content {
+    background-color: #262626;
+    width: 90%;
+    padding: 20px;
+    border-radius: 15px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 15px;
+  }
+  .main-pages #add-routine-modal .crud-content .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages #add-routine-modal .crud-content .title .image-container {
+    background-color: #171717;
+    padding: 2px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: unset;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .main-pages #add-routine-modal .crud-content .title .image-container img {
+    width: 20px;
+    height: 20px;
+  }
+  .main-pages #add-routine-modal .crud-content .title .crud-save-button {
+    color: #808080;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 14px;
+  }
+  .main-pages #add-routine-modal .crud-content form .crud-input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+    border: none;
+    background-color: #171717;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+  .main-pages #add-routine-modal .crud-content form .crud-input:focus {
+    border-color: #ffffff;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section {
+    margin-top: 10px;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section .equipment-types {
+    display: flex;
+    flex-direction: row;
+    justify-content: unset;
+    align-items: center;
+    gap: 10px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    margin-top: 5px;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section .equipment-types label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    border-radius: 15px;
+    color: #ffffff;
+    padding: 0 15px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section .equipment-types label input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    height: inherit;
+    position: absolute;
+    border-radius: 15px;
+    border: thin solid #ffffff;
+    cursor: pointer;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section .equipment-types label input:checked {
+    border: 2px solid #81fe5e;
+    z-index: 10;
+  }
+  .main-pages #add-routine-modal .crud-content form .choose-equipment-section .equipment-types label span {
+    z-index: 11;
+    text-wrap: nowrap;
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 10px;
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section h4 {
+    font-weight: normal;
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section .instructions-container {
+    margin-top: -5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: unset;
+    gap: 5px;
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section .instructions-container textarea {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #262626;
+    color: rgb(230, 230, 230);
+    outline: none;
+    font-family: "Times New Roman", Times, serif;
+    background-color: #171717;
+    border: 2px solid rgba(0, 0, 0, 0);
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section .instructions-container textarea:focus {
+    border: 2px solid #ffffff;
+  }
+  .main-pages #add-routine-modal .crud-content form .instructions-section .instructions-container .mandatory-textarea {
+    resize: none;
+  }
   .main-pages .pop-up-modal {
     position: fixed;
     transform: scale(0.7);

@@ -425,6 +425,10 @@ p {
         scrollbar-width: none;
 
         // ********** MODALS CSS **********
+        #add-routine-modal {
+            @include crud-modal-css();
+        }
+
         .pop-up-modal {
             @include pop-up-transition();
 
