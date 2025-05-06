@@ -27,4 +27,10 @@ class Exercises extends Model
     {
         return $this->belongsTo(EquipmentTypes::class, 'equipment_type_id');
     }
+
+    public function routines()
+    {
+        return $this->belongsToMany(Routines::class, 'exercise_routine', 'exercise_id', 'routine_id')
+                    ->withPivot('weight', 'sets', 'reps')->withTimestamps();
+    }
 }

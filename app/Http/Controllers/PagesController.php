@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Exercises;
 use App\Models\EquipmentTypes;
+use App\Models\Routines;
 
 class PagesController extends Controller
 {
-    // This function will return the workout page view
+    // This function will return the workout page view along with data from the routines and exercise_routine table
     public function workoutPage() {
-        return view('pages.workout');
+        $routines = Routines::all();
+
+        return view('pages.workout', compact('routines'));
     }
 
     // Returns the authentication view page

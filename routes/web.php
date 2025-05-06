@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EquipmentTypesController;
+use App\Http\Controllers\RoutinesController;
 use Illuminate\Support\Facades\Route;
 
 // Basically importing the Controllers to make use of them. Like Java
@@ -26,8 +27,6 @@ Route::get('/', function () {
 // Gets the authentication page with login and register forms
 Route::get('/authentication', [PagesController::class, 'authenticationPage'])->name('auth.index');
 
-// Get the workout page within the pages folder. The return view is defined in WorkoutController
-// '/workout' is the URL (for the user), 'index' is the method name in the PagesController', and 'pages.workout' is just the name for the route. Can be anything as long as they match
 Route::get('/workout', [PagesController::class, 'workoutPage'])->name('pages.workout');
 
 Route::get('/profile', [PagesController::class, 'profilePage'])->name('pages.profile');
@@ -51,6 +50,11 @@ Route::put('/exercises/{exercise}', [ExercisesController::class, 'update'])->nam
 // To delete the exercise
 Route::delete('/exercises/{id}', [ExercisesController::class, 'destroy'])->name('exercises.destroy');
 
+// To update profile
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
+// To delete profile
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+// To add a new routine 
+Route::post('/workout', [RoutinesController::class, 'store'])->name('routines.store');
