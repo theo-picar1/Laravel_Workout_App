@@ -27,28 +27,24 @@
                     <h2>Account Details</h2>
 
                     <div class="user-profile-picture-section">
-                        @if (auth()->user()->profile_picture == null)
+                        @if ($user->profile_picture == null)
                             <img src="images/profile-icon.png" alt="Profile Picture" class="profile-pic">
                         @else
-                            <img src="data:image/{{ auth()->user()->profile_picture_type }};base64,{{ auth()->user()->profile_picture }}"
+                            <img src="data:image/{{ $user->profile_picture_type }};base64,{{ $user->profile_picture }}"
                                 alt="Profile Picture" class="profile-pic">
                         @endif
 
                         <div class="user-profile-details">
-                            <p>{{ auth()->user()->username }}</p>
+                            <p>{{ $user->username }}</p>
 
                             <div class="user-profile-stats">
-                                <div>
-                                    <p class="title">Workouts</p>
-                                    <p>0</p>
-                                </div>
-                                <div>
+                                                                <div>
                                     <p class="title">Followers</p>
-                                    <p>9</p>
+                                    <p>{{ $user->followers()->count() }}</p>
                                 </div>
                                 <div>
                                     <p class="title">Following</p>
-                                    <p>11</p>
+                                    <p>{{ $user->following()->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +55,8 @@
                     <h2>Bio</h2>
 
                     <div class="user-bio-section">
-                        @if (auth()->user()->bio != null)
-                            <p>{{ auth()->user()->bio }}</p>
+                        @if ($user->bio != null)
+                            <p>{{ $user->bio }}</p>
                         @else
                             <p>No bio</p>
                         @endif

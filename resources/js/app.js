@@ -552,3 +552,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+$('.follow-form').submit(function (e) {
+    e.preventDefault();
+    const form = $(this);
+    const button = form.find('.follow-btn');
+
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: form.serialize(),
+        success: function (data) {
+            if (data.status === 'followed') {
+                button.text('Unfollow');
+            } else {
+                button.text('Follow');
+            }
+            $('.followers-count').text(data.followers_count);
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+        }
+    });
+});

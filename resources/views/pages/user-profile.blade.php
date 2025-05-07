@@ -24,18 +24,23 @@
 
                             <div class="user-profile-stats">
                                 <div>
-                                    <p class="title">Workouts</p>
-                                    <p>0</p>
-                                </div>
-                                <div>
                                     <p class="title">Followers</p>
-                                    <p>9</p>
+                                    <p>{{ $user->followers()->count() }}</p>
                                 </div>
                                 <div>
                                     <p class="title">Following</p>
-                                    <p>11</p>
+                                    <p>{{ $user->following()->count() }}</p>
                                 </div>
                             </div>
+
+                            @if (auth()->id() !== $user->id)
+                                <form method="POST" action="{{ route('follow.toggle', $user->id) }}" class="follow-form">
+                                    @csrf
+                                    <button type="submit" class="follow-btn">
+                                        {{ auth()->user()->following->contains($user->id) ? 'Unfollow' : 'Follow' }}
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -69,6 +74,28 @@
                             <h3>Total Weight</h3>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="discover-athletes">
+            <h2>Discover athletes</h2>
+            <div class="athletes-scroll-container">
+                <div class="athletes-grid">
+                    @foreach ($users as $athlete)
+                        <div class="athlete-card">
+                            <div class="profile-pic">
+                                <img src="{{ $athlete->profile_picture ?? asset('images/profile-icon.png') }}" alt="{{ $athlete->username }}">
+                            </div>
+                            <span class="username">{{ $athlete->username }}</span>
+                            <form method="POST" action="{{ route('follow.toggle', $athlete->id) }}" class="follow-form">
+                                @csrf
+                                <button type="submit" class="follow-btn">
+                                    {{ auth()->user()->following->contains($athlete->id) ? 'Unfollow' : 'Follow' }}
+                                </button>
+                            </form>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

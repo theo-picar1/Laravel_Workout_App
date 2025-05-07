@@ -13,6 +13,7 @@ use App\Http\Controllers\ExercisesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\FollowController;
 
 Auth::routes();
 
@@ -35,7 +36,7 @@ Route::get('/profile', [PagesController::class, 'profilePage'])->name('pages.pro
 
 Route::get('/exercises', [PagesController::class, 'exercisesPage'])->name('pages.exercises');
 
-Route::get('/discover', [PostController::class, 'index'])->name('pages.discover');
+Route::get('/discover', [PagesController::class, 'discover'])->name('pages.discover');
 
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
@@ -73,3 +74,5 @@ Route::post('/posts/{post}/like', [LikeController::class, 'toggleLike'])->name('
 Route::resource('posts', PostController::class)->middleware('auth');
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
+Route::post('/follow/{user}', [FollowController::class, 'toggleFollow'])->name('follow.toggle');

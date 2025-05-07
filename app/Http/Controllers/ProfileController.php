@@ -43,10 +43,11 @@ class ProfileController extends Controller
 
     public function show(User $user)
     {
-        // Fetch the user's posts and other related data
-        $posts = $user->posts()->with('likes')->latest()->get();
+        // Fetch all users except the currently authenticated user
+        $users = User::where('id', '!=', auth()->id())->get();
 
-        return view('pages.user-profile', compact('user', 'posts'));
+        // Pass the clicked user and other users to the view
+        return view('pages.user-profile', compact('user', 'users'));
     }
 }
 
