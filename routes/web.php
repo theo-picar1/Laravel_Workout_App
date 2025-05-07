@@ -41,7 +41,7 @@ Route::get('/discover', [PagesController::class, 'discoverPage'])->name('pages.d
 Auth::routes();
 
 // For logging in a user
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 // To add a new exercise to the database
 Route::post('/exercises', [ExercisesController::class, 'store'])->name('exercises.store');
