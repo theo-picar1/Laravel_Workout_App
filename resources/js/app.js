@@ -488,3 +488,67 @@ document.addEventListener('DOMContentLoaded', function() {
         fileInput.click();
     });
 });
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('.like-form').submit(function(e) {
+    e.preventDefault();
+    const form = $(this);
+    const likeButton = form.find('.like-btn');
+
+    // Add a loading state
+    likeButton.prop('disabled', true).addClass('loading');
+
+    $.ajax({
+        type: "POST",
+        url: form.attr('action'),
+        data: form.serialize(),
+        success: function(data) {
+            form.find('.like-count').text(data.like_count);
+
+            if (data.status === 'liked') {
+                likeButton.addClass('liked');
+            } else {
+                likeButton.removeClass('liked');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+        },
+        complete: function() {
+            // Remove the loading state
+            likeButton.prop('disabled', false).removeClass('loading');
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.like-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const postId = this.getAttribute('data-post-id');
+            const likeCountSpan = this.querySelector('.like-count');
+
+            fetch(`/posts/${postId}/like`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'liked') {
+                        this.classList.add('liked'); // Optional: Add a visual indicator
+                    } else {
+                        this.classList.remove('liked');
+                    }
+                    likeCountSpan.textContent = data.like_count; // Update the like count
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+});

@@ -4,6 +4,11 @@
     <div class="discover-page">
 
     @section('content')
+
+        <head>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+        </head>
         <div class="connect-container">
             <header>
                 <p>Discover</p>
@@ -79,7 +84,9 @@
                         <p class="workout-description">18 sets of Goblet Squat</p>
                     </div>
                     <div class="post-footer">
-                        <span class="likes">18 likes</span>
+                        {{-- <button class="like-btn" data-post-id="{{ $post->id }}">
+                            <i class="fas fa-heart"></i> <span class="like-count">{{ $post->likes->count() }}</span> Likes
+                        </button> --}}
                         <span class="comments">0 comments</span>
                     </div>
                 </div>
@@ -108,10 +115,42 @@
                         <p class="workout-description">18 sets of Goblet Squat</p>
                     </div>
                     <div class="post-footer">
-                        <span class="likes">18 likes</span>
+                        {{-- <button class="like-btn" data-post-id="{{ $post->id }}">
+                            <i class="fas fa-heart"></i> <span class="like-count">{{ $post->likes->count() }}</span> Likes
+                        </button> --}}
                         <span class="comments">0 comments</span>
                     </div>
                 </div>
+                @foreach ($posts as $post)
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-user">
+                                <div class="post-profile-pic">
+                                    <img src="{{ $post->user->profile_picture ?? 'images/profile-icon.png' }}"
+                                        alt="{{ $post->user->username }}">
+                                </div>
+                                <span class="post-username">{{ $post->user->username }}</span>
+                            </div>
+                            <span class="post-date">{{ $post->created_at->format('F j, Y') }}</span>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="routine-name">{{ $post->title }}</h3>
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
+                            @endif
+                            <p>{{ $post->content }}</p>
+                        </div>
+                        <div class="post-footer">
+                            <form method="POST" action="{{ route('posts.like', $post->id) }}" class="like-form">
+                                @csrf
+                                <button type="submit" class="like-btn {{ $post->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}">
+                                    <i class="fas fa-heart"></i> <span class="like-count">{{ $post->likes->count() }}</span> Likes
+                                </button>
+                            </form>
+                            {{-- <span class="comments">{{ $post->comments->count() }} comments</span> --}}
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
 
@@ -138,4 +177,25 @@
             </a>
         </footer>
     </div>
+
+    <div class="create-post-page">
+        <h1>Create a New Post</h1>
+        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+            @csrf
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="content">Content</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <div>
+                <label for="image">Image (optional)</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br><br>
 @endsection

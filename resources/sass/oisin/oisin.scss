@@ -626,6 +626,15 @@ $translucent: #00000080;
     @include pop-up-transition();
 }
 
+.like-btn.liked {
+    color: red;
+}
+
+.like-btn.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 // :root {
 //     --primary: #4CAF50;
 //     --primary-dark: #3d8b40;
