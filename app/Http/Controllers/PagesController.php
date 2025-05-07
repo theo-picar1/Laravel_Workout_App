@@ -42,18 +42,12 @@ class PagesController extends Controller
 
     // Returns the profile page view
     public function discoverPage() {
-        return view('pages.discover');
-    }
-
-    public function discover()
-    {
         // Fetch all users except the currently authenticated user
         $users = User::where('id', '!=', auth()->id())->get();
 
         // Fetch all posts with their related user and likes
         $posts = Post::with(['user', 'likes'])->latest()->get();
 
-        // Pass the users and posts to the view
         return view('pages.discover', compact('users', 'posts'));
     }
 }
