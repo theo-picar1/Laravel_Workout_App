@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -38,6 +39,14 @@ class ProfileController extends Controller
         auth()->user()->delete();
 
         return redirect()->route('login')->with('success', 'Account deleted successfully');
+    }
+
+    public function show(User $user)
+    {
+        // Fetch the user's posts and other related data
+        $posts = $user->posts()->with('likes')->latest()->get();
+
+        return view('pages.user-profile', compact('user', 'posts'));
     }
 }
 

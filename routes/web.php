@@ -71,3 +71,5 @@ Route::delete('/workout/{routineId}', [RoutinesController::class, 'destroy'])->n
 Route::post('/posts/{post}/like', [LikeController::class, 'toggleLike'])->name('posts.like');
 
 Route::resource('posts', PostController::class)->middleware('auth');
+
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');

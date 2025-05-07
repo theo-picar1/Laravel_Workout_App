@@ -126,10 +126,13 @@
                         <div class="post-header">
                             <div class="post-user">
                                 <div class="post-profile-pic">
-                                    <img src="{{ $post->user->profile_picture ?? 'images/profile-icon.png' }}"
-                                        alt="{{ $post->user->username }}">
+                                    <a href="{{ route('profile.show', $post->user->id) }}">
+                                        <img src="{{ $post->user->profile_picture ?? asset('images/profile-icon.png') }}" alt="{{ $post->user->username }}">
+                                    </a>
                                 </div>
-                                <span class="post-username">{{ $post->user->username }}</span>
+                                <span class="post-username">
+                                    <a href="{{ route('profile.show', $post->user->id) }}">{{ $post->user->username }}</a>
+                                </span>
                             </div>
                             <span class="post-date">{{ $post->created_at->format('F j, Y') }}</span>
                         </div>
