@@ -12,6 +12,13 @@ class UsersTableSeeder extends Seeder
     {
         $testUsers = [
             [
+                'username' => 'coolGuy19',
+                'email' => 'coolGuy19@example.com',
+                'password' => Hash::make('password'),
+                'bio' => 'I am coolGuy19.',
+                'profile_picture' => "https://i.pravatar.cc/150?img=3",
+            ],
+            [
                 'username' => 'coolGirl29',
                 'email' => 'coolGirl29@example.com',
                 'password' => Hash::make('password'),
