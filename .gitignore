@@ -21,6 +21,4 @@ yarn-error.log
 /.vscode
 /.zed
 .DS_Store
-resources/sass/app.css
-resources/sass/app.css.map
 resources/sass/oisin/oisin.css.map
