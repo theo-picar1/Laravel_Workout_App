@@ -7,6 +7,8 @@
     All modals that use pop-up-transition mixin: 11
     footer: 10
     #clear-exercise-search-button: 5
+    #edit-routine-modal: 12
+    #add-exercises-list (workout page): 13
 */
 
 // To get rid of up and down arrows for number inputs
@@ -430,9 +432,124 @@ p {
         }
 
         #edit-routine-modal {
-            @include crud-modal-css();
+            position:fixed;
+            bottom: 0;
+            transform: translateY(1000px);
+            background-color: $website-dark-gray;
+            height: 75vh;
+            z-index: 12;
+            transition: transform 0.3s ease;
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
 
-            
+            &.openOrClose {
+                transform: translateY(0);
+            }
+
+            &.minimise {
+                transform: translateY(80%);
+            }
+
+            .header {
+                @include display-flex(row, space-between, center, 0);
+
+                .right-side {
+                    @include display-flex(row, unset, center, 10px);
+
+                    div {
+                        padding: 3px;
+                        background-color: $website-darker-gray;
+                        border-radius: 50%;
+                        @include display-flex(unset, center, center, 0);
+                    }
+
+                    button {
+                        @include text-input-base-css(auto, 10px);
+                        background-color: $website-green;
+                        border: none;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .buttons-section {
+                margin-top: 20px;
+                @include display-flex(column, unset, center, 10px);
+
+                button {
+                    width: 100%;
+                    @include app-button-base-css(10px 0, 16px, $website-darker-gray, $website-white, 100%, $website-dark-gray, $website-light-gray);
+                }
+            }
+        }
+
+        #add-exercise-list {
+            @include pop-up-transition();
+            z-index:13;
+            @include display-flex(unset, center, center, 0);
+
+            .content {
+                background-color: $website-dark-gray;
+                border-radius: 15px;
+                height: 75vh;
+                width: 90%;
+                overflow-y: scroll;
+                padding: 20px;
+                scrollbar-width: none;
+                margin: auto;
+                @include display-flex(column, unset, unset, 15px);
+
+                .close-add-exercise-list {
+                    width: 100%;
+                    @include app-button-base-css(10px 0, 16px, $website-red, $website-white, 100%, $website-dark-red, $website-light-red);
+                }
+
+                .exercises-searchbar-container {
+                    @include display-flex(row, unset, center, 0);
+                    width: 100%;
+
+                    div {
+                        @include display-flex(row, unset, center, 5px);
+                        width: 100%;
+
+                        input {
+                            @include text-input-base-css(100%, 10px);
+                            background-color: $website-darker-gray;
+                            border: none;
+                        }
+                    }
+                }
+
+                .exercises-list {
+                    @include display-flex(column, unset, unset, 10px);
+                    
+                    .exercise {
+                        @include display-flex(row, space-between, center, 0);
+                        border-bottom: thin solid $website-white;
+                        padding: 10px 0;
+
+                        .left-side {
+                            @include display-flex(row, unset, center, 10px);
+
+                            .image-container {
+                                padding: 3px;
+                                background-color: $website-white;
+                                border-radius: 50%;
+                                @include display-flex(unset, center, center, 0);
+
+                                img {
+                                    filter: $website-white-to-black;
+                                }
+                            }
+
+                            .name-and-equipment-container {
+                                @include display-flex(column, unset, unset, 5px);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .pop-up-modal {

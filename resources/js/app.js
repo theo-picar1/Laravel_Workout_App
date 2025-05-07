@@ -1,5 +1,5 @@
 import './bootstrap'
-import axios from 'axios';
+import axios from 'axios'
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
@@ -430,107 +430,107 @@ window.clearInput = function (inputId) {
     inputToClear.value = ""
 }
 
-let originalProfilePicSrc = null;
+let originalProfilePicSrc = null
 
 window.toggleEditProfileModal = function () {
-    const form = document.getElementById('profileForm');
-    const profilePic = document.querySelector('.profile-pic-container .profile-pic');
-    const modal = document.getElementById('edit-profile-container');
-    const mainProfileSection = document.getElementById('user-profile-section');
+    const form = document.getElementById('profileForm')
+    const profilePic = document.querySelector('.profile-pic-container .profile-pic')
+    const modal = document.getElementById('edit-profile-container')
+    const mainProfileSection = document.getElementById('user-profile-section')
 
     // Toggle modal visibility
-    const isModalOpen = modal.style.display === 'block';
+    const isModalOpen = modal.style.display === 'block'
 
     if (!isModalOpen) {
         // Store the original image source when opening the modal
-        originalProfilePicSrc = profilePic.src;
-        modal.style.display = 'block';
-        mainProfileSection.style.display = 'none';
+        originalProfilePicSrc = profilePic.src
+        modal.style.display = 'block'
+        mainProfileSection.style.display = 'none'
     } else {
         // Reset the image and form when closing the modal
         if (originalProfilePicSrc) {
             // Reset all profile picture previews
             document.querySelectorAll('.profile-pic').forEach(img => {
-                img.src = originalProfilePicSrc;
-            });
+                img.src = originalProfilePicSrc
+            })
         }
 
-        form.reset(); // Reset the form fields
-        modal.style.display = 'none';
-        mainProfileSection.style.display = 'block';
+        form.reset() // Reset the form fields
+        modal.style.display = 'none'
+        mainProfileSection.style.display = 'block'
 
         // Clear any selected file
-        const fileInput = document.getElementById('profile_picture');
+        const fileInput = document.getElementById('profile_picture')
         if (fileInput) {
-            fileInput.value = '';
+            fileInput.value = ''
         }
     }
-};
+}
 
 document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('profile_picture');
-    const previewImage = document.querySelector('.profile-pic-container .profile-pic');
-    const cameraIcon = document.querySelector('.change-photo-btn i');
+    const fileInput = document.getElementById('profile_picture')
+    const previewImage = document.querySelector('.profile-pic-container .profile-pic')
+    const cameraIcon = document.querySelector('.change-photo-btn i')
     
     fileInput.addEventListener('change', function(e) {
         if (e.target.files && e.target.files[0]) {
-            const objectUrl = URL.createObjectURL(e.target.files[0]);
-            previewImage.src = objectUrl;
+            const objectUrl = URL.createObjectURL(e.target.files[0])
+            previewImage.src = objectUrl
             
             previewImage.onload = function() {
-                URL.revokeObjectURL(objectUrl);
-            };
+                URL.revokeObjectURL(objectUrl)
+            }
         }
-    });
+    })
     
     document.querySelector('.change-photo-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        fileInput.click();
-    });
-});
+        e.preventDefault()
+        fileInput.click()
+    })
+})
 
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-});
+})
 
 $('.like-form').submit(function(e) {
-    e.preventDefault();
-    const form = $(this);
-    const likeButton = form.find('.like-btn');
+    e.preventDefault()
+    const form = $(this)
+    const likeButton = form.find('.like-btn')
 
     // Add a loading state
-    likeButton.prop('disabled', true).addClass('loading');
+    likeButton.prop('disabled', true).addClass('loading')
 
     $.ajax({
         type: "POST",
         url: form.attr('action'),
         data: form.serialize(),
         success: function(data) {
-            form.find('.like-count').text(data.like_count);
+            form.find('.like-count').text(data.like_count)
 
             if (data.status === 'liked') {
-                likeButton.addClass('liked');
+                likeButton.addClass('liked')
             } else {
-                likeButton.removeClass('liked');
+                likeButton.removeClass('liked')
             }
         },
         error: function(xhr, status, error) {
-            console.error('Error:', error);
+            console.error('Error:', error)
         },
         complete: function() {
             // Remove the loading state
-            likeButton.prop('disabled', false).removeClass('loading');
+            likeButton.prop('disabled', false).removeClass('loading')
         }
-    });
-});
+    })
+})
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.like-btn').forEach(button => {
         button.addEventListener('click', function () {
-            const postId = this.getAttribute('data-post-id');
-            const likeCountSpan = this.querySelector('.like-count');
+            const postId = this.getAttribute('data-post-id')
+            const likeCountSpan = this.querySelector('.like-count')
 
             fetch(`/posts/${postId}/like`, {
                 method: 'POST',
@@ -542,21 +542,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'liked') {
-                        this.classList.add('liked'); // Optional: Add a visual indicator
+                        this.classList.add('liked') // Optional: Add a visual indicator
                     } else {
-                        this.classList.remove('liked');
+                        this.classList.remove('liked')
                     }
-                    likeCountSpan.textContent = data.like_count; // Update the like count
+                    likeCountSpan.textContent = data.like_count // Update the like count
                 })
-                .catch(error => console.error('Error:', error));
-        });
-    });
-});
+                .catch(error => console.error('Error:', error))
+        })
+    })
+})
 
 $('.follow-form').submit(function (e) {
-    e.preventDefault();
-    const form = $(this);
-    const button = form.find('.follow-btn');
+    e.preventDefault()
+    const form = $(this)
+    const button = form.find('.follow-btn')
 
     $.ajax({
         type: 'POST',
@@ -564,14 +564,14 @@ $('.follow-form').submit(function (e) {
         data: form.serialize(),
         success: function (data) {
             if (data.status === 'followed') {
-                button.text('Unfollow');
+                button.text('Unfollow')
             } else {
-                button.text('Follow');
+                button.text('Follow')
             }
-            $('.followers-count').text(data.followers_count);
+            $('.followers-count').text(data.followers_count)
         },
         error: function (xhr) {
-            console.error(xhr.responseText);
+            console.error(xhr.responseText)
         }
-    });
-});
+    })
+})
