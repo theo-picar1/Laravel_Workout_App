@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Exercises;
 use App\Models\EquipmentTypes;
 use App\Models\Routines;
+use App\Models\User;
+use App\Models\Post;
 
 class PagesController extends Controller
 {
@@ -22,8 +24,12 @@ class PagesController extends Controller
     }
 
     // Returns the profile page view
-    public function profilePage() {
-        return view('pages.profile');
+    public function profilePage()
+    {
+        $user = auth()->user();
+
+        // Pass the authenticated user to the view
+        return view('pages.profile', compact('user'));
     }
 
     // Returns the exercises page view along with data from the exercises and quipment-types tables
@@ -37,5 +43,17 @@ class PagesController extends Controller
     // Returns the profile page view
     public function discoverPage() {
         return view('pages.discover');
+    }
+
+    public function discover()
+    {
+        // Fetch all users except the currently authenticated user
+        $users = User::where('id', '!=', auth()->id())->get();
+
+        // Fetch all posts with their related user and likes
+        $posts = Post::with(['user', 'likes'])->latest()->get();
+
+        // Pass the users and posts to the view
+        return view('pages.discover', compact('users', 'posts'));
     }
 }
