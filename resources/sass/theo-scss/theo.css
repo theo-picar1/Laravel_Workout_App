@@ -1062,6 +1062,8 @@ p {
     height: 75px;
     background-color: #ff0000;
     border-radius: 50%;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .main-pages .profile-page .main-content .user-profile-picture-section .user-profile-details {
     width: 100%;

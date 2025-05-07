@@ -50,10 +50,13 @@ class PagesController extends Controller
         // Fetch all users except the currently authenticated user
         $users = User::where('id', '!=', auth()->id())->get();
 
-        // Fetch all posts with their related user and likes
-        $posts = Post::with(['user', 'likes'])->latest()->get();
+        // Fetch all posts with their related user and routine
+        $posts = Post::with(['user', 'routine'])->latest()->get();
 
-        // Pass the users and posts to the view
-        return view('pages.discover', compact('users', 'posts'));
+        // Fetch routines created by the authenticated user
+        $routines = auth()->user()->routines; 
+
+        // Pass the users, posts, and routines to the view
+        return view('pages.discover', compact('users', 'posts', 'routines'));
     }
 }

@@ -135,8 +135,6 @@
                         </button>
 
                         <div id="deleteAccountModal" class="modal">
-                            <div onClick="closePopupModal('deleteAccountModal')"></div>
-
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h3 class="modal-title">Delete Your Account?</h3>

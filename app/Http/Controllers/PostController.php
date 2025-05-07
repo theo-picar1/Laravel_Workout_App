@@ -14,10 +14,13 @@ class PostController extends Controller
         $users = User::where('id', '!=', auth()->id())->get();
 
         // Fetch all posts with their related user and likes
-        $posts = Post::with(['user', 'likes'])->latest()->get();
+        $posts = Post::with(['user', 'likes', 'routine'])->latest()->get();
 
-        // Pass the users and posts to the view
-        return view('pages.discover', compact('users', 'posts'));
+        // Fetch routines created by the authenticated user
+        $routines = auth()->user()->routines;
+
+        // Pass the users, posts, and routines to the view
+        return view('pages.discover', compact('users', 'posts', 'routines'));
     }
 
     public function create()
@@ -30,22 +33,17 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'routine_id' => 'nullable|exists:routines,routine_id',
         ]);
-
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('posts', 'public');
-        }
 
         Post::create([
             'user_id' => auth()->id(),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'image' => $imagePath,
+            'routine_id' => $request->input('routine_id'),
         ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
+        return redirect()->route('pages.discover')->with('success', 'Post created successfully!');
     }
 
     public function show(Post $post)

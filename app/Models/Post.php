@@ -9,11 +9,16 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title', 'content', 'image'];
+    protected $fillable = ['user_id', 'title', 'content', 'routine_id'];
+
+    public function routine()
+    {
+        return $this->belongsTo(Routines::class, 'routine_id');
+    }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function likes()
