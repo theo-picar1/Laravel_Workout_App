@@ -111,14 +111,10 @@
         </div>
 
         {{-- For each of exercises here with weight, reps and sets --}}
-        <div class="exercises-list"></div>
+        <div class="exercises-list" id="edit-routine-exercise-list"></div>
 
         <div class="buttons-section">
             <button id="add-exercises-button" onclick="openCustomPopUpModal('add-exercise-list')">Add Exercises</button>
-            <button
-                onclick="openPopupModal('general-pop-up-modal', 'Cancel workout?', 'Are you sure you want to cancel the workout? All progress will be lost!', 'Resume', 'Finish', '#171717', '#ff0000')">Cancel
-                Workout</button>
-            <button id="save-routine-changes-button">Save changes</button>
         </div>
     </div>
 
@@ -137,8 +133,7 @@
 
             <div class="exercises-list">
                 @foreach ($exercises as $exercise)
-                    <div exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row"
-                        onclick="openModal('specific-exercise-view-modal'); fillExerciseViewModal('{{ $exercise->name }}', '{{ $exercise->instructions }}', '{{ $exercise->image_url }}', '{{ $exercise->equipment_type_id }}', '{{ $exercise->exercise_id }}')">
+                    <div exerciseId="{{ $exercise->exercise_id }}" exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row" onclick="addExerciseToRoutine('{{ $exercise->exercise_id }}', '{{ $exercise->name }}')">
                         <div class="left-side">
                             <div class="image-container">
                                 <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}"
@@ -150,13 +145,11 @@
                                 <p id="equipment">{{ $exercise->equipmentType->name }}</p>
                             </div>
                         </div>
-
-                        <div class="right-side">
-                            <img src="{{ asset('images/minimise-icon.png') }}" style="transform: rotate(270deg)">
-                        </div>
                     </div>
                 @endforeach
             </div>
+
+            <button id="clear-exercise-search-button" onclick="clearSearchInput()">Reset</button>
         </div>
     </div>
 

@@ -136,6 +136,84 @@ window.setRoutineFields = function (selectedRoutineId, selectedRoutineName, moda
     modal.setAttribute('routineName', routineName)
 }
 
+// Function to add a selected exercise to the routine 
+window.addExerciseToRoutine = function (selectedExerciseId, selectedExerciseName) {
+    let htmlString = ""
+    let container = document.getElementById('edit-routine-exercise-list')
+
+    htmlString += `
+    <div class="exercise" exerciseId="${selectedExerciseId}">
+        <div class="exercise-header">
+            <p class="exercise-name" original-text="${selectedExerciseName}">${selectedExerciseName}</p>
+            <div
+                onclick="openPopupModal('general-pop-up-modal', 'Remove exercise?', 'Are you sure you want to remove this exercise? You can add it again later.', 'Cancel', 'Remove', '#171717', '#ff0000')">
+                <img src="/images/remove-icon.png" alt="Remove">
+            </div>
+        </div>
+
+        <div class="exercise-stats">
+            <div class="columns set-number-column">
+                <p>Set</p>
+                <div><p>1</p></div>
+                <div><p>2</p></div>
+                <div><p>3</p></div>
+                <div><p>4</p></div>
+                <div><p>5</p></div>
+                <div><p>6</p></div>
+            </div>
+
+            <div class="columns previous-stat-column">
+                <p>Previous</p>
+                <div><p>--</p></div>
+                <div><p>--</p></div>
+                <div><p>--</p></div>
+                <div><p>--</p></div>
+                <div><p>--</p></div>
+                <div><p>--</p></div>
+            </div>
+
+            <div class="columns kg-column">
+                <p>KG</p>
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+            </div>
+
+            <div class="columns reps-column">
+                <p>Reps</p>
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+                <input type="number" placeholder="10" min="0" max="999">
+            </div>
+
+            <div class="columns is-finished-column">
+                <img src="/images/check-icon.png" alt="Check">
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+                <label><input type="checkbox"><img src="/images/check-icon.png" alt="Check"></label>
+            </div>
+        </div>
+
+        <div class="add-set-button">
+            <img src="/images/add-icon.png" alt="Add">
+            <p>Add Set</p>
+        </div>
+    </div>  
+    `
+
+    // 'beforeend' just inserts the htmlString inside the container I chose
+    container.insertAdjacentHTML('beforeend', htmlString)
+}
+
 // Function to finalise fields and call the corresponding route for editing a routine's name
 window.confirmDeleteRoutine = function () {
     let modal = document.getElementById('delete-routine-pop-up-modal')
@@ -467,23 +545,23 @@ window.toggleEditProfileModal = function () {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('profile_picture')
     const previewImage = document.querySelector('.profile-pic-container .profile-pic')
     const cameraIcon = document.querySelector('.change-photo-btn i')
-    
-    fileInput.addEventListener('change', function(e) {
+
+    fileInput.addEventListener('change', function (e) {
         if (e.target.files && e.target.files[0]) {
             const objectUrl = URL.createObjectURL(e.target.files[0])
             previewImage.src = objectUrl
-            
-            previewImage.onload = function() {
+
+            previewImage.onload = function () {
                 URL.revokeObjectURL(objectUrl)
             }
         }
     })
-    
-    document.querySelector('.change-photo-btn').addEventListener('click', function(e) {
+
+    document.querySelector('.change-photo-btn').addEventListener('click', function (e) {
         e.preventDefault()
         fileInput.click()
     })
@@ -495,7 +573,7 @@ $.ajaxSetup({
     }
 })
 
-$('.like-form').submit(function(e) {
+$('.like-form').submit(function (e) {
     e.preventDefault()
     const form = $(this)
     const likeButton = form.find('.like-btn')
@@ -507,7 +585,7 @@ $('.like-form').submit(function(e) {
         type: "POST",
         url: form.attr('action'),
         data: form.serialize(),
-        success: function(data) {
+        success: function (data) {
             form.find('.like-count').text(data.like_count)
 
             if (data.status === 'liked') {
@@ -516,10 +594,10 @@ $('.like-form').submit(function(e) {
                 likeButton.removeClass('liked')
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error:', error)
         },
-        complete: function() {
+        complete: function () {
             // Remove the loading state
             likeButton.prop('disabled', false).removeClass('loading')
         }
