@@ -13,5 +13,15 @@
     "file": "assets/app-BMA2K6SA.css",
     "src": "resources/sass/app.scss",
     "isEntry": true
+  },
+  "resources/sass/oisin/oisin.scss": {
+    "file": "assets/oisin-BgXmS6u5.css",
+    "src": "resources/sass/oisin/oisin.scss",
+    "isEntry": true
+  },
+  "resources/sass/theo-scss/theo.scss": {
+    "file": "assets/theo-CtUYCx0E.css",
+    "src": "resources/sass/theo-scss/theo.scss",
+    "isEntry": true
   }
 }
