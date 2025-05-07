@@ -1,0 +1,17 @@
+{
+  "public/images/user-auth-background.jpg": {
+    "file": "assets/user-auth-background-BWuNhWAx.jpg",
+    "src": "public/images/user-auth-background.jpg"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BOHs1KWR.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-BMA2K6SA.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}
