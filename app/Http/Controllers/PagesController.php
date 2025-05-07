@@ -14,8 +14,9 @@ class PagesController extends Controller
     // This function will return the workout page view along with data from the routines and exercise_routine table
     public function workoutPage() {
         $routines = Routines::all();
+        $exercises = Exercises::all();
 
-        return view('pages.workout', compact('routines'));
+        return view('pages.workout', compact('routines', 'exercises'));
     }
 
     // Returns the authentication view page
@@ -42,11 +43,6 @@ class PagesController extends Controller
 
     // Returns the profile page view
     public function discoverPage() {
-        return view('pages.discover');
-    }
-
-    public function discover()
-    {
         // Fetch all users except the currently authenticated user
         $users = User::where('id', '!=', auth()->id())->get();
 

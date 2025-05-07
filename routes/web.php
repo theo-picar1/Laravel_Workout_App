@@ -36,13 +36,13 @@ Route::get('/profile', [PagesController::class, 'profilePage'])->name('pages.pro
 
 Route::get('/exercises', [PagesController::class, 'exercisesPage'])->name('pages.exercises');
 
-Route::get('/discover', [PagesController::class, 'discover'])->name('pages.discover');
+Route::get('/discover', [PagesController::class, 'discoverPage'])->name('pages.discover');
 
 // All the auth routes. This is a built in thing when running 'composer require laravel/ui'
 Auth::routes();
 
 // For logging in a user
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 // To add a new exercise to the database
 Route::post('/exercises', [ExercisesController::class, 'store'])->name('exercises.store');

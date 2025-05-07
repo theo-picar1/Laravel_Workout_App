@@ -40,7 +40,8 @@
             <p id="delete-routine-pop-up-modal-description"></p>
 
             <div>
-                <button id="delete-routine-pop-up-modal-cancel-button" onclick="closePopupModal('delete-routine-pop-up-modal')"></button>
+                <button id="delete-routine-pop-up-modal-cancel-button"
+                    onclick="closePopupModal('delete-routine-pop-up-modal')"></button>
 
                 <button id="delete-routine-pop-up-modal-continue-button" onclick="confirmDeleteRoutine()"></button>
             </div>
@@ -78,13 +79,77 @@
         <p id="time">0:00:00</p>
 
         {{-- For each of exercises here with weight, reps and sets --}}
-        <div class="exercises-list"></div> 
+        <div class="exercises-list"></div>
 
         <div class="buttons-section">
             <button id="add-exercises-button">Add Exercises</button>
             <button
                 onclick="openPopupModal('general-pop-up-modal', 'Cancel workout?', 'Are you sure you want to cancel the workout? All progress will be lost!', 'Resume', 'Finish', '#171717', '#ff0000')">Cancel
                 Workout</button>
+        </div>
+    </div>
+
+    <div id="edit-routine-modal" routineId="">
+        <div class="header">
+            <div class="left-side">
+                <h3 id="modal-routine-name"></h3>
+
+                <div>
+                    <img src="{{ asset('images/more-icon.png') }}">
+                </div>
+            </div>
+
+            <div class="right-side">
+                <div>
+                    <img src="{{ asset('images/minimise-icon.png') }}"
+                        onclick="minimiseModal('edit-routine-modal', 'minimise-start-empty-workout-button')"
+                        id="minimise-start-empty-workout-button">
+                </div>
+
+                <button onclick="closeModal('edit-routine-modal')">Save</button>
+            </div>
+        </div>
+
+        {{-- For each of exercises here with weight, reps and sets --}}
+        <div class="exercises-list" id="edit-routine-exercise-list"></div>
+
+        <div class="buttons-section">
+            <button id="add-exercises-button" onclick="openCustomPopUpModal('add-exercise-list')">Add Exercises</button>
+        </div>
+    </div>
+
+    <div id="add-exercise-list">
+        <div class="content">
+            <button class="close-add-exercise-list" onclick="closePopupModal('add-exercise-list')">Cancel</button>
+
+            <label class="exercises-searchbar-container"
+                onclick="setClearSearchAndInputId('clear-exercise-search-button', 'exercises-searchbar')">
+                <div class="left-side">
+                    <img src="{{ asset('images/search-icon.png') }}">
+
+                    <input autocomplete="off" type="text" placeholder="Search for an exercise" id="exercises-searchbar">
+                </div>
+            </label>
+
+            <div class="exercises-list">
+                @foreach ($exercises as $exercise)
+                    <div exerciseId="{{ $exercise->exercise_id }}" exercise-name="{{ $exercise->name }}" class="exercise exercise-view-row" onclick="addExerciseToRoutine('{{ $exercise->exercise_id }}', '{{ $exercise->name }}')">
+                        <div class="left-side">
+                            <div class="image-container">
+                                <img src="{{ $exercise->image_url ?? asset('images/weight-icon.png') }}"
+                                    class="{{ $exercise->image_url ? 'exercise-image' : 'placeholder-image' }}">
+                            </div>
+
+                            <div class="name-and-equipment-container">
+                                <p>{{ $exercise->name }}</p>
+                                <p id="equipment">{{ $exercise->equipmentType->name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <button id="clear-exercise-search-button" onclick="clearSearchInput()">Reset</button>
         </div>
     </div>
 
@@ -98,35 +163,15 @@
 
                 <h4>Add new routine</h4>
 
-                <button type="submit" form="add-routine-form" class="crud-save-button" id="add-routine-save-button">Save</button>
+                <button type="submit" form="add-routine-form" class="crud-save-button"
+                    id="add-routine-save-button">Save</button>
             </div>
 
             <form id="add-routine-form" method="POST" action="{{ route('routines.store') }}">
                 @csrf
 
-                <input type="text" class="crud-input" placeholder="Enter routine name" id="new-routine-name" name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
-            </form>
-        </div>
-    </div>
-
-    {{-- Edit routine modal --}}
-    <div id="edit-routine-modal" class="crud-modal" routineId="" routineName="">
-        <div class="crud-content">
-            <div class="title">
-                <div class="image-container" onclick="closePopupModal('edit-routine-modal'); showOrHideSaveButtonByClick('edit-routine-name')">
-                    <img src="{{ asset('images/close-icon 09.57.33.png') }}">
-                </div>
-
-                <h4>Edit routine</h4>
-
-                <button class="crud-save-button" id="edit-routine-save-button" onclick="confirmEditRoutine()">Save</button>
-            </div>
-
-            <form id="edit-routine-form" method="POST">
-                @csrf
-                @method('PUT')
-
-                <input type="text" class="crud-input" placeholder="Enter routine name" id="edit-routine-name" name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
+                <input type="text" class="crud-input" placeholder="Enter routine name" id="new-routine-name"
+                    name="routine_name" autocomplete="off" oninput="showOrHideSaveButton(event)">
             </form>
         </div>
     </div>
@@ -142,7 +187,9 @@
         <div class="routines-section">
             <div class="title">
                 <h2>Routines</h2>
-                <button onclick="openCustomPopUpModal('add-routine-modal'); setIdsForSaveButton('new-routine-name', 'add-routine-save-button')">Add Routine</button>
+                <button
+                    onclick="openCustomPopUpModal('add-routine-modal'); setIdsForSaveButton('new-routine-name', 'add-routine-save-button')">Add
+                    Routine</button>
             </div>
 
             <div class="routines-list">
@@ -156,9 +203,11 @@
                             <h2>{{ $routine->routine_name }}</h2>
 
                             <div style="display: flex; flex-direction: row; gap: 5px;">
-                                <img src="{{ asset('images/edit-icon.png') }}" onclick="openCustomPopUpModal('edit-routine-modal'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'edit-routine-modal'); setIdsForSaveButton('edit-routine-name', 'edit-routine-save-button')">
+                                <img src="{{ asset('images/edit-icon.png') }}"
+                                    onclick="openModal('edit-routine-modal'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'edit-routine-modal'); setIdsForSaveButton('edit-routine-name', 'edit-routine-save-button')">
 
-                                <img src="{{ asset('images/remove-icon.png') }}" onclick="openPopupModal('delete-routine-pop-up-modal', 'Delete routine?', 'Deleting this routine is permanent. Proceed anyways?', 'Cancel', 'Remove', '#171717', '#ff0000'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'delete-routine-pop-up-modal')">
+                                <img src="{{ asset('images/remove-icon.png') }}"
+                                    onclick="openPopupModal('delete-routine-pop-up-modal', 'Delete routine?', 'Deleting this routine is permanent. Proceed anyways?', 'Cancel', 'Remove', '#171717', '#ff0000'); setRoutineFields('{{ $routine->routine_id }}', '{{ $routine->routine_name }}', 'delete-routine-pop-up-modal')">
                             </div>
                         </div>
 
