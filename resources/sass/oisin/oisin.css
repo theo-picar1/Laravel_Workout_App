@@ -515,4 +515,13 @@
   opacity: 1;
   pointer-events: auto;
   background-color: rgba(0, 0, 0, 0.5019607843);
+}
+
+.like-btn.liked {
+  color: red;
+}
+
+.like-btn.loading {
+  opacity: 0.5;
+  pointer-events: none;
 }/*# sourceMappingURL=oisin.css.map */

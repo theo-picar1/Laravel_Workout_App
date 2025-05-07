@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -38,6 +39,15 @@ class ProfileController extends Controller
         auth()->user()->delete();
 
         return redirect()->route('login')->with('success', 'Account deleted successfully');
+    }
+
+    public function show(User $user)
+    {
+        // Fetch all users except the currently authenticated user
+        $users = User::where('id', '!=', auth()->id())->get();
+
+        // Pass the clicked user and other users to the view
+        return view('pages.user-profile', compact('user', 'users'));
     }
 }
 
