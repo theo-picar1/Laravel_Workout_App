@@ -68,15 +68,15 @@
 
                     <div class="user-progress-section">
                         <div>
-                            <h1>47</h1>
+                            <h1>12</h1>
                             <h3>Workouts Completed</h3>
                         </div>
                         <div>
-                            <h1>90</h1>
+                            <h1>15</h1>
                             <h3>Days on the App</h3>
                         </div>
                         <div>
-                            <h1>1039kg</h1>
+                            <h1>274kg</h1>
                             <h3>Total Weight</h3>
                         </div>
                     </div>

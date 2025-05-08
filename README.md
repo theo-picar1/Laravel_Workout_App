@@ -61,7 +61,105 @@
 
 ## 📸 App Preview
 
-<!-- I will put pictures here later -->
+<div align="center">
+  <h3>Experience Forged in Action</h3>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 30px 0;">
+    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+      <img src="public\images\workoutPage.png" width="100%" alt="Workout Tracking">
+      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
+        <strong>Workout Tracking</strong>
+        <p style="margin: 5px 0 0; font-size: 0.9em;">Log exercises with precision</p>
+      </div>
+    </div>
+    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+      <img src="public\images\discoverPage.png" width="100%" alt="Community Discovery">
+      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
+        <strong>Community Hub</strong>
+        <p style="margin: 5px 0 0; font-size: 0.9em;">Connect with fellow athletes</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 30px;">
+    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+      <img src="public\images\exercisesPage.png" width="100%" alt="Exercise Library">
+      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
+        <strong>Exercise Library</strong>
+        <p style="margin: 5px 0 0; font-size: 0.9em;">900+ exercises at your fingertips</p>
+      </div>
+    </div>
+    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+      <img src="public\images\profilePage.png" width="100%" alt="Progress Tracking">
+      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
+        <strong>Your Progress</strong>
+        <p style="margin: 5px 0 0; font-size: 0.9em;">Visualize your fitness journey</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+## 🗃️ Database Schema
+
+<div align="center">
+  <h3>Entity Relationship Diagram</h3>
+  
+  <img src="public/images/ERDNewDiagram.png" alt="FORGED ERD" style="max-width: 800px; width: 100%; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin: 20px 0; border: 1px solid #eee;">
+
+  ### 🔑 Core Entities & Relationships
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; max-width: 800px; margin: 0 auto;">
+    <div style="flex: 1; min-width: 300px; padding-right: 20px;">
+      <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #FF2D20; margin-bottom: 15px;">
+        <strong style="color: #FF2D20;">Users</strong> 👥<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">Central identity management with authentication and profile data</p>
+      </div>
+
+  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #4479A1; margin-bottom: 15px;">
+        <strong style="color: #4479A1;">Routines</strong> 📅<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">Workout plans, templates and tracker</p>
+      </div>
+
+  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #CC6699; margin-bottom: 15px;">
+        <strong style="color: #CC6699;">Exercises</strong> 💪<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">Extensive exercise templete library</p>
+      </div>
+    </div>
+
+  <div style="flex: 1; min-width: 300px;">
+      <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #2088FF; margin-bottom: 15px;">
+        <strong style="color: #2088FF;">Posts</strong> 💬<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">User-generated content and community interactions</p>
+      </div>
+
+  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #FF6B6B; margin-bottom: 15px;">
+        <strong style="color: #FF6B6B;">Likes</strong> ❤️<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">Engagement tracking and social validation</p>
+      </div>
+
+  <div style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 15px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-left: 4px solid #20C997; margin-bottom: 15px;">
+        <strong style="color: #20C997;">Follows</strong> 🔄<br>
+        <p style="margin: 8px 0 0; font-size: 0.85em; color: #495057;">User connections and social interations</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: #f5f7fa; padding: 20px; border-radius: 12px; max-width: 800px; margin: 25px auto; border-left: 5px solid #777BB4;">
+    <h4 style="margin-top: 0; color: #343a40;">Database Highlights</h4>
+    <ul style="columns: 2; column-gap: 30px; font-size: 0.9em;">
+      <li>🚀 <strong>Optimized queries</strong> for workout analytics</li>
+      <li>🔐 <strong>Secure relationships</strong> with proper constraints</li>
+      <li>📈 <strong>Scalable structure</strong> for growing user base</li>
+      <li>⚡ <strong>Efficient indexing</strong> on frequent queries</li>
+      <li>🤝 <strong>Social features</strong> integrated at database level</li>
+      <li>🔄 <strong>Soft deletes</strong> for data integrity</li>
+    </ul>
+  </div>
+
+  <p style="max-width: 700px; margin: 20px auto; font-style: italic; color: #6c757d;">
+    "The database powers both real-time workout tracking and social interactions while maintaining strict data consistency across all features."
+  </p>
+</div>
 
 ## 🚀 Getting Started
 
@@ -77,6 +175,8 @@ Ensure you have these installed:
 | MySQL         | 8.0+       | [Xampp](https://www.apachefriends.org/) |
 
 ### Installation
+
+<div align="center">
 
 ```bash
 # Clone the repository
@@ -99,6 +199,48 @@ php artisan serve
 
 Visit http://localhost:8000 to start using Forged!
 ```
+
+</div>
+
+## 🌍 Live Deployment
+
+<div align="center">
+  <h3>Now Live on Microsoft Azure</h3>
+  
+  <a href="https://forged-g3crdrfyb8bwhch5.northeurope-01.azurewebsites.net/" target="_blank" style="display: inline-block; background: #0078D4; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,120,212,0.3); transition: transform 0.2s;">
+    🚀 Visit Live Site
+  </a>
+
+  <div style="background: #f3f6ff; padding: 20px; border-radius: 12px; max-width: 700px; margin: 0 auto; border-left: 4px solid #0078D4;">
+    <h4 style="margin-top: 0; color: #0078D4;">Azure Deployment Details</h4>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+      <div style="background: white; padding: 12px 15px; border-radius: 8px; flex: 1; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <strong>Service</strong><br>
+        Azure App Service
+      </div>
+      <div style="background: white; padding: 12px 15px; border-radius: 8px; flex: 1; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <strong>Database</strong><br>
+        Azure Database for MySQL
+      </div>
+      <div style="background: white; padding: 12px 15px; border-radius: 8px; flex: 1; min-width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <strong>CI/CD</strong><br>
+        GitHub Actions
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 25px; max-width: 700px;">
+    <h4>Performance Highlights</h4>
+    <ul style="text-align: left; columns: 2; column-gap: 40px; font-size: 0.9em;">
+      <li>⚡ <strong>99.9% Uptime</strong> SLA</li>
+      <li>🌐 <strong>Global CDN</strong> for fast loading worldwide</li>
+      <li>🛡️ <strong>DDoS Protection</strong> enabled</li>
+      <li>📈 <strong>Auto-scaling</strong> for traffic spikes</li>
+      <li>🔒 <strong>SSL Encryption</strong> by default</li>
+      <li>📊 <strong>Application Insights</strong> monitoring</li>
+    </ul>
+  </div>
+</div>
 
 ## 👥 Authors
 
