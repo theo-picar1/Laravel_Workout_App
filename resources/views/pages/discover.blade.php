@@ -44,7 +44,7 @@
                 <button class="add-post-btn" onclick="openCustomPopUpModal('create-post-page')">+ Add Post</button>
                 <h2>Recent Posts</h2>
                 @foreach ($posts as $post)
-                    <div class="post-card">
+                    {{-- <div class="post-card">
                         <div class="post-header">
                             <div class="post-user">
                                 <div class="post-profile-pic">
@@ -90,37 +90,37 @@
                             </form>
                             <span class="comments">0 comments</span>
                         </div>
-                    </div>
+                    </div> --}}
                 @endforeach
-                {{-- <div class="post-card">
+                <div class="post-card">
                     <div class="post-header">
                         <div class="post-user">
                             <div class="post-profile-pic">
                                 <a href="{{ route('profile.show', 13) }}"> <!-- Link to the user's profile -->
-                                    <img src="https://i.pravatar.cc/150?img=3" alt="coolGuy19">
+                                    <img src="https://i.pravatar.cc/150?img=7" alt="guy4">
                                 </a>
                             </div>
                             <span class="post-username">
                                 <a href="{{ route('profile.show', 13) }}" style="text-decoration: none; color: inherit;">
-                                    coolGuy19
+                                    guy4
                                 </a>
                             </span>
                         </div>
-                        <span class="post-date">Tuesday, Mar 11, 2025</span>
+                        <span class="post-date">Mar 11, 2025</span>
                     </div>
                     <div class="post-content">
-                        <h3 class="routine-name">Routine name 2</h3>
+                        <h3 class="routine-name">Leg press</h3>
                         <div class="workout-stats">
                             <div class="stat">
                                 <span class="stat-label">Time</span>
-                                <span class="stat-value">1hr45min</span>
+                                <span class="stat-value">1hr</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-label">Volume</span>
-                                <span class="stat-value">8.987kg</span>
+                                <span class="stat-value">88kg</span>
                             </div>
                         </div>
-                        <p class="workout-description">18 sets of Goblet Squat</p>
+                        <p class="workout-description">2 sets of Leg press</p>
                     </div>
                     <div class="post-footer">
                         <form method="POST" action="{{ route('posts.like', $post->id) }}" class="like-form">
@@ -133,7 +133,49 @@
                         </form>
                         <span class="comments">0 comments</span>
                     </div>
-                </div> --}}
+                </div>
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="post-user">
+                            <div class="post-profile-pic">
+                                <a href="{{ route('profile.show', 13) }}">
+                                    <img src="https://i.pravatar.cc/150?img=3" alt="coolGuy19">
+                                </a>
+                            </div>
+                            <span class="post-username">
+                                <a href="{{ route('profile.show', 13) }}" style="text-decoration: none; color: inherit;">
+                                    coolGuy19
+                                </a>
+                            </span>
+                        </div>
+                        <span class="post-date">Mar 7, 2025</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="routine-name">Goblet Squat</h3>
+                        <div class="workout-stats">
+                            <div class="stat">
+                                <span class="stat-label">Time</span>
+                                <span class="stat-value">1hr45min</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Volume</span>
+                                <span class="stat-value">30kg</span>
+                            </div>
+                        </div>
+                        <p class="workout-description">4 sets of Goblet Squat</p>
+                    </div>
+                    <div class="post-footer">
+                        <form method="POST" action="{{ route('posts.like', $post->id) }}" class="like-form">
+                            @csrf
+                            <button type="submit" class="like-btn">
+                                <i
+                                    class="fas fa-heart {{ $post->likes->contains('user_id', auth()->id()) ? 'liked' : '' }}"></i>
+                                <span class="like-count">{{ $post->likes->count() }}</span>
+                            </button>
+                        </form>
+                        <span class="comments">0 comments</span>
+                    </div>
+                </div>
             </div>
         </div>
 
