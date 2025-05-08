@@ -68,11 +68,11 @@
   <table>
     <tr>
       <td width="50%" align="center">
-        <img src="public\images\discover page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <img src="public\images\discoverPage.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <p><strong>Workout Tracking</strong><br>Log exercises with precision</p>
       </td>
       <td width="50%" align="center">
-        <img src="public\images\Exercises page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <img src="public\images\ExercisesPage.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <p><strong>Community Hub</strong><br>Connect with fellow athletes</p>
       </td>
     </tr>
@@ -82,11 +82,11 @@
   <table>
     <tr>
       <td width="50%" align="center">
-        <img src="public\images\profile page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <img src="public\images\profilePage.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <p><strong>Exercise Library</strong><br>A plethora of exercises at your fingertips</p>
       </td>
       <td width="50%" align="center">
-        <img src="public\images\workout page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <img src="public\images\workoutPage.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <p><strong>Your Progress</strong><br>Visualize your fitness journey</p>
       </td>
     </tr>
