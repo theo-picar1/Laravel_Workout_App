@@ -44,7 +44,7 @@
                 <button class="add-post-btn" onclick="openCustomPopUpModal('create-post-page')">+ Add Post</button>
                 <h2>Recent Posts</h2>
                 @foreach ($posts as $post)
-                    {{-- <div class="post-card">
+                    <div class="post-card">
                         <div class="post-header">
                             <div class="post-user">
                                 <div class="post-profile-pic">
@@ -90,18 +90,18 @@
                             </form>
                             <span class="comments">0 comments</span>
                         </div>
-                    </div> --}}
+                    </div>
                 @endforeach
                 <div class="post-card">
                     <div class="post-header">
                         <div class="post-user">
                             <div class="post-profile-pic">
-                                <a href="{{ route('profile.show', 13) }}"> <!-- Link to the user's profile -->
+                                <a href="{{ route('profile.show', 14) }}"> <!-- Link to the user's profile -->
                                     <img src="https://i.pravatar.cc/150?img=7" alt="guy4">
                                 </a>
                             </div>
                             <span class="post-username">
-                                <a href="{{ route('profile.show', 13) }}" style="text-decoration: none; color: inherit;">
+                                <a href="{{ route('profile.show', 14) }}" style="text-decoration: none; color: inherit;">
                                     guy4
                                 </a>
                             </span>

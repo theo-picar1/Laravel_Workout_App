@@ -628,7 +628,7 @@ $translucent: #00000080;
 }
 
 .like-btn.liked {
-    color: red;
+    color: $website-red;
 }
 
 .like-btn.loading {
@@ -636,13 +636,9 @@ $translucent: #00000080;
     pointer-events: none;
 }
 
-// #header-title {
-//     cursor: pointer;
-// }
-
 /* Add Post Button */
 .add-post-btn {
-    background-color: #ff0000;
+    background-color: $website-red;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -654,7 +650,7 @@ $translucent: #00000080;
 }
 
 .add-post-btn:hover {
-    background-color: #cc0000;
+    background-color: $website-red;
 }
 
 /* Modal Styles */
@@ -690,11 +686,11 @@ $translucent: #00000080;
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    color: #ff0000;
+    color: $website-red;
 }
 
 .modal-close-btn:hover {
-    color: #cc0000;
+    color: $website-light-red;
 }
 
 /* Form Styles */
@@ -712,7 +708,7 @@ $translucent: #00000080;
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid $website-white;
     border-radius: 5px;
     font-size: 14px;
 }
@@ -725,10 +721,10 @@ $translucent: #00000080;
 .form-group select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid $website-white;
     border-radius: 5px;
     font-size: 14px;
-    background-color: #fff;
+    background-color: $website-white;
     color: #333;
 }
 
@@ -737,7 +733,7 @@ $translucent: #00000080;
 }
 
 .submit-btn {
-    background-color: #00cc00;
+    background-color: $website-green;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
@@ -749,7 +745,7 @@ $translucent: #00000080;
 }
 
 .submit-btn:hover {
-    background-color: #009900;
+    background-color: $website-green;
 }
 
 #create-post-page {
@@ -769,22 +765,22 @@ $translucent: #00000080;
 
 /* Follow Button Style */
 .follow-btn.follow {
-    background-color: #00cc00; /* Green for Follow */
-    color: #ffffff;
+    background-color: $website-green;
+    color: $website-white;
 }
 
 .follow-btn.follow:hover {
-    background-color: #009900; /* Darker green on hover */
+    background-color: $website-hover-green;
 }
 
 /* Unfollow Button Style */
 .follow-btn.unfollow {
-    background-color: #ff0000; /* Red for Unfollow */
+    background-color: $website-red;
     color: #ffffff;
 }
 
 .follow-btn.unfollow:hover {
-    background-color: #cc0000; /* Darker red on hover */
+    background-color: $website-dark-red; 
 }
 
 .like-btn {
@@ -795,7 +791,7 @@ $translucent: #00000080;
     align-items: center;
     gap: 5px;
     font-size: 16px;
-    color: #ccc; /* Default color for the heart icon */
+    color: $website-white;
     transition: color 0.3s ease;
 }
 
@@ -804,9 +800,9 @@ $translucent: #00000080;
 }
 
 .like-btn .fas.fa-heart.liked {
-    color: red; /* Red color for liked hearts */
+    color: $website-red;
 }
 
 .like-btn:hover .fas.fa-heart {
-    color: #ff6666; /* Slightly lighter red on hover */
+    color: $website-light-red;
 }

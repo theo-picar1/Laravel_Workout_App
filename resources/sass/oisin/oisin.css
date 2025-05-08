@@ -519,7 +519,7 @@
 }
 
 .like-btn.liked {
-  color: red;
+  color: #ff0000;
 }
 
 .like-btn.loading {
@@ -541,7 +541,7 @@
 }
 
 .add-post-btn:hover {
-  background-color: #cc0000;
+  background-color: #ff0000;
 }
 
 /* Modal Styles */
@@ -581,7 +581,7 @@
 }
 
 .modal-close-btn:hover {
-  color: #cc0000;
+  color: #fb4747;
 }
 
 /* Form Styles */
@@ -599,7 +599,7 @@
 .form-group textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   font-size: 14px;
 }
@@ -612,10 +612,10 @@
 .form-group select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   font-size: 14px;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #333;
 }
 
@@ -624,7 +624,7 @@
 }
 
 .submit-btn {
-  background-color: #00cc00;
+  background-color: #81fe5e;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -636,7 +636,7 @@
 }
 
 .submit-btn:hover {
-  background-color: #009900;
+  background-color: #81fe5e;
 }
 
 #create-post-page {
@@ -676,22 +676,22 @@
 
 /* Follow Button Style */
 .follow-btn.follow {
-  background-color: #00cc00; /* Green for Follow */
+  background-color: #81fe5e;
   color: #ffffff;
 }
 
 .follow-btn.follow:hover {
-  background-color: #009900; /* Darker green on hover */
+  background-color: #71ed4f;
 }
 
 /* Unfollow Button Style */
 .follow-btn.unfollow {
-  background-color: #ff0000; /* Red for Unfollow */
+  background-color: #ff0000;
   color: #ffffff;
 }
 
 .follow-btn.unfollow:hover {
-  background-color: #cc0000; /* Darker red on hover */
+  background-color: #9b0202;
 }
 
 .like-btn {
@@ -702,7 +702,7 @@
   align-items: center;
   gap: 5px;
   font-size: 16px;
-  color: #ccc; /* Default color for the heart icon */
+  color: #ffffff;
   transition: color 0.3s ease;
 }
 
@@ -711,9 +711,9 @@
 }
 
 .like-btn .fas.fa-heart.liked {
-  color: red; /* Red color for liked hearts */
+  color: #ff0000;
 }
 
 .like-btn:hover .fas.fa-heart {
-  color: #ff6666; /* Slightly lighter red on hover */
+  color: #fb4747;
 }/*# sourceMappingURL=oisin.css.map */

@@ -1,5 +1,4 @@
 import './bootstrap'
-import axios from 'axios'
 
 import Alpine from 'alpinejs'
 window.Alpine = Alpine
@@ -545,111 +544,132 @@ window.toggleEditProfileModal = function () {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+// Wait for the DOM to fully load before executing the script
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the file input element for profile picture upload
     const fileInput = document.getElementById('profile_picture')
+    // Get the image element where the preview of the uploaded profile picture will be displayed
     const previewImage = document.querySelector('.profile-pic-container .profile-pic')
+    // Get the camera icon button for triggering the file input
     const cameraIcon = document.querySelector('.change-photo-btn i')
-
-    fileInput.addEventListener('change', function (e) {
+    
+    // Event listener for when a file is selected in the file input
+    fileInput.addEventListener('change', function(e) {
         if (e.target.files && e.target.files[0]) {
+            // Create a temporary URL for the selected file
             const objectUrl = URL.createObjectURL(e.target.files[0])
+            // Set the preview image source to the temporary URL
             previewImage.src = objectUrl
-
-            previewImage.onload = function () {
+            
+            // Revoke the temporary URL after the image is loaded to free up memory
+            previewImage.onload = function() {
                 URL.revokeObjectURL(objectUrl)
             }
         }
     })
-
-    document.querySelector('.change-photo-btn').addEventListener('click', function (e) {
-        e.preventDefault()
-        fileInput.click()
+    // Event listener for the camera icon button to trigger the file input click
+    document.querySelector('.change-photo-btn').addEventListener('click', function(e) {
+        e.preventDefault() // Prevent the default button behavior
+        fileInput.click() // Programmatically trigger the file input click
     })
 })
 
+// Set up AJAX with CSRF token for secure requests
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Get the CSRF token from the meta tag
     }
 })
 
-$('.like-form').submit(function (e) {
-    e.preventDefault()
-    const form = $(this)
-    const likeButton = form.find('.like-btn')
+// Handle the like form submission using jQuery
+$('.like-form').submit(function(e) {
+    e.preventDefault() // Prevent the default form submission
+    const form = $(this) // Get the current form
+    const likeButton = form.find('.like-btn') // Get the like button within the form
 
-    // Add a loading state
+    // Add a loading state to the like button
     likeButton.prop('disabled', true).addClass('loading')
 
+    // Send an AJAX POST request to the form's action URL
     $.ajax({
         type: "POST",
-        url: form.attr('action'),
-        data: form.serialize(),
-        success: function (data) {
+        url: form.attr('action'), // Get the form's action URL
+        data: form.serialize(), // Serialize the form data
+        success: function(data) {
+            // Update the like count displayed in the form
             form.find('.like-count').text(data.like_count)
 
+            // Toggle the "liked" class based on the response status
             if (data.status === 'liked') {
                 likeButton.addClass('liked')
             } else {
                 likeButton.removeClass('liked')
             }
         },
-        error: function (xhr, status, error) {
-            console.error('Error:', error)
+        error: function(xhr, status, error) {
+            console.error('Error:', error) // Log any errors to the console
         },
-        complete: function () {
-            // Remove the loading state
+        complete: function() {
+            // Remove the loading state from the like button
             likeButton.prop('disabled', false).removeClass('loading')
         }
     })
 })
 
+// Add event listeners to all like buttons after the DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.like-btn').forEach(button => {
         button.addEventListener('click', function () {
-            const postId = this.getAttribute('data-post-id')
-            const likeCountSpan = this.querySelector('.like-count')
+            const postId = this.getAttribute('data-post-id') // Get the post ID from the button's data attribute
+            const likeCountSpan = this.querySelector('.like-count') // Get the span element displaying the like count
 
+            // Send a POST request to the like endpoint for the specific post
             fetch(`/posts/${postId}/like`, {
                 method: 'POST',
                 headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'), // Include the CSRF token
                     'Content-Type': 'application/json',
                 },
             })
-                .then(response => response.json())
+                .then(response => response.json()) // Parse the JSON response
                 .then(data => {
+                    // Update the button's appearance based on the like status
                     if (data.status === 'liked') {
-                        this.classList.add('liked') // Optional: Add a visual indicator
+                        this.classList.add('liked') 
                     } else {
                         this.classList.remove('liked')
                     }
-                    likeCountSpan.textContent = data.like_count // Update the like count
+                    // Update the like count displayed on the button
+                    likeCountSpan.textContent = data.like_count
                 })
-                .catch(error => console.error('Error:', error))
+                .catch(error => console.error('Error:', error)) // Log any errors to the console
         })
     })
 })
 
+// Handle the follow form submission using jQuery
 $('.follow-form').submit(function (e) {
-    e.preventDefault()
-    const form = $(this)
-    const button = form.find('.follow-btn')
+    e.preventDefault() // Prevent the default form submission
+    const form = $(this) // Get the current form
+    const button = form.find('.follow-btn') // Get the follow button within the form
 
+    // Send an AJAX POST request to the form's action URL
     $.ajax({
         type: 'POST',
-        url: form.attr('action'),
-        data: form.serialize(),
+        url: form.attr('action'), // Get the form's action URL
+        data: form.serialize(), // Serialize the form data
         success: function (data) {
+            // Update the button text based on the follow status
             if (data.status === 'followed') {
                 button.text('Unfollow')
             } else {
                 button.text('Follow')
             }
+            // Update the followers count displayed on the page
             $('.followers-count').text(data.followers_count)
         },
         error: function (xhr) {
-            console.error(xhr.responseText)
+            console.error(xhr.responseText) // Log any errors to the console
         }
     })
 })
