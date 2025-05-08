@@ -64,40 +64,33 @@
 <div align="center">
   <h3>Experience Forged in Action</h3>
   
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 30px 0;">
-    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-      <img src="public\images\workoutPage.png" width="100%" alt="Workout Tracking">
-      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
-        <strong>Workout Tracking</strong>
-        <p style="margin: 5px 0 0; font-size: 0.9em;">Log exercises with precision</p>
-      </div>
-    </div>
-    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-      <img src="public\images\discoverPage.png" width="100%" alt="Community Discovery">
-      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
-        <strong>Community Hub</strong>
-        <p style="margin: 5px 0 0; font-size: 0.9em;">Connect with fellow athletes</p>
-      </div>
-    </div>
-  </div>
+  <!-- First Row -->
+  <table>
+    <tr>
+      <td width="50%" align="center">
+        <img src="public\images\discover page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><strong>Workout Tracking</strong><br>Log exercises with precision</p>
+      </td>
+      <td width="50%" align="center">
+        <img src="public\images\Exercises page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><strong>Community Hub</strong><br>Connect with fellow athletes</p>
+      </td>
+    </tr>
+  </table>
 
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 30px;">
-    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-      <img src="public\images\exercisesPage.png" width="100%" alt="Exercise Library">
-      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
-        <strong>Exercise Library</strong>
-        <p style="margin: 5px 0 0; font-size: 0.9em;">900+ exercises at your fingertips</p>
-      </div>
-    </div>
-    <div style="position: relative; width: 280px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
-      <img src="public\images\profilePage.png" width="100%" alt="Progress Tracking">
-      <div style="position: absolute; bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); width: 100%; padding: 15px; color: white;">
-        <strong>Your Progress</strong>
-        <p style="margin: 5px 0 0; font-size: 0.9em;">Visualize your fitness journey</p>
-      </div>
-    </div>
-  </div>
-
+  <!-- Second Row -->
+  <table>
+    <tr>
+      <td width="50%" align="center">
+        <img src="public\images\profile page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><strong>Exercise Library</strong><br>A plethora of exercises at your fingertips</p>
+      </td>
+      <td width="50%" align="center">
+        <img src="public\images\workout page.png"  style="max-width: 200px; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <p><strong>Your Progress</strong><br>Visualize your fitness journey</p>
+      </td>
+    </tr>
+  </table>
 </div>
 
 ## 🗃️ Database Schema
@@ -174,11 +167,20 @@ Ensure you have these installed:
 | Node.js       | 18+        | [nodejs.org](https://nodejs.org) |
 | MySQL         | 8.0+       | [Xampp](https://www.apachefriends.org/) |
 
-### Installation
-
 <div align="center">
 
-```bash
+### Installation
+
+<pre style="
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+    padding: 16px;
+    background: #f6f8fa;
+    border-radius: 6px;
+    font-family: monospace;
+    border: 1px solid #e1e4e8;
+">
 # Clone the repository
 git clone https://github.com/theo-picar1/Laravel_Workout_App.git
 
@@ -198,8 +200,7 @@ php artisan db:seed
 php artisan serve
 
 Visit http://localhost:8000 to start using Forged!
-```
-
+</pre>
 </div>
 
 ## 🌍 Live Deployment
